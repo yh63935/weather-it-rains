@@ -1,48 +1,48 @@
-let userLocation = prompt("Location?");
+import getWeatherData from "./api";
 
-// Days in the url remains 3 (including current day) because we have the free version which only can forecast up to 3 days
-fetch(
-  `http://api.weatherapi.com/v1/forecast.json?key=76fcad5f297045359a7222047241501&q=${userLocation}&days=3&aqi=no&alerts=no`,
-  { mode: "cors" }
-)
-  .then((response) => response.json())
-  .then((weatherData) => {
-    console.log(weatherData.location.name);
-    console.log(weatherData.location.region);
-    console.log(weatherData.location.country);
-    console.log(weatherData.location.localtime);
+getWeatherData();
 
-    console.log(weatherData.current.temp_c);
-    console.log(weatherData.current.temp_f);
-    console.log(weatherData.current.feelslike_c);
-    console.log(weatherData.current.feelslike_f);
+console.log(weatherData.location.name);
+console.log(weatherData.location.region);
+console.log(weatherData.location.country);
+console.log(weatherData.location.localtime);
 
-    console.log(weatherData.current.is_day);
-    console.log(weatherData.current.condition.text);
-    console.log(weatherData.current.condition.icon);
+console.log(weatherData.current.temp_c);
+console.log(weatherData.current.temp_f);
+console.log(weatherData.current.feelslike_c);
+console.log(weatherData.current.feelslike_f);
 
-    console.log(weatherData.current.wind_mph);
-    console.log(weatherData.current.wind_kph);
+console.log(weatherData.current.is_day);
+console.log(weatherData.current.condition.text);
+console.log(weatherData.current.condition.icon);
 
-    console.log(weatherData.current.humidity);
+console.log(weatherData.current.wind_mph);
+console.log(weatherData.current.wind_kph);
 
-    // Will need to replace with indexes after
-    // Replace with the variables for day (accept variable in case they decide to upgrade to paid weather with extra days)
-    console.log(weatherData.forecast.forecastday[0].day.maxtemp_c);
-    console.log(weatherData.forecast.forecastday[0].day.maxtemp_f);
-    console.log(weatherData.forecast.forecastday[0].day.mintemp_c);
-    console.log(weatherData.forecast.forecastday[0].day.mintemp_f);
+console.log(weatherData.current.humidity);
 
-    console.log(weatherData.forecast.forecastday[0].day.daily_chance_of_rain);
-    console.log(weatherData.forecast.forecastday[0].day.daily_chance_of_snow);
+// Will need to replace with indexes after
+// Replace with the variables for day (accept variable in case they decide to upgrade to paid weather with extra days)
+console.log(`array length for days ${weatherData.forecast.forecastday.length}`);
+const forecastArr = weatherData.forecast.forecastday;
 
-    console.log(weatherData.forecast.forecastday[0].day.condition.text);
-    console.log(weatherData.forecast.forecastday[0].day.condition.icon);
+for (let i = 0; i < forecastArr.length; i++) {
+  const forecastDay = forecastArr[i];
+  console.log(forecastDay.day.maxtemp_c);
+  console.log(forecastDay.day.maxtemp_f);
+  console.log(forecastDay.day.mintemp_c);
+  console.log(forecastDay.day.mintemp_f);
 
-    console.log(weatherData.forecast.forecastday[0].hour[0].temp_c);
-    console.log(weatherData.forecast.forecastday[0].hour[0].temp_f);
-    console.log(weatherData.forecast.forecastday[0].hour[0].is_day);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  console.log(forecastDay.day.daily_chance_of_rain);
+  console.log(forecastDay.day.daily_chance_of_snow);
+
+  console.log(forecastDay.day.condition.text);
+  console.log(forecastDay.day.condition.icon);
+  console.log("hours arr" + forecastDay.hour.length);
+}
+
+for (let j = 0; j < forecastArr[0].hour.length; j++) {
+  console.log(j, forecastArr[0].hour[j].temp_c);
+  console.log(j, forecastArr[0].hour[j].temp_f);
+  console.log(j, forecastArr[0].hour[j].is_day);
+}
