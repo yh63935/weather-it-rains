@@ -1,4 +1,4 @@
-import getWeatherData from "./api";
+import getWeatherData from "./api.js";
 
 getWeatherData();
 
