@@ -18,4 +18,30 @@ async function getWeatherData() {
   }
 }
 
+function parseWeatherData(weatherData) {
+  const myWeatherData = {
+    location: weatherData.location.name,
+    region: weatherData.location.region,
+    country: weatherData.location.country,
+    time: weatherData.location.localtime,
+    currentTemp: {
+      cels: weatherData.current.temp_c,
+      far: weatherData.current.temp_,
+    },
+    feelsLike: {
+      cels: weatherData.current.feelslike_c,
+      far: weatherData.current.feelslike_f,
+    },
+    condition: {
+      text: weatherData.current.condition.text,
+      icon: weatherData.current.condition.icon,
+    },
+    wind: {
+      mi: weatherData.current.wind_mph,
+      km: weatherData.current.wind_kph,
+    },
+    humidity: weatherData.current.humidity,
+    is_day: weatherData.current.is_day,
+  };
+}
 export default getWeatherData;
