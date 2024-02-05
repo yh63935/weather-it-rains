@@ -43,5 +43,6 @@ function parseWeatherData(weatherData) {
     humidity: weatherData.current.humidity,
     is_day: weatherData.current.is_day,
   };
+  return myWeatherData;
 }
-export default getWeatherData;
+export { getWeatherData, parseWeatherData };
