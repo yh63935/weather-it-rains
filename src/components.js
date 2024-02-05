@@ -10,3 +10,11 @@ function createEl(el, text, className) {
 
   return element;
 }
+// Append element(s) to a parent
+function appendEl(parent, ...elements) {
+  elements.forEach((el) => {
+    parent.append(el);
+  });
+}
+
+export default weatherCard;
