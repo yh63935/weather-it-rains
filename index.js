@@ -1,6 +1,6 @@
 import { getWeatherData } from "./api.js";
 import { parseWeatherData } from "./api.js";
-import CurrentWeatherCard from "./components.js";
+import { CurrentWeatherCard, DayWeatherCard } from "./components.js";
 
 async function initialize() {
   const weatherData = await getWeatherData();
@@ -21,6 +21,15 @@ async function initialize() {
     parsedData.wind.mi
   );
   card1.createCard();
+
+  const dayCard = new DayWeatherCard(
+    forecastArr[0].date,
+    null,
+    parsedData.condition.icon,
+    forecastArr[0].day.mintemp_f,
+    forecastArr[0].day.maxtemp_f
+  );
+  dayCard.createCard();
 }
 
 initialize();
