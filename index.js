@@ -1,30 +1,26 @@
-import getWeatherData from "./api.js";
+import { getWeatherData } from "./api.js";
+import { parseWeatherData } from "./api.js";
+import weatherCard from "./components.js";
 
-getWeatherData();
+async function initialize() {
+  const weatherData = await getWeatherData();
+  console.log(weatherData);
+  const parsedData = parseWeatherData(weatherData);
 
-console.log(weatherData.location.name);
-console.log(weatherData.location.region);
-console.log(weatherData.location.country);
-console.log(weatherData.location.localtime);
+  const forecastArr = weatherData.forecast.forecastday;
+  console.log("forecastdate" + forecastArr[0].date);
+  const card1 = new weatherCard(
+    forecastArr[0].date,
+    parsedData.currentTemp.cels,
+    parsedData.icon
+  );
+  card1.createCard();
+}
 
-console.log(weatherData.current.temp_c);
-console.log(weatherData.current.temp_f);
-console.log(weatherData.current.feelslike_c);
-console.log(weatherData.current.feelslike_f);
-
-console.log(weatherData.current.is_day);
-console.log(weatherData.current.condition.text);
-console.log(weatherData.current.condition.icon);
-
-console.log(weatherData.current.wind_mph);
-console.log(weatherData.current.wind_kph);
-
-console.log(weatherData.current.humidity);
+initialize();
 
 // Will need to replace with indexes after
 // Replace with the variables for day (accept variable in case they decide to upgrade to paid weather with extra days)
-console.log(`array length for days ${weatherData.forecast.forecastday.length}`);
-const forecastArr = weatherData.forecast.forecastday;
 
 for (let i = 0; i < forecastArr.length; i++) {
   const forecastDay = forecastArr[i];
