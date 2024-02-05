@@ -14,6 +14,7 @@ class WeatherCard {
     appendEl(this.cardContainer, dateEl, tempEl, iconEl);
   }
 }
+
 // Better to use something else since there will be only one copy of this?
 class CurrentWeatherCard extends WeatherCard {
   constructor(
@@ -55,6 +56,35 @@ class CurrentWeatherCard extends WeatherCard {
   }
 }
 
+class DayWeatherCard extends WeatherCard {
+  constructor(date, temp, icon, minTemp, maxTemp) {
+    super(date, temp, icon);
+    this._minTemp = minTemp;
+    this._maxTemp = maxTemp;
+  }
+  convertDateToDay() {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const index = new Date(this._date).getDay();
+    return days[index];
+  }
+  createCard() {
+    super.createCard();
+    const day = this.convertDateToDay();
+    const dayEl = createEl("p", day);
+    const minTempEl = createEl("p", this._minTemp);
+    const maxTempEl = createEl("p", this._maxTemp);
+    appendEl(this.cardContainer, dayEl, minTempEl, maxTempEl);
+  }
+}
+
 // Create element with specified text and class
 function createEl(el, text, className) {
   const element = document.createElement(el);
@@ -67,6 +97,7 @@ function createEl(el, text, className) {
 
   return element;
 }
+
 // Append element(s) to a parent
 function appendEl(parent, ...elements) {
   elements.forEach((el) => {
@@ -74,4 +105,4 @@ function appendEl(parent, ...elements) {
   });
 }
 
-export default CurrentWeatherCard;
+export { CurrentWeatherCard, DayWeatherCard };
