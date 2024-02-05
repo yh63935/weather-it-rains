@@ -1,3 +1,20 @@
+class WeatherCard {
+  constructor(date, temp, icon) {
+    this._date = date;
+    this._temp = temp;
+    this._icon = icon;
+    this.cardContainer = createEl("div", "");
+  }
+  createCard() {
+    const body = document.querySelector("body");
+    const dateEl = createEl("p", this._date);
+    const tempEl = createEl("p", this._temp);
+    const iconEl = createEl("img", this._icon);
+    appendEl(body, this.cardContainer);
+    appendEl(this.cardContainer, dateEl, tempEl, iconEl);
+  }
+}
+
 // Create element with specified text and class
 function createEl(el, text, className) {
   const element = document.createElement(el);
