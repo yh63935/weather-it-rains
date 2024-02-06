@@ -1,24 +1,28 @@
 class WeatherCard {
-  constructor(date, temp, icon) {
-    this._date = date;
+  constructor(timeMeasurement, temp, icon) {
+    this._timeMeasurement = timeMeasurement;
     this._temp = temp;
     this._icon = icon;
     this.cardContainer = createEl("div", "");
   }
+  formatTimeMeasurement() {
+    return this.timeMeasurement;
+  }
   createCard() {
     const body = document.querySelector("body");
-    const dateEl = createEl("p", this._date);
+    const formattedTimeMeasurement = this.formatTimeMeasurement();
+    const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
     const tempEl = createEl("p", this._temp);
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
-    appendEl(this.cardContainer, dateEl, tempEl, iconEl);
+    appendEl(this.cardContainer, timeMeasurementEl, tempEl, iconEl);
   }
 }
 
 // Better to use something else since there will be only one copy of this?
 class CurrentWeatherCard extends WeatherCard {
   constructor(
-    date,
+    timeMeasurement,
     temp,
     icon,
     location,
@@ -28,7 +32,7 @@ class CurrentWeatherCard extends WeatherCard {
     chanceRain,
     windSpeed
   ) {
-    super(date, temp, icon);
+    super(timeMeasurement, temp, icon);
     this._location = location;
     this._conditionText = conditionText;
     this._feelsLike = feelsLike;
@@ -57,12 +61,13 @@ class CurrentWeatherCard extends WeatherCard {
 }
 
 class DayWeatherCard extends WeatherCard {
-  constructor(date, temp, icon, minTemp, maxTemp) {
-    super(date, temp, icon);
+  constructor(timeMeasurement, temp, icon, minTemp, maxTemp) {
+    super(timeMeasurement, temp, icon);
     this._minTemp = minTemp;
     this._maxTemp = maxTemp;
   }
-  convertDateToDay() {
+  // Convert time to day of the week
+  formatTimeMeasurement() {
     const days = [
       "Sunday",
       "Monday",
@@ -72,22 +77,23 @@ class DayWeatherCard extends WeatherCard {
       "Friday",
       "Saturday",
     ];
-    const index = new Date(this._date).getDay();
+    const index = new Date(this._timeMeasurement).getDay();
     return days[index];
   }
   createCard() {
     super.createCard();
-    const day = this.convertDateToDay();
-    const dayEl = createEl("p", day);
     const minTempEl = createEl("p", this._minTemp);
     const maxTempEl = createEl("p", this._maxTemp);
+    appendEl(this.cardContainer, minTempEl, maxTempEl);
+  }
+}
     appendEl(this.cardContainer, dayEl, minTempEl, maxTempEl);
   }
 }
 
 // Factory function to create instances of a current day card
 function CreateCurrentDayCard(
-  date,
+  timeMeasurement,
   temp,
   icon,
   location,
@@ -98,7 +104,7 @@ function CreateCurrentDayCard(
   windSpeed
 ) {
   return new CurrentWeatherCard(
-    date,
+    timeMeasurement,
     temp,
     icon,
     location,
@@ -110,8 +116,8 @@ function CreateCurrentDayCard(
   );
 }
 // Factory function to create instances of a forecast day card
-function CreateForecastDayCard(date, temp, icon, minTemp, maxTemp) {
-  return new DayWeatherCard(date, temp, icon, minTemp, maxTemp);
+function CreateForecastDayCard(timeMeasurement, temp, icon, minTemp, maxTemp) {
+  return new DayWeatherCard(timeMeasurement, temp, icon, minTemp, maxTemp);
 }
 // Factory function to create instances of a hourly card
 function CreateHourlyCard(date, temp, icon) {
@@ -137,4 +143,4 @@ function appendEl(parent, ...elements) {
   });
 }
 
-export { CurrentWeatherCard, DayWeatherCard };
+export { CreateCurrentDayCard, CreateForecastDayCard, CreateHourlyCard };
