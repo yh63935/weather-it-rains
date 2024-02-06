@@ -85,6 +85,38 @@ class DayWeatherCard extends WeatherCard {
   }
 }
 
+// Factory function to create instances of a current day card
+function CreateCurrentDayCard(
+  date,
+  temp,
+  icon,
+  location,
+  conditionText,
+  feelsLike,
+  humidity,
+  chanceRain,
+  windSpeed
+) {
+  return new CurrentWeatherCard(
+    date,
+    temp,
+    icon,
+    location,
+    conditionText,
+    feelsLike,
+    humidity,
+    chanceRain,
+    windSpeed
+  );
+}
+// Factory function to create instances of a forecast day card
+function CreateForecastDayCard(date, temp, icon, minTemp, maxTemp) {
+  return new DayWeatherCard(date, temp, icon, minTemp, maxTemp);
+}
+// Factory function to create instances of a hourly card
+function CreateHourlyCard(date, temp, icon) {
+  return new WeatherCard(date, temp, icon);
+}
 // Create element with specified text and class
 function createEl(el, text, className) {
   const element = document.createElement(el);
