@@ -91,7 +91,10 @@ class DayWeatherCard extends WeatherCard {
 class HourlyWeatherCard extends WeatherCard {
   formatTimeMeasurement() {
     const time = new Date(this._timeMeasurement);
-    return time.getHours();
+    const hours = time.getHours() % 12 || 12;
+    const amOrPm = time.getHours() < 12 ? " am" : " pm";
+    const formattedHour = hours + amOrPm;
+    return formattedHour;
   }
 }
 // Factory function to create instances of a current day card
