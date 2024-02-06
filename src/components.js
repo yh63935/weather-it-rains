@@ -87,10 +87,13 @@ class DayWeatherCard extends WeatherCard {
     appendEl(this.cardContainer, minTempEl, maxTempEl);
   }
 }
-    appendEl(this.cardContainer, dayEl, minTempEl, maxTempEl);
+// Class for hourly weather card
+class HourlyWeatherCard extends WeatherCard {
+  formatTimeMeasurement() {
+    const time = new Date(this._timeMeasurement);
+    return time.getHours();
   }
 }
-
 // Factory function to create instances of a current day card
 function CreateCurrentDayCard(
   timeMeasurement,
@@ -120,8 +123,8 @@ function CreateForecastDayCard(timeMeasurement, temp, icon, minTemp, maxTemp) {
   return new DayWeatherCard(timeMeasurement, temp, icon, minTemp, maxTemp);
 }
 // Factory function to create instances of a hourly card
-function CreateHourlyCard(date, temp, icon) {
-  return new WeatherCard(date, temp, icon);
+function CreateHourlyCard(timeMeasurement, temp, icon) {
+  return new HourlyWeatherCard(timeMeasurement, temp, icon);
 }
 // Create element with specified text and class
 function createEl(el, text, className) {
