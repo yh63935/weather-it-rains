@@ -14,7 +14,7 @@ async function initialize() {
   const forecastArr = weatherData.forecast.forecastday;
   console.log("forecastdate" + forecastArr[0].date);
   const card1 = CreateCurrentDayCard(
-    forecastArr[0].date,
+    parsedData.time,
     parsedData.currentTemp.cels,
     parsedData.condition.icon,
     parsedData.location,

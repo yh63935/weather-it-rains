@@ -1,3 +1,4 @@
+import { convertAmPm, addLabel } from "./utils.js";
 class WeatherCard {
   constructor(timeMeasurement, temp, icon) {
     this._timeMeasurement = timeMeasurement;
@@ -39,6 +40,30 @@ class CurrentWeatherCard extends WeatherCard {
     this._humidity = humidity;
     this._chanceRain = chanceRain;
     this._windSpeed = windSpeed;
+  }
+  formatTimeMeasurement() {
+    const date = new Date(this._timeMeasurement);
+    const day = date.getDay();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const formattedHourMin = convertAmPm(date, true);
+    const minutes = date.getMinutes();
+    const formattedDate = `${month} ${day}, ${year} ${formattedHourMin}`;
+    return formattedDate;
   }
   createCard() {
     super.createCard();
@@ -90,10 +115,8 @@ class DayWeatherCard extends WeatherCard {
 // Class for hourly weather card
 class HourlyWeatherCard extends WeatherCard {
   formatTimeMeasurement() {
-    const time = new Date(this._timeMeasurement);
-    const hours = time.getHours() % 12 || 12;
-    const amOrPm = time.getHours() < 12 ? " am" : " pm";
-    const formattedHour = hours + amOrPm;
+    const date = new Date(this._timeMeasurement);
+    const formattedHour = convertAmPm(date);
     return formattedHour;
   }
 }
