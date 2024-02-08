@@ -64,16 +64,24 @@ class CurrentWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
+    const body = document.querySelector("body");
+    const currentCardContainer = createEl("div", "", "current-card-container");
+    appendEl(body, currentCardContainer);
+    const weatherConditions = createEl("div", "", "weather-conditions");
+    appendEl(currentCardContainer, this.cardContainer, weatherConditions);
     const locationEl = createEl("p", this._location);
+    appendEl(currentCardContainer, locationEl);
     const conditionEl = createEl("p", this._conditionText);
+    this.cardContainer.insertBefore(
+      conditionEl,
+      document.querySelector(".temp")
+    );
     const feelsLikeEl = createEl("p", this._feelsLike);
     const humidityEl = createEl("p", this._humidity);
     const chanceRainEl = createEl("p", this._chanceRain);
     const windSpeedEl = createEl("p", this._windSpeed);
     appendEl(
-      this.cardContainer,
-      locationEl,
-      conditionEl,
+      weatherConditions,
       feelsLikeEl,
       humidityEl,
       chanceRainEl,
