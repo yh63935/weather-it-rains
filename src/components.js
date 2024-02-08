@@ -13,7 +13,7 @@ class WeatherCard {
     const body = document.querySelector("body");
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
-    const tempEl = createEl("p", this._temp);
+    const tempEl = createEl("p", addLabel(this._temp, "f"));
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
     appendEl(this.cardContainer, timeMeasurementEl, tempEl, iconEl);
@@ -79,10 +79,10 @@ class CurrentWeatherCard extends WeatherCard {
       conditionEl,
       document.querySelector(".temp")
     );
-    const feelsLikeEl = createEl("p", this._feelsLike);
-    const humidityEl = createEl("p", this._humidity);
-    const chanceRainEl = createEl("p", this._chanceRain);
-    const windSpeedEl = createEl("p", this._windSpeed);
+    const feelsLikeEl = createEl("p", addLabel(this._feelsLike, "f"));
+    const humidityEl = createEl("p", addLabel(this._humidity, "%"));
+    const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
+    const windSpeedEl = createEl("p", addLabel(this._windSpeed, "km"));
     appendEl(
       weatherConditions,
       feelsLikeEl,
@@ -115,8 +115,8 @@ class DayWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
-    const minTempEl = createEl("p", this._minTemp);
-    const maxTempEl = createEl("p", this._maxTemp);
+    const minTempEl = createEl("p", addLabel(this._minTemp, "f"));
+    const maxTempEl = createEl("p", addLabel(this._maxTemp, "f"));
     appendEl(this.cardContainer, minTempEl, maxTempEl);
   }
 }
