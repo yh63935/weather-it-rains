@@ -13,7 +13,9 @@ class WeatherCard {
     const body = document.querySelector("body");
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
-    const tempEl = this._temp ? createEl("p", addLabel(this._temp, "f")) : "";
+    const tempEl = this._temp
+      ? createEl("p", addLabel(this._temp, "f"), "temp")
+      : "";
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
     if (tempEl) {
@@ -78,11 +80,11 @@ class CurrentWeatherCard extends WeatherCard {
     appendEl(currentCardContainer, this.cardContainer, weatherConditions);
     const locationEl = createEl("p", this._location);
     appendEl(currentCardContainer, locationEl);
+    const convertBtn = createEl("button", "Display °F/°C");
+    const tempEl = document.querySelector(".temp");
+    appendEl(tempEl, convertBtn);
     const conditionEl = createEl("p", this._conditionText);
-    this.cardContainer.insertBefore(
-      conditionEl,
-      document.querySelector(".temp")
-    );
+    this.cardContainer.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl("p", addLabel(this._feelsLike, "f"));
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
