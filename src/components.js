@@ -13,10 +13,14 @@ class WeatherCard {
     const body = document.querySelector("body");
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
-    const tempEl = createEl("p", this._temp);
+    const tempEl = this._temp ? createEl("p", addLabel(this._temp, "f")) : "";
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
-    appendEl(this.cardContainer, timeMeasurementEl, tempEl, iconEl);
+    if (tempEl) {
+      appendEl(this.cardContainer, timeMeasurementEl, tempEl, iconEl);
+    } else {
+      appendEl(this.cardContainer, timeMeasurementEl, iconEl);
+    }
   }
 }
 
