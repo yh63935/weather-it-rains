@@ -5,9 +5,24 @@ function convertAmPm(time, withMinutes) {
     : time.toLocaleTimeString([], { hour: "numeric" });
   return formattedHrsMin;
 }
-
+// Determine appropriate labels for imperial/metric system
+function determineImperialMetricLabel(label) {
+  switch (label) {
+    case "f":
+      return "°F";
+    case "c":
+      return "°C";
+    case "mi":
+      return "mi/h";
+    case "km":
+      return "km/h";
+  }
+}
 // Add appropriate labels to elements displayed
 function addLabel(unit, label) {
+  if (determineImperialMetricLabel(label)) {
+    label = determineImperialMetricLabel(label);
+  }
   return `${unit} ${label}`;
 }
 
