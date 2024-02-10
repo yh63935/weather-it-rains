@@ -25,6 +25,7 @@ async function initialize() {
     parsedData.wind.mi
   );
   card1.createCard();
+  console.log(card1);
 
   const dayCard = CreateForecastDayCard(
     forecastArr[0].date,
@@ -42,6 +43,12 @@ async function initialize() {
   );
   console.log(hourCard);
   hourCard.createCard();
+  const button = document.querySelector("button");
+  button.addEventListener("click", () => {
+    // card1.toggleImperialMetric();
+    // dayCard.toggleImperialMetric();
+    hourCard.toggleImperialMetric();
+  });
 }
 
 initialize();
