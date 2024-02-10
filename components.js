@@ -3,6 +3,7 @@ class WeatherCard {
   constructor(timeMeasurement, temp, icon) {
     this._timeMeasurement = timeMeasurement;
     this._temp = temp;
+    this.tempUnit = "f";
     this._icon = icon;
     this.cardContainer = createEl("div", "");
   }
@@ -14,7 +15,7 @@ class WeatherCard {
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
     const tempEl = this._temp
-      ? createEl("p", addLabel(this._temp, "f"), "temp")
+      ? createEl("p", addLabel(this._temp, this.tempUnit), "temp")
       : "";
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
@@ -23,6 +24,23 @@ class WeatherCard {
     } else {
       appendEl(this.cardContainer, timeMeasurementEl, iconEl);
     }
+  }
+  // Toggle between imperial and metric units for the weather card
+  toggleImperialMetric() {
+    this.tempUnit = this.tempUnit === "f" ? "c" : "f";
+    if (this.speedUnit) {
+      this.speedUnit = this.speedUnit === "mi" ? "km" : "mi";
+    }
+    this.updateLabels();
+  }
+  // Update imperial and metric labels
+  updateLabels() {
+    const tempEls = this.cardContainer.querySelectorAll(".temp");
+    for (const tempEl of tempEls) {
+      tempEl.innerText = addLabel(this._temp, this.tempUnit);
+    }
+    const windSpeedEl = this.cardContainer.querySelector(".wind-speed");
+    windSpeedEl.innerText = addLabel(this._windSpeed, this.speedUnit);
   }
 }
 
@@ -42,6 +60,7 @@ class CurrentWeatherCard extends WeatherCard {
     super(timeMeasurement, temp, icon);
     this._location = location;
     this._conditionText = conditionText;
+    this.speedUnit = "mi";
     this._feelsLike = feelsLike;
     this._humidity = humidity;
     this._chanceRain = chanceRain;
@@ -74,21 +93,25 @@ class CurrentWeatherCard extends WeatherCard {
   createCard() {
     super.createCard();
     const body = document.querySelector("body");
-    const currentCardContainer = createEl("div", "", "current-card-container");
-    appendEl(body, currentCardContainer);
+    const mainInfo = createEl("div", "", "main-info");
+    appendEl(body, mainInfo);
     const weatherConditions = createEl("div", "", "weather-conditions");
-    appendEl(currentCardContainer, this.cardContainer, weatherConditions);
+    appendEl(mainInfo, this.cardContainer, weatherConditions);
     const locationEl = createEl("p", this._location);
-    appendEl(currentCardContainer, locationEl);
+    appendEl(mainInfo, locationEl);
     const convertBtn = createEl("button", "Display °F/°C");
     const tempEl = document.querySelector(".temp");
-    appendEl(tempEl, convertBtn);
+    appendEl(this.cardContainer, convertBtn);
     const conditionEl = createEl("p", this._conditionText);
     this.cardContainer.insertBefore(conditionEl, tempEl);
-    const feelsLikeEl = createEl("p", addLabel(this._feelsLike, "f"));
+    const feelsLikeEl = createEl("p", addLabel(this._feelsLike, this.tempUnit));
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
-    const windSpeedEl = createEl("p", addLabel(this._windSpeed, "km"));
+    const windSpeedEl = createEl(
+      "p",
+      addLabel(this._windSpeed, this.speedUnit),
+      "wind-speed"
+    );
     appendEl(
       weatherConditions,
       feelsLikeEl,
@@ -121,8 +144,16 @@ class DayWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
-    const minTempEl = createEl("p", addLabel(this._minTemp, "f"));
-    const maxTempEl = createEl("p", addLabel(this._maxTemp, "f"));
+    const minTempEl = createEl(
+      "p",
+      addLabel(this._minTemp, this.tempUnit),
+      "temp"
+    );
+    const maxTempEl = createEl(
+      "p",
+      addLabel(this._maxTemp, this.tempUnit),
+      "temp"
+    );
     appendEl(this.cardContainer, minTempEl, maxTempEl);
   }
 }
