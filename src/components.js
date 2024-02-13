@@ -134,7 +134,7 @@ class CurrentWeatherCard extends WeatherCard {
     this.cardContainer.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl(
       "p",
-      addLabel(this._feelsLike, this.tempUnit),
+      addLabel(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
@@ -273,7 +273,7 @@ function createEl(el, text, className) {
 
   // Only add class if provided
   if (className) {
-      element.classList.add(className);
+    element.classList.add(className);
   }
 
   return element;
