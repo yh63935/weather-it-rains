@@ -96,12 +96,13 @@ class CurrentWeatherCard extends WeatherCard {
     const mainInfo = createEl("div", "", "main-info");
     appendEl(body, mainInfo);
     const weatherConditions = createEl("div", "", "weather-conditions");
-    appendEl(mainInfo, this.cardContainer, weatherConditions);
+    appendEl(this.cardContainer, mainInfo, weatherConditions);
     const locationEl = createEl("p", this._location);
     appendEl(mainInfo, locationEl);
     const convertBtn = createEl("button", "Display °F/°C");
-    const tempEl = document.querySelector(".temp");
-    appendEl(this.cardContainer, convertBtn);
+    const tempEl = this.cardContainer.querySelector(".temp");
+    const iconEl = this.cardContainer.querySelector("img");
+    this.cardContainer.insertBefore(convertBtn, iconEl);
     const conditionEl = createEl("p", this._conditionText);
     this.cardContainer.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl("p", addLabel(this._feelsLike, this.tempUnit));
