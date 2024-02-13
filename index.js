@@ -15,11 +15,13 @@ async function initialize() {
   console.log("forecastdate" + forecastArr[0].date);
   const card1 = CreateCurrentDayCard(
     parsedData.time,
+    parsedData.currentTemp.far,
     parsedData.currentTemp.cels,
     parsedData.condition.icon,
     parsedData.location,
     parsedData.condition.text,
     parsedData.feelsLike.far,
+    parsedData.feelsLike.cels,
     parsedData.humidity,
     forecastArr[0].day.daily_chance_of_rain,
     parsedData.wind.mi
@@ -38,6 +40,7 @@ async function initialize() {
 
   const hourCard = CreateHourlyCard(
     forecastArr[0].hour[0].time,
+    forecastArr[0].hour[0].temp_f,
     forecastArr[0].hour[0].temp_c,
     forecastArr[0].hour[0].condition.icon
   );
@@ -45,8 +48,8 @@ async function initialize() {
   hourCard.createCard();
   const button = document.querySelector("button");
   button.addEventListener("click", () => {
-    // card1.toggleImperialMetric();
-    // dayCard.toggleImperialMetric();
+    card1.toggleImperialMetric();
+    dayCard.toggleImperialMetric();
     hourCard.toggleImperialMetric();
   });
 }
