@@ -26,7 +26,7 @@ function parseWeatherData(weatherData) {
     time: weatherData.location.localtime,
     currentTemp: {
       cels: weatherData.current.temp_c,
-      far: weatherData.current.temp_,
+      far: weatherData.current.temp_f,
     },
     feelsLike: {
       cels: weatherData.current.feelslike_c,
