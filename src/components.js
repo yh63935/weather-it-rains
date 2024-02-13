@@ -1,11 +1,13 @@
 import { convertAmPm, addLabel } from "./utils.js";
 class WeatherCard {
-  constructor(timeMeasurement, temp, icon) {
+  constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
     this._timeMeasurement = timeMeasurement;
-    this._temp = temp;
+    this._imperialTemp = imperialTemp;
+    this._metricTemp = metricTemp;
     this.tempUnit = "f";
     this._icon = icon;
     this.cardContainer = createEl("div", "");
+    this.imperial = true;
   }
   formatTimeMeasurement() {
     return this._timeMeasurement;
@@ -14,8 +16,8 @@ class WeatherCard {
     const body = document.querySelector("body");
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
-    const tempEl = this._temp
-      ? createEl("p", addLabel(this._temp, this.tempUnit), "temp")
+    const tempEl = this._imperialTemp
+      ? createEl("p", addLabel(this._imperialTemp, this.tempUnit), "temp")
       : "";
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
@@ -27,20 +29,35 @@ class WeatherCard {
   }
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
-    this.tempUnit = this.tempUnit === "f" ? "c" : "f";
-    if (this.speedUnit) {
-      this.speedUnit = this.speedUnit === "mi" ? "km" : "mi";
-    }
-    this.updateLabels();
+    this.imperial = !this.imperial;
+    this.updateImperialMetricLabels();
   }
   // Update imperial and metric labels
-  updateLabels() {
-    const tempEls = this.cardContainer.querySelectorAll(".temp");
-    for (const tempEl of tempEls) {
-      tempEl.innerText = addLabel(this._temp, this.tempUnit);
+  updateImperialMetricLabels() {
+    this.tempUnit = this.imperial ? "f" : "c";
+    this.updateImperialMetricLabel(
+      ".temp",
+      this._imperialTemp,
+      this._metricTemp,
+      this.tempUnit
+    );
+    // const tempEls = this.cardContainer.querySelectorAll(".temp");
+
+    // for (const tempEl of tempEls) {
+    //   tempEl.innerText = addLabel(
+    //     this.imperial ? this._imperialTemp : this._metricTemp,
+    //     this.tempUnit
+    //   );
+    // }
+    if (this.speedUnit) {
+      this.speedUnit = this.imperial ? "mi" : "km";
     }
     const windSpeedEl = this.cardContainer.querySelector(".wind-speed");
     windSpeedEl.innerText = addLabel(this._windSpeed, this.speedUnit);
+  }
+  updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
+    const el = this.cardContainer.querySelector(className);
+    el.innerText = addLabel(this.imperial ? imperialValue : metricValue, unit);
   }
 }
 
@@ -48,23 +65,33 @@ class WeatherCard {
 class CurrentWeatherCard extends WeatherCard {
   constructor(
     timeMeasurement,
-    temp,
+    imperialTemp,
+    metricTemp,
     icon,
     location,
     conditionText,
-    feelsLike,
+    imperialFeelsLikeTemp,
+    metricFeelsLikeTemp,
     humidity,
     chanceRain,
     windSpeed
   ) {
-    super(timeMeasurement, temp, icon);
+    super(
+      timeMeasurement,
+      imperialTemp,
+      metricTemp,
+      imperialFeelsLikeTemp,
+      metricFeelsLikeTemp,
+      icon
+    );
     this._location = location;
     this._conditionText = conditionText;
     this.speedUnit = "mi";
-    this._feelsLike = feelsLike;
     this._humidity = humidity;
     this._chanceRain = chanceRain;
     this._windSpeed = windSpeed;
+    this._imperialFeelsLikeTemp = imperialFeelsLikeTemp;
+    this._metricFeelsLikeTemp = metricFeelsLikeTemp;
   }
   formatTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
@@ -96,15 +123,20 @@ class CurrentWeatherCard extends WeatherCard {
     const mainInfo = createEl("div", "", "main-info");
     appendEl(body, mainInfo);
     const weatherConditions = createEl("div", "", "weather-conditions");
-    appendEl(mainInfo, this.cardContainer, weatherConditions);
+    appendEl(this.cardContainer, mainInfo, weatherConditions);
     const locationEl = createEl("p", this._location);
     appendEl(mainInfo, locationEl);
     const convertBtn = createEl("button", "Display °F/°C");
-    const tempEl = document.querySelector(".temp");
-    appendEl(this.cardContainer, convertBtn);
+    const tempEl = this.cardContainer.querySelector(".temp");
+    const iconEl = this.cardContainer.querySelector("img");
+    this.cardContainer.insertBefore(convertBtn, iconEl);
     const conditionEl = createEl("p", this._conditionText);
     this.cardContainer.insertBefore(conditionEl, tempEl);
-    const feelsLikeEl = createEl("p", addLabel(this._feelsLike, this.tempUnit));
+    const feelsLikeEl = createEl(
+      "p",
+      addLabel(this._feelsLike, this.tempUnit),
+      "feels-like"
+    );
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
     const windSpeedEl = createEl(
@@ -120,11 +152,32 @@ class CurrentWeatherCard extends WeatherCard {
       windSpeedEl
     );
   }
+  updateImperialMetricLabels() {
+    super.updateImperialMetricLabel(
+      ".temp",
+      this._imperialTemp,
+      this._metricTemp,
+      this.tempUnit
+    );
+    this.updateImperialMetricLabel(
+      ".feels-like",
+      this._imperialFeelsLikeTemp,
+      this._metricFeelsLikeTemp,
+      this.tempUnit
+    );
+  }
 }
 
 class DayWeatherCard extends WeatherCard {
-  constructor(timeMeasurement, temp, icon, minTemp, maxTemp) {
-    super(timeMeasurement, temp, icon);
+  constructor(
+    timeMeasurement,
+    imperialTemp,
+    metricTemp,
+    icon,
+    minTemp,
+    maxTemp
+  ) {
+    super(timeMeasurement, imperialTemp, metricTemp, icon);
     this._minTemp = minTemp;
     this._maxTemp = maxTemp;
   }
@@ -168,7 +221,8 @@ class HourlyWeatherCard extends WeatherCard {
 // Factory function to create instances of a current day card
 function CreateCurrentDayCard(
   timeMeasurement,
-  temp,
+  imperialTemp,
+  metricTemp,
   icon,
   location,
   conditionText,
@@ -179,7 +233,8 @@ function CreateCurrentDayCard(
 ) {
   return new CurrentWeatherCard(
     timeMeasurement,
-    temp,
+    imperialTemp,
+    metricTemp,
     icon,
     location,
     conditionText,
@@ -190,12 +245,26 @@ function CreateCurrentDayCard(
   );
 }
 // Factory function to create instances of a forecast day card
-function CreateForecastDayCard(timeMeasurement, temp, icon, minTemp, maxTemp) {
-  return new DayWeatherCard(timeMeasurement, temp, icon, minTemp, maxTemp);
+function CreateForecastDayCard(
+  timeMeasurement,
+  imperialTemp,
+  metricTemp,
+  icon,
+  minTemp,
+  maxTemp
+) {
+  return new DayWeatherCard(
+    timeMeasurement,
+    imperialTemp,
+    metricTemp,
+    icon,
+    minTemp,
+    maxTemp
+  );
 }
 // Factory function to create instances of a hourly card
-function CreateHourlyCard(timeMeasurement, temp, icon) {
-  return new HourlyWeatherCard(timeMeasurement, temp, icon);
+function CreateHourlyCard(timeMeasurement, imperialTemp, metricTemp, icon) {
+  return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
 }
 // Create element with specified text and class
 function createEl(el, text, className) {
@@ -204,7 +273,7 @@ function createEl(el, text, className) {
 
   // Only add class if provided
   if (className) {
-    element.classList.add(className);
+      element.classList.add(className);
   }
 
   return element;
