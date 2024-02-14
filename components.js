@@ -7,7 +7,7 @@ class WeatherCard {
     this.tempUnit = "f";
     this._icon = icon;
     this.cardContainer = createEl("div", "");
-    this.imperial = true;
+    this.isImperial = true;
   }
   formatTimeMeasurement() {
     return this._timeMeasurement;
@@ -29,15 +29,15 @@ class WeatherCard {
   }
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
-    console.log("Before changing imperial: ", this.imperial);
-    this.imperial = !this.imperial;
-    console.log("After click, changed imperial to: ", this.imperial);
+    console.log("Before changing imperial: ", this.isImperial);
+    this.isImperial = !this.isImperial;
+    console.log("After click, changed imperial to: ", this.isImperial);
     this.updateImperialMetricLabels();
   }
   // Update imperial and metric labels
   updateImperialMetricLabels() {
-    console.log("In updateImperialMetricLabels: ", this.imperial);
-    this.tempUnit = this.imperial ? "f" : "c";
+    console.log("In updateImperialMetricLabels: ", this.isImperial);
+    this.tempUnit = this.isImperial ? "f" : "c";
     console.log("Set this.tempunit to: ", this.tempUnit);
     this.updateImperialMetricLabel(
       ".temp",
@@ -50,7 +50,7 @@ class WeatherCard {
     const el = this.cardContainer.querySelector(className);
     if (el) {
       el.innerText = addLabel(
-        this.imperial ? imperialValue : metricValue,
+        this.isImperial ? imperialValue : metricValue,
         unit
       );
     }
@@ -153,7 +153,7 @@ class CurrentWeatherCard extends WeatherCard {
       "This speed unit inside updateImperialMetric Labels",
       this.speedUnit
     );
-    this.speedUnit = this.imperial ? "mi" : "km";
+    this.speedUnit = this.isImperial ? "mi" : "km";
 
     this.updateImperialMetricLabel(
       ".feels-like",
