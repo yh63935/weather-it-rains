@@ -52,7 +52,12 @@ class WeatherCard {
   }
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
-    el.innerText = addLabel(this.imperial ? imperialValue : metricValue, unit);
+    if (el) {
+      el.innerText = addLabel(
+        this.imperial ? imperialValue : metricValue,
+        unit
+      );
+    }
   }
 }
 
