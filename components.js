@@ -19,6 +19,7 @@ class WeatherCard {
     const tempEl = this._imperialTemp
       ? createEl("p", addLabel(this._imperialTemp, this.tempUnit), "temp")
       : "";
+    console.log("line 22", this.tempUnit);
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
     if (tempEl) {
@@ -29,12 +30,16 @@ class WeatherCard {
   }
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
+    console.log("Before changing imperial: ", this.imperial);
     this.imperial = !this.imperial;
+    console.log("After click, changed imperial to: ", this.imperial);
     this.updateImperialMetricLabels();
   }
   // Update imperial and metric labels
   updateImperialMetricLabels() {
+    console.log("In updateImperialMetricLabels: ", this.imperial);
     this.tempUnit = this.imperial ? "f" : "c";
+    console.log("Set this.tempunit to: ", this.tempUnit);
     this.updateImperialMetricLabel(
       ".temp",
       this._imperialTemp,
@@ -58,6 +63,7 @@ class WeatherCard {
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
     el.innerText = addLabel(this.imperial ? imperialValue : metricValue, unit);
+    console.log("unit", unit);
   }
 }
 
@@ -137,6 +143,7 @@ class CurrentWeatherCard extends WeatherCard {
       addLabel(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
+
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
     const windSpeedEl = createEl(
@@ -153,12 +160,8 @@ class CurrentWeatherCard extends WeatherCard {
     );
   }
   updateImperialMetricLabels() {
-    super.updateImperialMetricLabel(
-      ".temp",
-      this._imperialTemp,
-      this._metricTemp,
-      this.tempUnit
-    );
+    super.updateImperialMetricLabels();
+    console.log("line 165", this.tempUnit);
     this.updateImperialMetricLabel(
       ".feels-like",
       this._imperialFeelsLikeTemp,
