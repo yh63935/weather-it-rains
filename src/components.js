@@ -45,10 +45,6 @@ class WeatherCard {
       this._metricTemp,
       this.tempUnit
     );
-
-    // if (this.speedUnit) {
-    //   this.speedUnit = this.imperial ? "mi" : "km";
-    // }
   }
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
@@ -180,12 +176,16 @@ class DayWeatherCard extends WeatherCard {
     imperialTemp,
     metricTemp,
     icon,
-    minTemp,
-    maxTemp
+    imperialMinTemp,
+    metricMinTemp,
+    imperialMaxTemp,
+    metricMaxTemp
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
-    this._minTemp = minTemp;
-    this._maxTemp = maxTemp;
+    this._imperialMinTemp = imperialMinTemp;
+    this._metricMinTemp = metricMinTemp;
+    this._imperialMaxTemp = imperialMaxTemp;
+    this._metricMaxTemp = metricMaxTemp;
   }
   // Convert time to day of the week
   formatTimeMeasurement() {
@@ -205,15 +205,30 @@ class DayWeatherCard extends WeatherCard {
     super.createCard();
     const minTempEl = createEl(
       "p",
-      addLabel(this._minTemp, this.tempUnit),
-      "temp"
+      addLabel(this._imperialMinTemp, this.tempUnit),
+      "min-temp"
     );
     const maxTempEl = createEl(
       "p",
-      addLabel(this._maxTemp, this.tempUnit),
-      "temp"
+      addLabel(this._imperialMaxTemp, this.tempUnit),
+      "max-temp"
     );
     appendEl(this.cardContainer, minTempEl, maxTempEl);
+  }
+  updateImperialMetricLabels() {
+    super.updateImperialMetricLabels();
+    this.updateImperialMetricLabel(
+      ".min-temp",
+      this._imperialMinTemp,
+      this._metricMinTemp,
+      this.tempUnit
+    );
+    this.updateImperialMetricLabel(
+      ".max-temp",
+      this._imperialMaxTemp,
+      this._metricMaxTemp,
+      this.tempUnit
+    );
   }
 }
 // Class for hourly weather card
@@ -260,16 +275,20 @@ function CreateForecastDayCard(
   imperialTemp,
   metricTemp,
   icon,
-  minTemp,
-  maxTemp
+  imperialMinTemp,
+  metricMinTemp,
+  imperialMaxTemp,
+  metricMaxTemp
 ) {
   return new DayWeatherCard(
     timeMeasurement,
     imperialTemp,
     metricTemp,
     icon,
-    minTemp,
-    maxTemp
+    imperialMinTemp,
+    metricMinTemp,
+    imperialMaxTemp,
+    metricMaxTemp
   );
 }
 // Factory function to create instances of a hourly card

@@ -12,7 +12,6 @@ async function initialize() {
   const parsedData = parseWeatherData(weatherData);
 
   const forecastArr = weatherData.forecast.forecastday;
-  console.log("windkm", parsedData.wind.km);
   const card1 = CreateCurrentDayCard(
     parsedData.time,
     parsedData.currentTemp.far,
@@ -28,14 +27,16 @@ async function initialize() {
     parsedData.wind.km
   );
   card1.createCard();
-  console.log(card1);
 
   const dayCard = CreateForecastDayCard(
     forecastArr[0].date,
     null,
+    null,
     parsedData.condition.icon,
     forecastArr[0].day.mintemp_f,
-    forecastArr[0].day.maxtemp_f
+    forecastArr[0].day.mintemp_c,
+    forecastArr[0].day.maxtemp_f,
+    forecastArr[0].day.maxtemp_c
   );
   dayCard.createCard();
 
@@ -50,7 +51,7 @@ async function initialize() {
   const button = document.querySelector("button");
   button.addEventListener("click", () => {
     card1.toggleImperialMetric();
-    // dayCard.toggleImperialMetric();
+    dayCard.toggleImperialMetric();
     // hourCard.toggleImperialMetric();
   });
 }
