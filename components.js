@@ -19,7 +19,6 @@ class WeatherCard {
     const tempEl = this._imperialTemp
       ? createEl("p", addLabel(this._imperialTemp, this.tempUnit), "temp")
       : "";
-    console.log("line 22", this.tempUnit);
     const iconEl = createEl("img", this._icon);
     appendEl(body, this.cardContainer);
     if (tempEl) {
@@ -46,24 +45,14 @@ class WeatherCard {
       this._metricTemp,
       this.tempUnit
     );
-    // const tempEls = this.cardContainer.querySelectorAll(".temp");
 
-    // for (const tempEl of tempEls) {
-    //   tempEl.innerText = addLabel(
-    //     this.imperial ? this._imperialTemp : this._metricTemp,
-    //     this.tempUnit
-    //   );
+    // if (this.speedUnit) {
+    //   this.speedUnit = this.imperial ? "mi" : "km";
     // }
-    if (this.speedUnit) {
-      this.speedUnit = this.imperial ? "mi" : "km";
-    }
-    const windSpeedEl = this.cardContainer.querySelector(".wind-speed");
-    windSpeedEl.innerText = addLabel(this._windSpeed, this.speedUnit);
   }
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
     el.innerText = addLabel(this.imperial ? imperialValue : metricValue, unit);
-    console.log("unit", unit);
   }
 }
 
@@ -80,22 +69,19 @@ class CurrentWeatherCard extends WeatherCard {
     metricFeelsLikeTemp,
     humidity,
     chanceRain,
-    windSpeed
+    imperialWindSpeed,
+    metricWindSpeed
   ) {
-    super(
-      timeMeasurement,
-      imperialTemp,
-      metricTemp,
-      imperialFeelsLikeTemp,
-      metricFeelsLikeTemp,
-      icon
-    );
+    super(timeMeasurement, imperialTemp, metricTemp, icon);
     this._location = location;
     this._conditionText = conditionText;
     this.speedUnit = "mi";
     this._humidity = humidity;
     this._chanceRain = chanceRain;
-    this._windSpeed = windSpeed;
+    this._imperialWindSpeed = imperialWindSpeed;
+    console.log("imperialwindspeed", imperialWindSpeed);
+    console.log("metricwindspeed", metricWindSpeed);
+    this._metricWindSpeed = metricWindSpeed;
     this._imperialFeelsLikeTemp = imperialFeelsLikeTemp;
     this._metricFeelsLikeTemp = metricFeelsLikeTemp;
   }
@@ -148,9 +134,10 @@ class CurrentWeatherCard extends WeatherCard {
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
     const windSpeedEl = createEl(
       "p",
-      addLabel(this._windSpeed, this.speedUnit),
+      addLabel(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
+    console.log("Create windSpeedEl:", this._imperialWindSpeed);
     appendEl(
       weatherConditions,
       feelsLikeEl,
@@ -161,12 +148,23 @@ class CurrentWeatherCard extends WeatherCard {
   }
   updateImperialMetricLabels() {
     super.updateImperialMetricLabels();
-    console.log("line 165", this.tempUnit);
+    console.log(
+      "This speed unit inside updateImperialMetric Labels",
+      this.speedUnit
+    );
+    this.speedUnit = this.imperial ? "mi" : "km";
+
     this.updateImperialMetricLabel(
       ".feels-like",
       this._imperialFeelsLikeTemp,
       this._metricFeelsLikeTemp,
       this.tempUnit
+    );
+    this.updateImperialMetricLabel(
+      ".wind-speed",
+      this._imperialWindSpeed,
+      this._metricWindSpeed,
+      this.speedUnit
     );
   }
 }
@@ -229,10 +227,12 @@ function CreateCurrentDayCard(
   icon,
   location,
   conditionText,
-  feelsLike,
+  imperialFeelsLikeTemp,
+  metricFeelsLikeTemp,
   humidity,
   chanceRain,
-  windSpeed
+  imperialWindSpeed,
+  metricWindSpeed
 ) {
   return new CurrentWeatherCard(
     timeMeasurement,
@@ -241,10 +241,12 @@ function CreateCurrentDayCard(
     icon,
     location,
     conditionText,
-    feelsLike,
+    imperialFeelsLikeTemp,
+    metricFeelsLikeTemp,
     humidity,
     chanceRain,
-    windSpeed
+    imperialWindSpeed,
+    metricWindSpeed
   );
 }
 // Factory function to create instances of a forecast day card
