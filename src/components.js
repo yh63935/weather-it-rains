@@ -7,7 +7,7 @@ class WeatherCard {
     this.tempUnit = "f";
     this._icon = icon;
     this.cardContainer = createEl("div", "");
-    this.imperial = true;
+    this.isImperial = true;
   }
   formatTimeMeasurement() {
     return this._timeMeasurement;
@@ -29,34 +29,30 @@ class WeatherCard {
   }
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
-    console.log("Before changing imperial: ", this.imperial);
-    this.imperial = !this.imperial;
-    console.log("After click, changed imperial to: ", this.imperial);
+    this.isImperial = !this.isImperial;
     this.updateImperialMetricLabels();
   }
   // Update imperial and metric labels
   updateImperialMetricLabels() {
-    console.log("In updateImperialMetricLabels: ", this.imperial);
-    this.tempUnit = this.imperial ? "f" : "c";
-    console.log("Set this.tempunit to: ", this.tempUnit);
+    this.tempUnit = this.isImperial ? "f" : "c";
     this.updateImperialMetricLabel(
       ".temp",
       this._imperialTemp,
       this._metricTemp,
       this.tempUnit
     );
-
-    // if (this.speedUnit) {
-    //   this.speedUnit = this.imperial ? "mi" : "km";
-    // }
   }
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
-    el.innerText = addLabel(this.imperial ? imperialValue : metricValue, unit);
+    if (el) {
+      el.innerText = addLabel(
+        this.isImperial ? imperialValue : metricValue,
+        unit
+      );
+    }
   }
 }
 
-// Better to use something else since there will be only one copy of this?
 class CurrentWeatherCard extends WeatherCard {
   constructor(
     timeMeasurement,
@@ -79,8 +75,6 @@ class CurrentWeatherCard extends WeatherCard {
     this._humidity = humidity;
     this._chanceRain = chanceRain;
     this._imperialWindSpeed = imperialWindSpeed;
-    console.log("imperialwindspeed", imperialWindSpeed);
-    console.log("metricwindspeed", metricWindSpeed);
     this._metricWindSpeed = metricWindSpeed;
     this._imperialFeelsLikeTemp = imperialFeelsLikeTemp;
     this._metricFeelsLikeTemp = metricFeelsLikeTemp;
@@ -137,7 +131,6 @@ class CurrentWeatherCard extends WeatherCard {
       addLabel(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
-    console.log("Create windSpeedEl:", this._imperialWindSpeed);
     appendEl(
       weatherConditions,
       feelsLikeEl,
@@ -148,11 +141,7 @@ class CurrentWeatherCard extends WeatherCard {
   }
   updateImperialMetricLabels() {
     super.updateImperialMetricLabels();
-    console.log(
-      "This speed unit inside updateImperialMetric Labels",
-      this.speedUnit
-    );
-    this.speedUnit = this.imperial ? "mi" : "km";
+    this.speedUnit = this.isImperial ? "mi" : "km";
 
     this.updateImperialMetricLabel(
       ".feels-like",
@@ -175,12 +164,16 @@ class DayWeatherCard extends WeatherCard {
     imperialTemp,
     metricTemp,
     icon,
-    minTemp,
-    maxTemp
+    imperialMinTemp,
+    metricMinTemp,
+    imperialMaxTemp,
+    metricMaxTemp
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
-    this._minTemp = minTemp;
-    this._maxTemp = maxTemp;
+    this._imperialMinTemp = imperialMinTemp;
+    this._metricMinTemp = metricMinTemp;
+    this._imperialMaxTemp = imperialMaxTemp;
+    this._metricMaxTemp = metricMaxTemp;
   }
   // Convert time to day of the week
   formatTimeMeasurement() {
@@ -200,15 +193,30 @@ class DayWeatherCard extends WeatherCard {
     super.createCard();
     const minTempEl = createEl(
       "p",
-      addLabel(this._minTemp, this.tempUnit),
-      "temp"
+      addLabel(this._imperialMinTemp, this.tempUnit),
+      "min-temp"
     );
     const maxTempEl = createEl(
       "p",
-      addLabel(this._maxTemp, this.tempUnit),
-      "temp"
+      addLabel(this._imperialMaxTemp, this.tempUnit),
+      "max-temp"
     );
     appendEl(this.cardContainer, minTempEl, maxTempEl);
+  }
+  updateImperialMetricLabels() {
+    super.updateImperialMetricLabels();
+    this.updateImperialMetricLabel(
+      ".min-temp",
+      this._imperialMinTemp,
+      this._metricMinTemp,
+      this.tempUnit
+    );
+    this.updateImperialMetricLabel(
+      ".max-temp",
+      this._imperialMaxTemp,
+      this._metricMaxTemp,
+      this.tempUnit
+    );
   }
 }
 // Class for hourly weather card
@@ -220,7 +228,7 @@ class HourlyWeatherCard extends WeatherCard {
   }
 }
 // Factory function to create instances of a current day card
-function CreateCurrentDayCard(
+function createCurrentWeatherCard(
   timeMeasurement,
   imperialTemp,
   metricTemp,
@@ -250,25 +258,34 @@ function CreateCurrentDayCard(
   );
 }
 // Factory function to create instances of a forecast day card
-function CreateForecastDayCard(
+function createDayWeatherCard(
   timeMeasurement,
   imperialTemp,
   metricTemp,
   icon,
-  minTemp,
-  maxTemp
+  imperialMinTemp,
+  metricMinTemp,
+  imperialMaxTemp,
+  metricMaxTemp
 ) {
   return new DayWeatherCard(
     timeMeasurement,
     imperialTemp,
     metricTemp,
     icon,
-    minTemp,
-    maxTemp
+    imperialMinTemp,
+    metricMinTemp,
+    imperialMaxTemp,
+    metricMaxTemp
   );
 }
 // Factory function to create instances of a hourly card
-function CreateHourlyCard(timeMeasurement, imperialTemp, metricTemp, icon) {
+function createHourlyWeatherCard(
+  timeMeasurement,
+  imperialTemp,
+  metricTemp,
+  icon
+) {
   return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
 }
 // Create element with specified text and class
@@ -291,4 +308,8 @@ function appendEl(parent, ...elements) {
   });
 }
 
-export { CreateCurrentDayCard, CreateForecastDayCard, CreateHourlyCard };
+export {
+  createCurrentWeatherCard,
+  createDayWeatherCard,
+  createHourlyWeatherCard,
+};
