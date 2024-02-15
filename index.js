@@ -8,7 +8,6 @@ import {
 
 async function initialize() {
   const weatherData = await getWeatherData();
-  console.log(weatherData);
   const parsedData = parseWeatherData(weatherData);
 
   const forecastArr = weatherData.forecast.forecastday;
@@ -46,13 +45,12 @@ async function initialize() {
     forecastArr[0].hour[0].temp_c,
     forecastArr[0].hour[0].condition.icon
   );
-  console.log(hourCard);
   hourCard.createCard();
   const button = document.querySelector("button");
   button.addEventListener("click", () => {
     card1.toggleImperialMetric();
     dayCard.toggleImperialMetric();
-    // hourCard.toggleImperialMetric();
+    hourCard.toggleImperialMetric();
   });
 }
 
