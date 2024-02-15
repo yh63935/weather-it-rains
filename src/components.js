@@ -29,16 +29,12 @@ class WeatherCard {
   }
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
-    console.log("Before changing imperial: ", this.isImperial);
     this.isImperial = !this.isImperial;
-    console.log("After click, changed imperial to: ", this.isImperial);
     this.updateImperialMetricLabels();
   }
   // Update imperial and metric labels
   updateImperialMetricLabels() {
-    console.log("In updateImperialMetricLabels: ", this.isImperial);
     this.tempUnit = this.isImperial ? "f" : "c";
-    console.log("Set this.tempunit to: ", this.tempUnit);
     this.updateImperialMetricLabel(
       ".temp",
       this._imperialTemp,
@@ -57,7 +53,6 @@ class WeatherCard {
   }
 }
 
-// Better to use something else since there will be only one copy of this?
 class CurrentWeatherCard extends WeatherCard {
   constructor(
     timeMeasurement,
@@ -80,8 +75,6 @@ class CurrentWeatherCard extends WeatherCard {
     this._humidity = humidity;
     this._chanceRain = chanceRain;
     this._imperialWindSpeed = imperialWindSpeed;
-    console.log("imperialwindspeed", imperialWindSpeed);
-    console.log("metricwindspeed", metricWindSpeed);
     this._metricWindSpeed = metricWindSpeed;
     this._imperialFeelsLikeTemp = imperialFeelsLikeTemp;
     this._metricFeelsLikeTemp = metricFeelsLikeTemp;
@@ -138,7 +131,6 @@ class CurrentWeatherCard extends WeatherCard {
       addLabel(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
-    console.log("Create windSpeedEl:", this._imperialWindSpeed);
     appendEl(
       weatherConditions,
       feelsLikeEl,
@@ -149,10 +141,6 @@ class CurrentWeatherCard extends WeatherCard {
   }
   updateImperialMetricLabels() {
     super.updateImperialMetricLabels();
-    console.log(
-      "This speed unit inside updateImperialMetric Labels",
-      this.speedUnit
-    );
     this.speedUnit = this.isImperial ? "mi" : "km";
 
     this.updateImperialMetricLabel(
