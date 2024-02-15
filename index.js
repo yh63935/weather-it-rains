@@ -1,9 +1,9 @@
 import { getWeatherData } from "./api.js";
 import { parseWeatherData } from "./api.js";
 import {
-  CreateCurrentDayCard,
-  CreateForecastDayCard,
-  CreateHourlyCard,
+  createCurrentWeatherCard,
+  createDayWeatherCard,
+  createHourlyWeatherCard,
 } from "./components.js";
 
 async function initialize() {
@@ -12,7 +12,7 @@ async function initialize() {
   const parsedData = parseWeatherData(weatherData);
 
   const forecastArr = weatherData.forecast.forecastday;
-  const card1 = CreateCurrentDayCard(
+  const card1 = createCurrentWeatherCard(
     parsedData.time,
     parsedData.currentTemp.far,
     parsedData.currentTemp.cels,
@@ -28,7 +28,7 @@ async function initialize() {
   );
   card1.createCard();
 
-  const dayCard = CreateForecastDayCard(
+  const dayCard = createDayWeatherCard(
     forecastArr[0].date,
     null,
     null,
@@ -40,7 +40,7 @@ async function initialize() {
   );
   dayCard.createCard();
 
-  const hourCard = CreateHourlyCard(
+  const hourCard = createHourlyWeatherCard(
     forecastArr[0].hour[0].time,
     forecastArr[0].hour[0].temp_f,
     forecastArr[0].hour[0].temp_c,

@@ -240,7 +240,7 @@ class HourlyWeatherCard extends WeatherCard {
   }
 }
 // Factory function to create instances of a current day card
-function CreateCurrentDayCard(
+function createCurrentWeatherCard(
   timeMeasurement,
   imperialTemp,
   metricTemp,
@@ -270,7 +270,7 @@ function CreateCurrentDayCard(
   );
 }
 // Factory function to create instances of a forecast day card
-function CreateForecastDayCard(
+function createDayWeatherCard(
   timeMeasurement,
   imperialTemp,
   metricTemp,
@@ -292,7 +292,12 @@ function CreateForecastDayCard(
   );
 }
 // Factory function to create instances of a hourly card
-function CreateHourlyCard(timeMeasurement, imperialTemp, metricTemp, icon) {
+function createHourlyWeatherCard(
+  timeMeasurement,
+  imperialTemp,
+  metricTemp,
+  icon
+) {
   return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
 }
 // Create element with specified text and class
@@ -315,4 +320,8 @@ function appendEl(parent, ...elements) {
   });
 }
 
-export { CreateCurrentDayCard, CreateForecastDayCard, CreateHourlyCard };
+export {
+  createCurrentWeatherCard,
+  createDayWeatherCard,
+  createHourlyWeatherCard,
+};
