@@ -32,3 +32,14 @@ function convertTimeToHours(time) {
   return hour;
 }
 
+// Get the 8 hour interval from the current time of selected date
+function getEightHourForecast() {
+  const selectedDate = new Date();
+  const hour = convertTimeToHours(selectedDate);
+  console.log("hour", hour);
+  const start = hour + 1;
+  const end = hour + 8;
+  console.log("start", start);
+  console.log("end", end);
+  return { start, end };
+}
