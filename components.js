@@ -159,6 +159,8 @@ class CurrentWeatherCard extends WeatherCard {
 }
 
 class DayWeatherCard extends WeatherCard {
+  // Create an index variable to increase every time a new instance of DayWeatherCard is created
+  static index = 0;
   constructor(
     timeMeasurement,
     imperialTemp,
@@ -170,6 +172,7 @@ class DayWeatherCard extends WeatherCard {
     metricMaxTemp
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
+    this.cardContainer.dataset.index = DayWeatherCard.index++;
     this._imperialMinTemp = imperialMinTemp;
     this._metricMinTemp = metricMinTemp;
     this._imperialMaxTemp = imperialMaxTemp;
