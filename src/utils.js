@@ -26,4 +26,9 @@ function addLabel(unit, label) {
   return `${unit} ${label}`;
 }
 
-export { convertAmPm, addLabel };
+// Convert time to hours
+function convertTimeToHours(time) {
+  const hour = new Date(time).getHours();
+  return hour;
+}
+
