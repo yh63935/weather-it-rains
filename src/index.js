@@ -13,27 +13,26 @@ import {
 } from "./renderCards.js";
 
 async function initialize() {
-  renderDayWeatherCards();
   const weatherData = await getWeatherData();
   const parsedData = parseWeatherData(weatherData);
-
   const forecastArr = weatherData.forecast.forecastday;
-  // const card1 = createCurrentWeatherCard(
-  //   parsedData.time,
-  //   parsedData.currentTemp.far,
-  //   parsedData.currentTemp.cels,
-  //   parsedData.condition.icon,
-  //   parsedData.location,
-  //   parsedData.condition.text,
-  //   parsedData.feelsLike.far,
-  //   parsedData.feelsLike.cels,
-  //   parsedData.humidity,
-  //   forecastArr[0].day.daily_chance_of_rain,
-  //   parsedData.wind.mi,
-  //   parsedData.wind.km
-  // );
-  // card1.createCard();
   const forecastContainer = document.querySelector(".forecast-container");
+  const currentWeatherCard = createCurrentWeatherCard(
+    parsedData.time,
+    parsedData.currentTemp.far,
+    parsedData.currentTemp.cels,
+    parsedData.condition.icon,
+    parsedData.location,
+    parsedData.condition.text,
+    parsedData.feelsLike.far,
+    parsedData.feelsLike.cels,
+    parsedData.humidity,
+    forecastArr[0].day.daily_chance_of_rain,
+    parsedData.wind.mi,
+    parsedData.wind.km
+  );
+  currentWeatherCard.createCard();
+  renderDayWeatherCards(weatherData, parsedData);
   forecastContainer.addEventListener("click", (e) => {
     clearForecastContainer();
     const selectedCard = e.target.closest(".day-weather-card");
@@ -61,7 +60,7 @@ async function initialize() {
   // hourCard.createCard();
   const button = document.querySelector("button");
   button.addEventListener("click", () => {
-    card1.toggleImperialMetric();
+    currentWeatherCard.toggleImperialMetric();
     dayCard.toggleImperialMetric();
     hourCard.toggleImperialMetric();
   });
