@@ -189,7 +189,7 @@ class DayWeatherCard extends WeatherCard {
       "Friday",
       "Saturday",
     ];
-    const index = new Date(this._timeMeasurement).getDay();
+    const index = new Date(this._timeMeasurement + " 00:00").getDay();
     return days[index];
   }
   createCard() {
