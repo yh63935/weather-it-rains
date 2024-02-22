@@ -4,6 +4,7 @@ import {
   createCurrentWeatherCard,
   createDayWeatherCard,
   createHourlyWeatherCard,
+  appendEl,
 } from "./components.js";
 import { convertTimeToHours } from "./utils.js";
 
