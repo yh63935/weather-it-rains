@@ -110,6 +110,10 @@ class CurrentWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
+    const currentWeatherContainer = document.querySelector(
+      ".current-weather-container"
+    );
+    appendEl(currentWeatherContainer, this.cardContainer);
     const body = document.querySelector("body");
     const mainInfo = createEl("div", "", "main-info");
     appendEl(body, mainInfo);
