@@ -5,7 +5,6 @@ import {
   createDayWeatherCard,
   createHourlyWeatherCard,
 } from "./components.js";
-// import { renderDayWeatherCards } from "./renderCards.js";
 import { convertAmPm } from "./utils.js";
 import { renderDayWeatherCards, renderHourlyCards } from "./renderCards.js";
 
@@ -60,27 +59,3 @@ async function initialize() {
 }
 
 initialize();
-
-// Will need to replace with indexes after
-// Replace with the variables for day (accept variable in case they decide to upgrade to paid weather with extra days)
-
-for (let i = 0; i < forecastArr.length; i++) {
-  const forecastDay = forecastArr[i];
-  console.log(forecastDay.day.maxtemp_c);
-  console.log(forecastDay.day.maxtemp_f);
-  console.log(forecastDay.day.mintemp_c);
-  console.log(forecastDay.day.mintemp_f);
-
-  console.log(forecastDay.day.daily_chance_of_rain);
-  console.log(forecastDay.day.daily_chance_of_snow);
-
-  console.log(forecastDay.day.condition.text);
-  console.log(forecastDay.day.condition.icon);
-  console.log("hours arr" + forecastDay.hour.length);
-}
-
-for (let j = 0; j < forecastArr[0].hour.length; j++) {
-  console.log(j, forecastArr[0].hour[j].temp_c);
-  console.log(j, forecastArr[0].hour[j].temp_f);
-  console.log(j, forecastArr[0].hour[j].is_day);
-}
