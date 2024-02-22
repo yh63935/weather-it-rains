@@ -194,6 +194,8 @@ class DayWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
+    const forecastContainer = document.querySelector(".forecast-container");
+    appendEl(forecastContainer, this.cardContainer);
     const minTempEl = createEl(
       "p",
       addLabel(this._imperialMinTemp, this.tempUnit),
@@ -228,6 +230,11 @@ class HourlyWeatherCard extends WeatherCard {
     const date = new Date(this._timeMeasurement);
     const formattedHour = convertAmPm(date);
     return formattedHour;
+  }
+  createCard() {
+    super.createCard();
+    const forecastContainer = document.querySelector(".forecast-container");
+    appendEl(forecastContainer, this.cardContainer);
   }
 }
 // Factory function to create instances of a current day card
@@ -315,4 +322,5 @@ export {
   createCurrentWeatherCard,
   createDayWeatherCard,
   createHourlyWeatherCard,
+  appendEl,
 };
