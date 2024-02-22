@@ -24,10 +24,10 @@ function getEightHourForecast() {
 function renderHourlyCards(dayWeatherCard, weatherData) {
   const hours = getEightHourForecast();
   const forecastArr = weatherData.forecast.forecastday;
-  let dayWeatherCardIndex = parseInt(
-    dayWeatherCard.cardContainer.dataset.index
-  );
-  console.log(dayWeatherCardIndex);
+  let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
+  console.log("renderhourlycard forecastArr", forecastArr);
+  console.log("dayWeatherCardIndex", dayWeatherCardIndex);
+
   let dayWeatherCardIndexUpdated = false;
   for (let i = hours.start; i <= hours.end; i++) {
     let hour = i;
@@ -77,4 +77,9 @@ function renderDayWeatherCards() {
   });
 }
 
-export { renderDayWeatherCards, renderHourlyCards };
+function clearForecastContainer() {
+  const forecastContainer = document.querySelector(".forecast-container");
+  forecastContainer.innerHTML = "";
+}
+
+export { renderDayWeatherCards, renderHourlyCards, clearForecastContainer };
