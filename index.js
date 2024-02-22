@@ -34,6 +34,7 @@ async function initialize() {
   // );
   // card1.createCard();
   const forecastContainer = document.querySelector(".forecast-container");
+  renderDayWeatherCards(weatherData, parsedData);
   forecastContainer.addEventListener("click", (e) => {
     clearForecastContainer();
     const selectedCard = e.target.closest(".day-weather-card");
