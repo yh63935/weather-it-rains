@@ -12,7 +12,11 @@ class WeatherCard {
   formatTimeMeasurement() {
     return this._timeMeasurement;
   }
+  addCardType() {
+    this.cardContainer.classList.add(this._cardType);
+  }
   createCard() {
+    this.addCardType();
     const body = document.querySelector("body");
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
@@ -69,6 +73,7 @@ class CurrentWeatherCard extends WeatherCard {
     metricWindSpeed
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
+    this._cardType = "current-weather-card";
     this._location = location;
     this._conditionText = conditionText;
     this.speedUnit = "mi";
@@ -172,6 +177,7 @@ class DayWeatherCard extends WeatherCard {
     metricMaxTemp
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
+    this._cardType = "day-weather-card";
     this.cardContainer.dataset.index = DayWeatherCard.index++;
     this._imperialMinTemp = imperialMinTemp;
     this._metricMinTemp = metricMinTemp;
@@ -194,6 +200,8 @@ class DayWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
+    const forecastContainer = document.querySelector(".forecast-container");
+    appendEl(forecastContainer, this.cardContainer);
     const minTempEl = createEl(
       "p",
       addLabel(this._imperialMinTemp, this.tempUnit),
@@ -224,10 +232,19 @@ class DayWeatherCard extends WeatherCard {
 }
 // Class for hourly weather card
 class HourlyWeatherCard extends WeatherCard {
+  constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
+    super(timeMeasurement, imperialTemp, metricTemp, icon);
+    this._cardType = "hourly-weather-card";
+  }
   formatTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
     const formattedHour = convertAmPm(date);
     return formattedHour;
+  }
+  createCard() {
+    super.createCard();
+    const forecastContainer = document.querySelector(".forecast-container");
+    appendEl(forecastContainer, this.cardContainer);
   }
 }
 // Factory function to create instances of a current day card
@@ -315,4 +332,5 @@ export {
   createCurrentWeatherCard,
   createDayWeatherCard,
   createHourlyWeatherCard,
+  appendEl,
 };
