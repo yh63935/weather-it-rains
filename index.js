@@ -6,10 +6,13 @@ import {
   createHourlyWeatherCard,
 } from "./components.js";
 import { convertAmPm } from "./utils.js";
+import {
+  renderDayWeatherCards,
+  renderHourlyCards,
 import { renderDayWeatherCards, renderHourlyCards } from "./renderCards.js";
 
 async function initialize() {
-  // renderDayWeatherCards();
+  renderDayWeatherCards();
   const weatherData = await getWeatherData();
   const parsedData = parseWeatherData(weatherData);
 
@@ -29,6 +32,8 @@ async function initialize() {
   //   parsedData.wind.km
   // );
   // card1.createCard();
+  const forecastContainer = document.querySelector(".forecast-container");
+  forecastContainer.addEventListener("click", (e) => {
 
   const dayCard = createDayWeatherCard(
     forecastArr[0].date,
@@ -42,6 +47,21 @@ async function initialize() {
   );
   dayCard.createCard();
   renderHourlyCards(dayCard, weatherData);
+    console.log("selectedCard", selectedCard);
+    renderHourlyCards(selectedCard, weatherData);
+  });
+  // const dayCard = createDayWeatherCard(
+  //   forecastArr[0].date,
+  //   null,
+  //   null,
+  //   parsedData.condition.icon,
+  //   forecastArr[0].day.mintemp_f,
+  //   forecastArr[0].day.mintemp_c,
+  //   forecastArr[0].day.maxtemp_f,
+  //   forecastArr[0].day.maxtemp_c
+  // );
+  // dayCard.createCard();
+  // renderHourlyCards(dayCard, weatherData);
 
   // const hourCard = createHourlyWeatherCard(
   //   forecastArr[0].hour[0].time,
