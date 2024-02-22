@@ -9,7 +9,8 @@ import { convertAmPm } from "./utils.js";
 import {
   renderDayWeatherCards,
   renderHourlyCards,
-import { renderDayWeatherCards, renderHourlyCards } from "./renderCards.js";
+  clearForecastContainer,
+} from "./renderCards.js";
 
 async function initialize() {
   renderDayWeatherCards();
@@ -34,19 +35,8 @@ async function initialize() {
   // card1.createCard();
   const forecastContainer = document.querySelector(".forecast-container");
   forecastContainer.addEventListener("click", (e) => {
-
-  const dayCard = createDayWeatherCard(
-    forecastArr[0].date,
-    null,
-    null,
-    parsedData.condition.icon,
-    forecastArr[0].day.mintemp_f,
-    forecastArr[0].day.mintemp_c,
-    forecastArr[0].day.maxtemp_f,
-    forecastArr[0].day.maxtemp_c
-  );
-  dayCard.createCard();
-  renderHourlyCards(dayCard, weatherData);
+    clearForecastContainer();
+    const selectedCard = e.target.closest(".day-weather-card");
     console.log("selectedCard", selectedCard);
     renderHourlyCards(selectedCard, weatherData);
   });
