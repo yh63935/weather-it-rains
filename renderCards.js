@@ -77,4 +77,9 @@ function renderDayWeatherCards() {
   });
 }
 
-export { renderDayWeatherCards, renderHourlyCards };
+function clearForecastContainer() {
+  const forecastContainer = document.querySelector(".forecast-container");
+  forecastContainer.innerHTML = "";
+}
+
+export { renderDayWeatherCards, renderHourlyCards, clearForecastContainer };
