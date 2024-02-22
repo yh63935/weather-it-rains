@@ -12,11 +12,8 @@ import { convertTimeToHours } from "./utils.js";
 function getEightHourForecast() {
   const selectedDate = new Date();
   const hour = convertTimeToHours(selectedDate);
-  console.log("hour", hour);
   const start = hour + 1;
   const end = hour + 8;
-  console.log("start", start);
-  console.log("end", end);
   return { start, end };
 }
 
@@ -25,25 +22,16 @@ function renderHourlyCards(dayWeatherCard, weatherData) {
   const hours = getEightHourForecast();
   const forecastArr = weatherData.forecast.forecastday;
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
-  console.log("renderhourlycard forecastArr", forecastArr);
-  console.log("dayWeatherCardIndex", dayWeatherCardIndex);
-
   let dayWeatherCardIndexUpdated = false;
   for (let i = hours.start; i <= hours.end; i++) {
     let hour = i;
-    console.log("hour of the day:", hour);
     // If hour is more than 24, dayWeatherIndex will increase by 1 and hours will become hour % 24(for the next day)
     if (i >= 24) {
       hour = hour % 24;
-      console.log("hour of the day if greater than 24:", hour);
       if (!dayWeatherCardIndexUpdated) {
         dayWeatherCardIndexUpdated = true;
         dayWeatherCardIndex++;
       }
-      console.log(
-        "dayWeatherCardIndex if greater than 24: ",
-        dayWeatherCardIndex
-      );
     }
     const hourlyWeatherCard = createHourlyWeatherCard(
       forecastArr[dayWeatherCardIndex].hour[hour].time,

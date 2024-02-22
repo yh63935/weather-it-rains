@@ -9,9 +9,6 @@ async function getWeatherData() {
       { mode: "cors" }
     );
     const weatherData = await response.json();
-    console.log(weatherData.location.name);
-    console.log(weatherData.location.region);
-
     return weatherData;
   } catch (err) {
     console.log("Error fetching data:", err);
