@@ -8,6 +8,9 @@ import {
 } from "./components.js";
 import { convertTimeToHours } from "./utils.js";
 
+const dayWeatherCards = [];
+const hourlyWeatherCards = [];
+
 // Get the 8 hour interval from the current time of selected date
 function getEightHourForecast() {
   const selectedDate = new Date();
@@ -39,12 +42,12 @@ function renderHourlyCards(dayWeatherCard, weatherData) {
       forecastArr[dayWeatherCardIndex].hour[hour].temp_c,
       forecastArr[dayWeatherCardIndex].hour[hour].condition.icon
     );
+    hourlyWeatherCards.push(hourlyWeatherCard);
     hourlyWeatherCard.createCard();
   }
 }
 
 function renderDayWeatherCards(weatherData, parsedData) {
-  const dayWeatherCards = [];
   const forecastArr = weatherData.forecast.forecastday;
   forecastArr.forEach((forecastDay) => {
     const dayWeatherCard = createDayWeatherCard(
@@ -60,6 +63,7 @@ function renderDayWeatherCards(weatherData, parsedData) {
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
   });
+  return dayWeatherCards;
 }
 
 function clearForecastContainer() {
@@ -67,4 +71,18 @@ function clearForecastContainer() {
   forecastContainer.innerHTML = "";
 }
 
-export { renderDayWeatherCards, renderHourlyCards, clearForecastContainer };
+function getDayWeatherCards() {
+  return dayWeatherCards;
+}
+
+function getHourlyWeatherCards() {
+  return hourlyWeatherCards;
+}
+
+export {
+  renderDayWeatherCards,
+  renderHourlyCards,
+  clearForecastContainer,
+  getDayWeatherCards,
+  getHourlyWeatherCards,
+};
