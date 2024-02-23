@@ -206,6 +206,10 @@ class DayWeatherCard extends WeatherCard {
     super.createCard();
     const forecastContainer = document.querySelector(".forecast-container");
     appendEl(forecastContainer, this.cardContainer);
+    const displayHourlyForecastBtn = createEl(
+      "button",
+      "Display hourly forecast"
+    );
     const minTempEl = createEl(
       "p",
       addLabel(this._imperialMinTemp, this.tempUnit),
@@ -216,7 +220,12 @@ class DayWeatherCard extends WeatherCard {
       addLabel(this._imperialMaxTemp, this.tempUnit),
       "max-temp"
     );
-    appendEl(this.cardContainer, minTempEl, maxTempEl);
+    appendEl(
+      this.cardContainer,
+      displayHourlyForecastBtn,
+      minTempEl,
+      maxTempEl
+    );
   }
   updateImperialMetricLabels() {
     super.updateImperialMetricLabels();
