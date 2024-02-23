@@ -10,6 +10,8 @@ import {
   renderDayWeatherCards,
   renderHourlyCards,
   clearForecastContainer,
+  getDayWeatherCards,
+  getHourlyWeatherCards,
 } from "./renderCards.js";
 
 async function initialize() {
@@ -61,8 +63,14 @@ async function initialize() {
   const button = document.querySelector("button");
   button.addEventListener("click", () => {
     currentWeatherCard.toggleImperialMetric();
-    dayCard.toggleImperialMetric();
-    hourCard.toggleImperialMetric();
+    const dayWeatherCards = getDayWeatherCards();
+    const hourlyWeatherCards = getHourlyWeatherCards();
+    dayWeatherCards.forEach((dayWeatherCard) => {
+      dayWeatherCard.toggleImperialMetric();
+    });
+    hourlyWeatherCards.forEach((hourlyWeatherCard) => {
+      hourlyWeatherCard.toggleImperialMetric();
+    });
   });
 }
 
