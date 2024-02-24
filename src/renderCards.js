@@ -66,9 +66,11 @@ function renderDayWeatherCards(weatherData, parsedData) {
   return dayWeatherCards;
 }
 
-function clearForecastContainer() {
-  const forecastContainer = document.querySelector(".forecast-container");
-  forecastContainer.innerHTML = "";
+function clearForecastCardsContainer() {
+  const forecastCardsContainer = document.querySelector(
+    ".forecast-cards-container"
+  );
+  forecastCardsContainer.innerHTML = "";
 }
 
 function getDayWeatherCards() {
@@ -82,7 +84,7 @@ function getHourlyWeatherCards() {
 export {
   renderDayWeatherCards,
   renderHourlyCards,
-  clearForecastContainer,
+  clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
 };
