@@ -33,4 +33,18 @@ function convertTimeToHours(time) {
   return hour;
 }
 
-export { convertAmPm, addLabel, convertTimeToHours };
+// Forecast view toggle will toggle forecast view and return the current view
+function createForecastViewToggler() {
+  let view = "day";
+  const toggleView = () => {
+    view = view === "day" ? "hourly" : "day";
+  };
+
+  const getView = () => view;
+
+  return {
+    toggleView,
+    getView,
+  };
+}
+export { convertAmPm, addLabel, convertTimeToHours, createForecastViewToggler };
