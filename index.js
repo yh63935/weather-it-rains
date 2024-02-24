@@ -9,7 +9,7 @@ import { convertAmPm } from "./utils.js";
 import {
   renderDayWeatherCards,
   renderHourlyCards,
-  clearForecastContainer,
+  clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
 } from "./renderCards.js";
@@ -18,7 +18,9 @@ async function initialize() {
   const weatherData = await getWeatherData();
   const parsedData = parseWeatherData(weatherData);
   const forecastArr = weatherData.forecast.forecastday;
-  const forecastContainer = document.querySelector(".forecast-container");
+  const forecastCardsContainer = document.querySelector(
+    ".forecast-cards-container"
+  );
   const currentWeatherCard = createCurrentWeatherCard(
     parsedData.time,
     parsedData.currentTemp.far,
@@ -35,10 +37,13 @@ async function initialize() {
   );
   currentWeatherCard.createCard();
   renderDayWeatherCards(weatherData, parsedData);
-  forecastContainer.addEventListener("click", (e) => {
-    clearForecastContainer();
+  forecastCardsContainer.addEventListener("click", (e) => {
+    clearForecastCardsContainer();
+
     const selectedCard = e.target.closest(".day-weather-card");
     renderHourlyCards(selectedCard, weatherData);
+    }
+  });
   });
   // const dayCard = createDayWeatherCard(
   //   forecastArr[0].date,
