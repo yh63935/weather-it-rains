@@ -204,8 +204,10 @@ class DayWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
-    const forecastContainer = document.querySelector(".forecast-container");
-    appendEl(forecastContainer, this.cardContainer);
+    const forecastCardsContainer = document.querySelector(
+      ".forecast-cards-container"
+    );
+    appendEl(forecastCardsContainer, this.cardContainer);
     const displayHourlyForecastBtn = createEl(
       "button",
       "Display hourly forecast"
@@ -256,8 +258,10 @@ class HourlyWeatherCard extends WeatherCard {
   }
   createCard() {
     super.createCard();
-    const forecastContainer = document.querySelector(".forecast-container");
-    appendEl(forecastContainer, this.cardContainer);
+    const forecastCardsContainer = document.querySelector(
+      ".forecast-cards-container"
+    );
+    appendEl(forecastCardsContainer, this.cardContainer);
   }
 }
 // Factory function to create instances of a current day card
