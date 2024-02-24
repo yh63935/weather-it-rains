@@ -42,8 +42,6 @@ async function initialize() {
 
     const selectedCard = e.target.closest(".day-weather-card");
     renderHourlyCards(selectedCard, weatherData);
-    }
-  });
   });
   // const dayCard = createDayWeatherCard(
   //   forecastArr[0].date,
