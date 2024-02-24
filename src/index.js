@@ -42,8 +42,6 @@ async function initialize() {
 
     const selectedCard = e.target.closest(".day-weather-card");
     renderHourlyCards(selectedCard, weatherData);
-    }
-  });
   });
   // const dayCard = createDayWeatherCard(
   //   forecastArr[0].date,
@@ -65,8 +63,10 @@ async function initialize() {
   //   forecastArr[0].hour[0].condition.icon
   // );
   // hourCard.createCard();
-  const button = document.querySelector("button");
-  button.addEventListener("click", () => {
+  const convertImperialMetricBtn = document.querySelector(
+    ".convert-imperial-metric"
+  );
+  convertImperialMetricBtn.addEventListener("click", () => {
     currentWeatherCard.toggleImperialMetric();
     const dayWeatherCards = getDayWeatherCards();
     const hourlyWeatherCards = getHourlyWeatherCards();
