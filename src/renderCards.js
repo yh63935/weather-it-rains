@@ -81,10 +81,19 @@ function getHourlyWeatherCards() {
   return hourlyWeatherCards;
 }
 
+// Renders display day forecast button if forecast is in hourlyu view
+function renderDisplayDayForecastBtn(currentView) {
+  const displayDayForecastBtn = document.querySelector(".display-day-forecast");
+  console.log("forecast button", displayDayForecastBtn);
+  displayDayForecastBtn.style.display =
+    currentView === "hourly" ? "block" : "none";
+}
+
 export {
   renderDayWeatherCards,
   renderHourlyCards,
   clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
+  renderDisplayDayForecastBtn,
 };
