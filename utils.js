@@ -33,4 +33,4 @@ function convertTimeToHours(time) {
   return hour;
 }
 
-export { convertAmPm, addLabel, convertTimeToHours };
+  return {
