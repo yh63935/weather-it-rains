@@ -36,6 +36,7 @@ function renderHourlyCards(dayWeatherCard, weatherData) {
         dayWeatherCardIndex++;
       }
     }
+    console.log("DayWeatherCardIndex", dayWeatherCardIndex);
     const hourlyWeatherCard = createHourlyWeatherCard(
       forecastArr[dayWeatherCardIndex].hour[hour].time,
       forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
@@ -49,7 +50,7 @@ function renderHourlyCards(dayWeatherCard, weatherData) {
 
 function renderDayWeatherCards(weatherData, parsedData) {
   const forecastArr = weatherData.forecast.forecastday;
-  forecastArr.forEach((forecastDay) => {
+  forecastArr.forEach((forecastDay, index) => {
     const dayWeatherCard = createDayWeatherCard(
       forecastDay.date,
       null,
@@ -58,7 +59,9 @@ function renderDayWeatherCards(weatherData, parsedData) {
       forecastDay.day.mintemp_f,
       forecastDay.day.mintemp_c,
       forecastDay.day.maxtemp_f,
-      forecastDay.day.maxtemp_c
+      forecastDay.day.maxtemp_c,
+      index,
+      forecastArr
     );
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
