@@ -173,7 +173,6 @@ class CurrentWeatherCard extends WeatherCard {
 
 class DayWeatherCard extends WeatherCard {
   // Create an index variable to increase every time a new instance of DayWeatherCard is created
-  static index = 0;
   constructor(
     timeMeasurement,
     imperialTemp,
@@ -182,11 +181,13 @@ class DayWeatherCard extends WeatherCard {
     imperialMinTemp,
     metricMinTemp,
     imperialMaxTemp,
-    metricMaxTemp
+    metricMaxTemp,
+    index,
+    forecastArr
   ) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
     this._cardType = "day-weather-card";
-    this.cardContainer.dataset.index = DayWeatherCard.index++;
+    this.cardContainer.dataset.index = index % forecastArr.length;
     this._imperialMinTemp = imperialMinTemp;
     this._metricMinTemp = metricMinTemp;
     this._imperialMaxTemp = imperialMaxTemp;
@@ -307,7 +308,9 @@ function createDayWeatherCard(
   imperialMinTemp,
   metricMinTemp,
   imperialMaxTemp,
-  metricMaxTemp
+  metricMaxTemp,
+  index,
+  forecastArr
 ) {
   return new DayWeatherCard(
     timeMeasurement,
@@ -317,7 +320,9 @@ function createDayWeatherCard(
     imperialMinTemp,
     metricMinTemp,
     imperialMaxTemp,
-    metricMaxTemp
+    metricMaxTemp,
+    index,
+    forecastArr
   );
 }
 // Factory function to create instances of a hourly card
