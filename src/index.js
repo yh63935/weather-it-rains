@@ -5,13 +5,14 @@ import {
   createDayWeatherCard,
   createHourlyWeatherCard,
 } from "./components.js";
-import { convertAmPm } from "./utils.js";
+import { convertAmPm, createForecastViewToggler } from "./utils.js";
 import {
   renderDayWeatherCards,
   renderHourlyCards,
   clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
+  renderDisplayDayForecastBtn,
 } from "./renderCards.js";
 
 async function initialize() {
@@ -35,13 +36,29 @@ async function initialize() {
     parsedData.wind.mi,
     parsedData.wind.km
   );
+  let forecastViewToggler = createForecastViewToggler();
+
   currentWeatherCard.createCard();
   renderDayWeatherCards(weatherData, parsedData);
   forecastCardsContainer.addEventListener("click", (e) => {
     clearForecastCardsContainer();
-
     const selectedCard = e.target.closest(".day-weather-card");
-    renderHourlyCards(selectedCard, weatherData);
+    const selectedBtn = e.target.closest(".day-weather-card button");
+    if (selectedBtn && selectedCard) {
+      forecastViewToggler.toggleView();
+      let currentView = forecastViewToggler.getView();
+      renderDisplayDayForecastBtn(currentView);
+      renderHourlyCards(selectedCard, weatherData);
+    }
+  });
+
+  const displayDayForecastBtn = document.querySelector(".display-day-forecast");
+  displayDayForecastBtn.addEventListener("click", () => {
+    clearForecastCardsContainer();
+    forecastViewToggler.toggleView();
+    let currentView = forecastViewToggler.getView();
+    renderDisplayDayForecastBtn(currentView);
+    renderDayWeatherCards(weatherData, parsedData);
   });
   // const dayCard = createDayWeatherCard(
   //   forecastArr[0].date,
