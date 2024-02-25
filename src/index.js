@@ -63,8 +63,10 @@ async function initialize() {
   //   forecastArr[0].hour[0].condition.icon
   // );
   // hourCard.createCard();
-  const button = document.querySelector("button");
-  button.addEventListener("click", () => {
+  const displayImperialMetricBtn = document.querySelector(
+    ".display-imperial-metric"
+  );
+  displayImperialMetricBtn.addEventListener("click", () => {
     currentWeatherCard.toggleImperialMetric();
     const dayWeatherCards = getDayWeatherCards();
     const hourlyWeatherCards = getHourlyWeatherCards();
