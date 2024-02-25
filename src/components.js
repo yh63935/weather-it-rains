@@ -124,7 +124,7 @@ class CurrentWeatherCard extends WeatherCard {
     const convertBtn = createEl(
       "button",
       "Display °F/°C",
-      "display-imperial-metric"
+      "convert-imperial-metric"
     );
     const tempEl = this.cardContainer.querySelector(".temp");
     const iconEl = this.cardContainer.querySelector("img");
