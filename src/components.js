@@ -121,7 +121,11 @@ class CurrentWeatherCard extends WeatherCard {
     appendEl(this.cardContainer, mainInfo, weatherConditions);
     const locationEl = createEl("p", this._location);
     appendEl(mainInfo, locationEl);
-    const convertBtn = createEl("button", "Display °F/°C");
+    const convertBtn = createEl(
+      "button",
+      "Display °F/°C",
+      "display-imperial-metric"
+    );
     const tempEl = this.cardContainer.querySelector(".temp");
     const iconEl = this.cardContainer.querySelector("img");
     this.cardContainer.insertBefore(convertBtn, iconEl);
