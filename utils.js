@@ -5,6 +5,7 @@ function convertAmPm(time, withMinutes) {
     : time.toLocaleTimeString([], { hour: "numeric" });
   return formattedHrsMin;
 }
+
 // Determine appropriate labels for imperial/metric system
 function determineImperialMetricLabel(label) {
   switch (label) {
@@ -18,6 +19,7 @@ function determineImperialMetricLabel(label) {
       return "km/h";
   }
 }
+
 // Add appropriate labels to elements displayed
 function addLabel(unit, label) {
   if (determineImperialMetricLabel(label)) {
@@ -32,7 +34,7 @@ function convertTimeToHours(time) {
   return hour;
 }
 
-// Forecast view toggle will toggle forecast view and return the current view
+// Create a forecast view toggler to toggle forecast view and return the current view
 function createForecastViewToggler() {
   let view = "day";
   const toggleView = () => {
@@ -46,4 +48,5 @@ function createForecastViewToggler() {
     getView,
   };
 }
+
 export { convertAmPm, addLabel, convertTimeToHours, createForecastViewToggler };
