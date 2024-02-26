@@ -8,7 +8,7 @@ import {
 import { convertAmPm, createForecastViewToggler } from "./utils.js";
 import {
   renderDayWeatherCards,
-  renderHourlyCards,
+  renderHourlyWeatherCards,
   clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
@@ -74,7 +74,7 @@ async function initialize() {
   //   forecastArr[0].day.maxtemp_c
   // );
   // dayCard.createCard();
-  // renderHourlyCards(dayCard, weatherData);
+  // renderHourlyWeatherCards(dayCard, weatherData);
 
   // const hourCard = createHourlyWeatherCard(
   //   forecastArr[0].hour[0].time,
