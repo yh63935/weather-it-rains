@@ -1,21 +1,16 @@
 import { getWeatherData } from "./api.js";
 import { parseWeatherData } from "./api.js";
-import {
-  createCurrentWeatherCard,
-  createDayWeatherCard,
-  createHourlyWeatherCard,
-} from "./components.js";
-import { convertAmPm, createForecastViewToggler } from "./utils.js";
+import { createCurrentWeatherCard } from "./components.js";
+import { createForecastViewToggler } from "./utils.js";
 import {
   renderDayWeatherCards,
   renderHourlyWeatherCards,
-  clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
-  renderDisplayDayForecastBtn,
   renderForecastDisplay,
 } from "./renderCards.js";
 
+// Initialize app
 async function initialize() {
   const weatherData = await getWeatherData();
   const parsedData = parseWeatherData(weatherData);
@@ -23,6 +18,8 @@ async function initialize() {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
+
+  // Create current weather card
   const currentWeatherCard = createCurrentWeatherCard(
     parsedData.time,
     parsedData.currentTemp.far,
@@ -41,6 +38,8 @@ async function initialize() {
 
   currentWeatherCard.createCard();
   renderDayWeatherCards(weatherData, parsedData);
+
+  // Display associated hourly forecast for the selected button of the day card when clicked
   forecastCardsContainer.addEventListener("click", (e) => {
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
@@ -54,6 +53,7 @@ async function initialize() {
     }
   });
 
+  // Display day forecast when displayDayForecastBtn is clicked
   const displayDayForecastBtn = document.querySelector(".display-day-forecast");
   displayDayForecastBtn.addEventListener("click", () => {
     renderForecastDisplay(
@@ -64,6 +64,7 @@ async function initialize() {
     );
   });
 
+  // Display imperial/metric units when convertImperialMetricBtn is clicked
   const convertImperialMetricBtn = document.querySelector(
     ".convert-imperial-metric"
   );
