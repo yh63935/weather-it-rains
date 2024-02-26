@@ -1,4 +1,3 @@
-import { createHourlyWeatherCard } from "./components.js";
 // Convert the hours of a date to am or pm
 function convertAmPm(time, withMinutes) {
   const formattedHrsMin = withMinutes
