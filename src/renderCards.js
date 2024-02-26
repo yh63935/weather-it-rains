@@ -31,7 +31,11 @@ function renderHourlyCards(dayWeatherCard, weatherData) {
     // If hour is more than 24, dayWeatherIndex will increase by 1 and hours will become hour % 24(for the next day)
     if (i >= 24) {
       hour = hour % 24;
-      if (!dayWeatherCardIndexUpdated) {
+      // Check if dayWeatherCardIndex was updated and if the data for the next day for that index exists in forecastARr
+      if (
+        !dayWeatherCardIndexUpdated &&
+        dayWeatherCardIndex < forecastArr.length - 1
+      ) {
         dayWeatherCardIndexUpdated = true;
         dayWeatherCardIndex++;
       }
