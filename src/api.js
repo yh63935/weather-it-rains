@@ -15,6 +15,7 @@ async function getWeatherData() {
   }
 }
 
+// Parse weather data to an easier to use format
 function parseWeatherData(weatherData) {
   const myWeatherData = {
     location: weatherData.location.name,
@@ -42,4 +43,5 @@ function parseWeatherData(weatherData) {
   };
   return myWeatherData;
 }
+
 export { getWeatherData, parseWeatherData };

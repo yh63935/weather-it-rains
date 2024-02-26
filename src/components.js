@@ -1,4 +1,6 @@
 import { convertAmPm, addLabel } from "./utils.js";
+
+// Base class for all weather cards
 class WeatherCard {
   constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
     this._timeMeasurement = timeMeasurement;
@@ -57,6 +59,7 @@ class WeatherCard {
   }
 }
 
+// Class for the current day weather card (today)
 class CurrentWeatherCard extends WeatherCard {
   constructor(
     timeMeasurement,
@@ -136,7 +139,6 @@ class CurrentWeatherCard extends WeatherCard {
       addLabel(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
-
     const humidityEl = createEl("p", addLabel(this._humidity, "%"));
     const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
     const windSpeedEl = createEl(
@@ -171,6 +173,7 @@ class CurrentWeatherCard extends WeatherCard {
   }
 }
 
+// Class for day weather cards
 class DayWeatherCard extends WeatherCard {
   // Create an index variable to increase every time a new instance of DayWeatherCard is created
   constructor(
@@ -250,7 +253,8 @@ class DayWeatherCard extends WeatherCard {
     );
   }
 }
-// Class for hourly weather card
+
+// Class for hourly weather cards
 class HourlyWeatherCard extends WeatherCard {
   constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
     super(timeMeasurement, imperialTemp, metricTemp, icon);
@@ -325,6 +329,7 @@ function createDayWeatherCard(
     forecastArr
   );
 }
+
 // Factory function to create instances of a hourly card
 function createHourlyWeatherCard(
   timeMeasurement,
@@ -334,6 +339,7 @@ function createHourlyWeatherCard(
 ) {
   return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
 }
+
 // Create element with specified text and class
 function createEl(el, text, className) {
   const element = document.createElement(el);

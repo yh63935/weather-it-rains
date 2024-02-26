@@ -45,6 +45,7 @@ function renderHourlyWeatherCards(dayWeatherCard, weatherData) {
   }
 }
 
+// Render day weather cards
 function renderDayWeatherCards(weatherData, parsedData) {
   const forecastArr = weatherData.forecast.forecastday;
   forecastArr.forEach((forecastDay, index) => {
@@ -66,6 +67,7 @@ function renderDayWeatherCards(weatherData, parsedData) {
   return dayWeatherCards;
 }
 
+// Clear forecast cards container
 function clearForecastCardsContainer() {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
@@ -73,15 +75,17 @@ function clearForecastCardsContainer() {
   forecastCardsContainer.innerHTML = "";
 }
 
+// Return dayWeatherCards array
 function getDayWeatherCards() {
   return dayWeatherCards;
 }
 
+// Return hourlyWeatherCards array
 function getHourlyWeatherCards() {
   return hourlyWeatherCards;
 }
 
-// Renders display day forecast button if forecast is in hourlyu view
+// Render display day forecast button if forecast is in hourlyu view
 function renderDisplayDayForecastBtn(currentView) {
   const displayDayForecastBtn = document.querySelector(".display-day-forecast");
   console.log("forecast button", displayDayForecastBtn);
