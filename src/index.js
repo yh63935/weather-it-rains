@@ -37,7 +37,7 @@ async function initialize() {
   let forecastViewToggler = createForecastViewToggler();
 
   currentWeatherCard.createCard();
-  renderDayWeatherCards(weatherData, parsedData);
+  renderDayWeatherCards(forecastArr, parsedData);
 
   // Display associated hourly forecast for the selected button of the day card when clicked
   forecastCardsContainer.addEventListener("click", (e) => {
@@ -48,7 +48,7 @@ async function initialize() {
         renderHourlyWeatherCards,
         forecastViewToggler,
         selectedCard,
-        weatherData
+        forecastArr
       );
     }
   });
@@ -59,7 +59,7 @@ async function initialize() {
     renderForecastDisplay(
       renderDayWeatherCards,
       forecastViewToggler,
-      weatherData,
+      forecastArr,
       parsedData
     );
   });
