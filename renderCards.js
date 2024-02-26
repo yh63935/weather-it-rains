@@ -14,9 +14,8 @@ function getEightHourForecast() {
 }
 
 // Create the hourly cards for selected date in a 8 hour interval (starting from the next hour)
-function renderHourlyWeatherCards(dayWeatherCard, weatherData) {
+function renderHourlyWeatherCards(dayWeatherCard, forecastArr) {
   const hours = getEightHourForecast();
-  const forecastArr = weatherData.forecast.forecastday;
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
   let dayWeatherCardIndexUpdated = false;
   for (let i = hours.start; i <= hours.end; i++) {
@@ -46,8 +45,7 @@ function renderHourlyWeatherCards(dayWeatherCard, weatherData) {
 }
 
 // Render day weather cards
-function renderDayWeatherCards(weatherData, parsedData) {
-  const forecastArr = weatherData.forecast.forecastday;
+function renderDayWeatherCards(forecastArr, parsedData) {
   forecastArr.forEach((forecastDay, index) => {
     const dayWeatherCard = createDayWeatherCard(
       forecastDay.date,
