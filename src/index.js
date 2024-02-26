@@ -63,26 +63,7 @@ async function initialize() {
       parsedData
     );
   });
-  // const dayCard = createDayWeatherCard(
-  //   forecastArr[0].date,
-  //   null,
-  //   null,
-  //   parsedData.condition.icon,
-  //   forecastArr[0].day.mintemp_f,
-  //   forecastArr[0].day.mintemp_c,
-  //   forecastArr[0].day.maxtemp_f,
-  //   forecastArr[0].day.maxtemp_c
-  // );
-  // dayCard.createCard();
-  // renderHourlyWeatherCards(dayCard, weatherData);
 
-  // const hourCard = createHourlyWeatherCard(
-  //   forecastArr[0].hour[0].time,
-  //   forecastArr[0].hour[0].temp_f,
-  //   forecastArr[0].hour[0].temp_c,
-  //   forecastArr[0].hour[0].condition.icon
-  // );
-  // hourCard.createCard();
   const convertImperialMetricBtn = document.querySelector(
     ".convert-imperial-metric"
   );
