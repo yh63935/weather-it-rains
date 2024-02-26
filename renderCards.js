@@ -96,6 +96,20 @@ function renderDisplayDayForecastBtn(currentView) {
     currentView === "hourly" ? "block" : "none";
 }
 
+// Render forecast display based on function passed in
+function renderForecastDisplay(
+  renderFunc,
+  forecastViewToggler,
+  param1,
+  param2
+) {
+  clearForecastCardsContainer();
+  forecastViewToggler.toggleView();
+  let currentView = forecastViewToggler.getView();
+  renderDisplayDayForecastBtn(currentView);
+  renderFunc(param1, param2);
+}
+
 export {
   renderDayWeatherCards,
   renderHourlyCards,
@@ -103,4 +117,5 @@ export {
   getDayWeatherCards,
   getHourlyWeatherCards,
   renderDisplayDayForecastBtn,
+  renderForecastDisplay,
 };
