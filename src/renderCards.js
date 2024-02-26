@@ -1,4 +1,8 @@
-import { createDayWeatherCard, createHourlyWeatherCard } from "./components.js";
+import {
+  createCurrentWeatherCard,
+  createDayWeatherCard,
+  createHourlyWeatherCard,
+} from "./components.js";
 import { convertTimeToHours } from "./utils.js";
 
 const dayWeatherCards = [];
@@ -11,6 +15,27 @@ function getEightHourForecast() {
   const start = hour + 1;
   const end = hour + 8;
   return { start, end };
+}
+
+// Render current weather card
+function renderCurrentWeatherCard(forecastArr, parsedData) {
+  // Create current weather card
+  const currentWeatherCard = createCurrentWeatherCard(
+    parsedData.time,
+    parsedData.currentTemp.far,
+    parsedData.currentTemp.cels,
+    parsedData.condition.icon,
+    parsedData.location,
+    parsedData.condition.text,
+    parsedData.feelsLike.far,
+    parsedData.feelsLike.cels,
+    parsedData.humidity,
+    forecastArr[0].day.daily_chance_of_rain,
+    parsedData.wind.mi,
+    parsedData.wind.km
+  );
+  currentWeatherCard.createCard();
+  return currentWeatherCard;
 }
 
 // Create the hourly cards for selected date in a 8 hour interval (starting from the next hour)
@@ -106,6 +131,7 @@ function renderForecastDisplay(
 }
 
 export {
+  renderCurrentWeatherCard,
   renderDayWeatherCards,
   renderHourlyWeatherCards,
   clearForecastCardsContainer,

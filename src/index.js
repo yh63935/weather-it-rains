@@ -3,6 +3,7 @@ import { parseWeatherData } from "./api.js";
 import { createCurrentWeatherCard } from "./components.js";
 import { createForecastViewToggler } from "./utils.js";
 import {
+  renderCurrentWeatherCard,
   renderDayWeatherCards,
   renderHourlyWeatherCards,
   getDayWeatherCards,
@@ -19,24 +20,8 @@ async function initialize() {
     ".forecast-cards-container"
   );
 
-  // Create current weather card
-  const currentWeatherCard = createCurrentWeatherCard(
-    parsedData.time,
-    parsedData.currentTemp.far,
-    parsedData.currentTemp.cels,
-    parsedData.condition.icon,
-    parsedData.location,
-    parsedData.condition.text,
-    parsedData.feelsLike.far,
-    parsedData.feelsLike.cels,
-    parsedData.humidity,
-    forecastArr[0].day.daily_chance_of_rain,
-    parsedData.wind.mi,
-    parsedData.wind.km
-  );
   let forecastViewToggler = createForecastViewToggler();
-
-  currentWeatherCard.createCard();
+  let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
   renderDayWeatherCards(forecastArr, parsedData);
 
   // Display associated hourly forecast for the selected button of the day card when clicked
