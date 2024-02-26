@@ -41,10 +41,10 @@ async function initialize() {
   currentWeatherCard.createCard();
   renderDayWeatherCards(weatherData, parsedData);
   forecastCardsContainer.addEventListener("click", (e) => {
-    clearForecastCardsContainer();
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
     if (selectedBtn && selectedCard) {
+      clearForecastCardsContainer();
       forecastViewToggler.toggleView();
       let currentView = forecastViewToggler.getView();
       renderDisplayDayForecastBtn(currentView);
