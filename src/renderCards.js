@@ -21,7 +21,7 @@ function getEightHourForecast() {
 }
 
 // Create the hourly cards for selected date in a 8 hour interval (starting from the next hour)
-function renderHourlyCards(dayWeatherCard, weatherData) {
+function renderHourlyWeatherCards(dayWeatherCard, weatherData) {
   const hours = getEightHourForecast();
   const forecastArr = weatherData.forecast.forecastday;
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
@@ -112,7 +112,7 @@ function renderForecastDisplay(
 
 export {
   renderDayWeatherCards,
-  renderHourlyCards,
+  renderHourlyWeatherCards,
   clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
