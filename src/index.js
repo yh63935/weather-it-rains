@@ -13,6 +13,7 @@ import {
   getDayWeatherCards,
   getHourlyWeatherCards,
   renderDisplayDayForecastBtn,
+  renderForecastDisplay,
 } from "./renderCards.js";
 
 async function initialize() {
@@ -44,21 +45,23 @@ async function initialize() {
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
     if (selectedBtn && selectedCard) {
-      clearForecastCardsContainer();
-      forecastViewToggler.toggleView();
-      let currentView = forecastViewToggler.getView();
-      renderDisplayDayForecastBtn(currentView);
-      renderHourlyCards(selectedCard, weatherData);
+      renderForecastDisplay(
+        renderHourlyWeatherCards,
+        forecastViewToggler,
+        selectedCard,
+        weatherData
+      );
     }
   });
 
   const displayDayForecastBtn = document.querySelector(".display-day-forecast");
   displayDayForecastBtn.addEventListener("click", () => {
-    clearForecastCardsContainer();
-    forecastViewToggler.toggleView();
-    let currentView = forecastViewToggler.getView();
-    renderDisplayDayForecastBtn(currentView);
-    renderDayWeatherCards(weatherData, parsedData);
+    renderForecastDisplay(
+      renderDayWeatherCards,
+      forecastViewToggler,
+      weatherData,
+      parsedData
+    );
   });
   // const dayCard = createDayWeatherCard(
   //   forecastArr[0].date,
