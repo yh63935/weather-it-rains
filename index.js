@@ -1,18 +1,12 @@
 import { getWeatherData } from "./api.js";
 import { parseWeatherData } from "./api.js";
-import {
-  createCurrentWeatherCard,
-  createDayWeatherCard,
-  createHourlyWeatherCard,
-} from "./components.js";
-import { convertAmPm, createForecastViewToggler } from "./utils.js";
+import { createCurrentWeatherCard } from "./components.js";
+import { createForecastViewToggler } from "./utils.js";
 import {
   renderDayWeatherCards,
   renderHourlyWeatherCards,
-  clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
-  renderDisplayDayForecastBtn,
   renderForecastDisplay,
 } from "./renderCards.js";
 

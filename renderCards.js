@@ -1,11 +1,4 @@
-import { getWeatherData } from "./api.js";
-import { parseWeatherData } from "./api.js";
-import {
-  createCurrentWeatherCard,
-  createDayWeatherCard,
-  createHourlyWeatherCard,
-  appendEl,
-} from "./components.js";
+import { createDayWeatherCard, createHourlyWeatherCard } from "./components.js";
 import { convertTimeToHours } from "./utils.js";
 
 const dayWeatherCards = [];
