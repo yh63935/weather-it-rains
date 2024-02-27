@@ -25,7 +25,8 @@ class WeatherCard {
     const tempEl = this._imperialTemp
       ? createEl("p", addLabel(this._imperialTemp, this.tempUnit), "temp")
       : "";
-    const iconEl = createEl("img", this._icon);
+    const iconEl = createEl("img");
+    iconEl.src = this._icon;
     appendEl(body, this.cardContainer);
     if (tempEl) {
       appendEl(this.cardContainer, timeMeasurementEl, tempEl, iconEl);
