@@ -125,14 +125,14 @@ class CurrentWeatherCard extends WeatherCard {
     appendEl(this.cardContainer, mainInfo, weatherConditions);
     const locationEl = createEl("p", this._location);
     appendEl(mainInfo, locationEl);
-    const convertBtn = createEl(
+    const convertImperialMetricBtn = createEl(
       "button",
-      "Display °F/°C",
+      `Display °C`,
       "convert-imperial-metric"
     );
     const tempEl = this.cardContainer.querySelector(".temp");
     const iconEl = this.cardContainer.querySelector("img");
-    this.cardContainer.insertBefore(convertBtn, iconEl);
+    this.cardContainer.insertBefore(convertImperialMetricBtn, iconEl);
     const conditionEl = createEl("p", this._conditionText);
     this.cardContainer.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl(
@@ -154,6 +154,18 @@ class CurrentWeatherCard extends WeatherCard {
       chanceRainEl,
       windSpeedEl
     );
+  }
+  toggleImperialMetric() {
+    super.toggleImperialMetric();
+    this.toggleConvertImperialMetricBtn();
+  }
+  // Updates convert imperial metric button with new temp unit when toggled
+  toggleConvertImperialMetricBtn() {
+    const convertImperialMetricBtn = document.querySelector(
+      ".convert-imperial-metric"
+    );
+    const altTempUnit = this.tempUnit === "c" ? "f" : "c";
+    convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
   updateImperialMetricLabels() {
     super.updateImperialMetricLabels();
