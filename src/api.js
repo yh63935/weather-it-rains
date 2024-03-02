@@ -1,7 +1,13 @@
+// Get user location weather data
+async function getUserLocationWeatherData() {
+  let userLocationInput = document.querySelector("#location");
+  let userLocation = userLocationInput.value;
+  let userLocationWeatherData = await getWeatherData(userLocation);
+  return userLocationWeatherData;
+}
+
 // Get weather data from weather api
-async function getWeatherData() {
-  // let userLocation = prompt("Location?");
-  let userLocation = "san jose";
+async function getWeatherData(userLocation) {
   try {
     // Days in the url remains 3 (including current day) because we have the free version which only can forecast up to 3 days
     const response = await fetch(
@@ -44,4 +50,4 @@ function parseWeatherData(weatherData) {
   return myWeatherData;
 }
 
-export { getWeatherData, parseWeatherData };
+export { parseWeatherData, getUserLocationWeatherData };
