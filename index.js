@@ -1,5 +1,4 @@
-import { getWeatherData } from "./api.js";
-import { parseWeatherData } from "./api.js";
+import { parseWeatherData, getUserLocationWeatherData } from "./api.js";
 import { createCurrentWeatherCard } from "./components.js";
 import { createForecastViewToggler } from "./utils.js";
 import {
@@ -11,15 +10,25 @@ import {
   renderForecastDisplay,
 } from "./renderCards.js";
 
+// Initializes app with user location weather data when user presses Enter
+let userLocationInput = document.querySelector("#location");
+
+userLocationInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    getUserLocationWeatherData().then((userLocationWeatherData) => {
+      initialize(userLocationWeatherData);
+    });
+  }
+});
+
 // Initialize app
-async function initialize() {
-  const weatherData = await getWeatherData();
-  const parsedData = parseWeatherData(weatherData);
-  const forecastArr = weatherData.forecast.forecastday;
+async function initialize(userLocationWeatherData) {
+  const parsedData = parseWeatherData(userLocationWeatherData);
+  const forecastArr = userLocationWeatherData.forecast.forecastday;
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
-
+  const userLocationInput = document.querySelector("#location");
   let forecastViewToggler = createForecastViewToggler();
   let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
   renderDayWeatherCards(forecastArr, parsedData);
@@ -65,5 +74,3 @@ async function initialize() {
     });
   });
 }
-
-initialize();
