@@ -22,9 +22,13 @@ userLocationInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     clearContainer(currentWeatherContainer);
     clearContainer(forecastCardsContainer);
-    getUserLocationWeatherData().then((userLocationWeatherData) => {
-      initialize(userLocationWeatherData);
-    });
+    getUserLocationWeatherData()
+      .then((userLocationWeatherData) => {
+        initialize(userLocationWeatherData);
+      })
+      .catch((err) => {
+        console.log(`Error in initializing weather app: ${err.message}`);
+      });
   }
 });
 

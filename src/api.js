@@ -2,8 +2,12 @@
 async function getUserLocationWeatherData() {
   let userLocationInput = document.querySelector("#location");
   let userLocation = userLocationInput.value;
-  let userLocationWeatherData = await getWeatherData(userLocation);
-  return userLocationWeatherData;
+  try {
+    let userLocationWeatherData = await getWeatherData(userLocation);
+    return userLocationWeatherData;
+  } catch (err) {
+    throw new Error("Error getting user location data");
+  }
 }
 
 // Get weather data from weather api
@@ -14,10 +18,16 @@ async function getWeatherData(userLocation) {
       `https://api.weatherapi.com/v1/forecast.json?key=76fcad5f297045359a7222047241501&q=${userLocation}&days=3&aqi=no&alerts=no`,
       { mode: "cors" }
     );
+
+    // Throw an error if the response was not successful
+    if (!response.ok) {
+      throw new Error(`${response.status}: ${response.statusText}`);
+    }
     const weatherData = await response.json();
     return weatherData;
   } catch (err) {
-    console.log("Error fetching data:", err);
+    console.log("Error fetching data:", err.message);
+    throw err;
   }
 }
 
