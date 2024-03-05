@@ -49,4 +49,15 @@ function createForecastViewToggler() {
   };
 }
 
-export { convertAmPm, addLabel, convertTimeToHours, createForecastViewToggler };
+// Clear specified HTML container
+function clearContainer(container) {
+  container.innerHTML = "";
+}
+
+export {
+  convertAmPm,
+  addLabel,
+  convertTimeToHours,
+  createForecastViewToggler,
+  clearContainer,
+};
