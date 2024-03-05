@@ -1,8 +1,7 @@
 import { parseWeatherData, getUserLocationWeatherData } from "./api.js";
 import { createCurrentWeatherCard } from "./components.js";
-import { createForecastViewToggler } from "./utils.js";
+import { createForecastViewToggler, clearContainer } from "./utils.js";
 import {
-  renderCurrentWeatherCard,
   renderDayWeatherCards,
   renderHourlyWeatherCards,
   getDayWeatherCards,
@@ -14,7 +13,15 @@ import {
 let userLocationInput = document.querySelector("#location");
 
 userLocationInput.addEventListener("keyup", (e) => {
+  const currentWeatherContainer = document.querySelector(
+    ".current-weather-container"
+  );
+  const forecastCardsContainer = document.querySelector(
+    ".forecast-cards-container"
+  );
   if (e.key === "Enter") {
+    clearContainer(currentWeatherContainer);
+    clearContainer(forecastCardsContainer);
     getUserLocationWeatherData().then((userLocationWeatherData) => {
       initialize(userLocationWeatherData);
     });
