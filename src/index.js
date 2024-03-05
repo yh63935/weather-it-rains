@@ -28,9 +28,15 @@ async function initialize(userLocationWeatherData) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
+<<<<<<< Updated upstream
   const userLocationInput = document.querySelector("#location");
   let forecastViewToggler = createForecastViewToggler();
   let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
+=======
+
+  let forecastViewToggler = createForecastViewToggler();
+  renderCurrentWeatherCard(forecastArr, parsedData);
+>>>>>>> Stashed changes
   renderDayWeatherCards(forecastArr, parsedData);
 
   // Display associated hourly forecast for the selected button of the day card when clicked
