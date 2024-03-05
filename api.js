@@ -22,7 +22,8 @@ async function getWeatherData(userLocation) {
     const weatherData = await response.json();
     return weatherData;
   } catch (err) {
-    console.log("Error fetching data:", err);
+    console.log("Error fetching data:", err.message);
+    throw err;
   }
 }
 
