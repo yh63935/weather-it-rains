@@ -3,7 +3,7 @@ import {
   createDayWeatherCard,
   createHourlyWeatherCard,
 } from "./components.js";
-import { convertTimeToHours } from "./utils.js";
+import { convertTimeToHours, clearContainer } from "./utils.js";
 
 const dayWeatherCards = [];
 const hourlyWeatherCards = [];
@@ -90,14 +90,6 @@ function renderDayWeatherCards(forecastArr, parsedData) {
   return dayWeatherCards;
 }
 
-// Clear forecast cards container
-function clearForecastCardsContainer() {
-  const forecastCardsContainer = document.querySelector(
-    ".forecast-cards-container"
-  );
-  forecastCardsContainer.innerHTML = "";
-}
-
 // Return dayWeatherCards array
 function getDayWeatherCards() {
   return dayWeatherCards;
@@ -123,7 +115,10 @@ function renderForecastDisplay(
   param1,
   param2
 ) {
-  clearForecastCardsContainer();
+  const forecastCardsContainer = document.querySelector(
+    ".forecast-cards-container"
+  );
+  clearContainer(forecastCardsContainer);
   forecastViewToggler.toggleView();
   let currentView = forecastViewToggler.getView();
   renderDisplayDayForecastBtn(currentView);
@@ -134,7 +129,6 @@ export {
   renderCurrentWeatherCard,
   renderDayWeatherCards,
   renderHourlyWeatherCards,
-  clearForecastCardsContainer,
   getDayWeatherCards,
   getHourlyWeatherCards,
   renderDisplayDayForecastBtn,
