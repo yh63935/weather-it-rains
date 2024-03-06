@@ -2,6 +2,7 @@ import { parseWeatherData, getUserLocationWeatherData } from "./api.js";
 import { createCurrentWeatherCard } from "./components.js";
 import { createForecastViewToggler, clearContainer } from "./utils.js";
 import {
+  renderCurrentWeatherCard,
   renderDayWeatherCards,
   renderHourlyWeatherCards,
   getDayWeatherCards,
