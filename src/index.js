@@ -30,6 +30,9 @@ userLocationInput.addEventListener("keyup", (e) => {
       .catch((err) => {
         console.log(`Error in initializing weather app: ${err.message}`);
       });
+
+    // Clear user input after pressing enter
+    userLocationInput.value = "";
   }
 });
 
