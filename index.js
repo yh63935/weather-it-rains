@@ -10,6 +10,14 @@ import {
   renderForecastDisplay,
 } from "./renderCards.js";
 
+getUserLocationWeatherData("San Jose")
+  .then((userLocationWeatherData) => {
+    initialize(userLocationWeatherData);
+  })
+  .catch((err) => {
+    console.log(`Error in initializing weather app: ${err.message}`);
+  });
+
 // Initializes app with user location weather data when user presses Enter
 let userLocationInput = document.querySelector("#location");
 
@@ -20,10 +28,12 @@ userLocationInput.addEventListener("keyup", (e) => {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
+
   if (e.key === "Enter") {
+    let userLocation = userLocationInput.value;
     clearContainer(currentWeatherContainer);
     clearContainer(forecastCardsContainer);
-    getUserLocationWeatherData()
+    getUserLocationWeatherData(userLocation)
       .then((userLocationWeatherData) => {
         initialize(userLocationWeatherData);
       })
