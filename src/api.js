@@ -1,10 +1,12 @@
 // Get user location weather data
-async function getUserLocationWeatherData() {
+async function getUserLocationWeatherData(userLocation) {
   let userLocationInput = document.querySelector("#location");
-  let userLocation = userLocationInput.value;
   try {
-    let userLocationWeatherData = await getWeatherData(userLocation);
-    return userLocationWeatherData;
+    // Only attempt to fetch API data if userLocation is not empty
+    if (userLocation) {
+      let userLocationWeatherData = await getWeatherData(userLocation);
+      return userLocationWeatherData;
+    }
   } catch (err) {
     throw new Error("Error getting user location data");
   }
