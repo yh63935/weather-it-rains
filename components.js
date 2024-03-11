@@ -5,11 +5,14 @@ import { createEl, appendEl } from "./utils/domUtils.js";
 // Base class for all weather cards
 class WeatherCard {
   constructor(weatherCardParams) {
+    // Properties based off of weatherCardParams
     this._timeMeasurement = weatherCardParams.timeMeasurement;
     this._imperialTemp = weatherCardParams.imperialTemp;
     this._metricTemp = weatherCardParams.metricTemp;
-    this.tempUnit = "f";
     this._icon = weatherCardParams.icon;
+
+    // Other properties
+    this.tempUnit = "f";
     this.cardContainer = createEl("div", "");
     this.isImperial = true;
   }
@@ -70,17 +73,20 @@ class WeatherCard {
 class CurrentWeatherCard extends WeatherCard {
   constructor(currentWeatherCardParams) {
     super(currentWeatherCardParams);
-    this._cardType = "current-weather-card";
+    // Properties based off of currentWeatherCardParams
     this._location = currentWeatherCardParams.location;
     this._conditionText = currentWeatherCardParams.conditionText;
-    this.speedUnit = "mi";
+    this._imperialFeelsLikeTemp =
+      currentWeatherCardParams.imperialFeelsLikeTemp;
+    this._metricFeelsLikeTemp = currentWeatherCardParams.metricFeelsLikeTemp;
     this._humidity = currentWeatherCardParams.humidity;
     this._chanceOfRain = currentWeatherCardParams.chanceOfRain;
     this._imperialWindSpeed = currentWeatherCardParams.imperialWindSpeed;
     this._metricWindSpeed = currentWeatherCardParams.metricWindSpeed;
-    this._imperialFeelsLikeTemp =
-      currentWeatherCardParams.imperialFeelsLikeTemp;
-    this._metricFeelsLikeTemp = currentWeatherCardParams.metricFeelsLikeTemp;
+
+    // Other properties
+    this._cardType = "current-weather-card";
+    this.speedUnit = "mi";
   }
   formatTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
@@ -191,13 +197,16 @@ class DayWeatherCard extends WeatherCard {
   // Create an index variable to increase every time a new instance of DayWeatherCard is created
   constructor(dayWeatherCardParams) {
     super(dayWeatherCardParams);
-    this._cardType = "day-weather-card";
-    this.cardContainer.dataset.index =
-      dayWeatherCardParams.index % dayWeatherCardParams.forecastArr.length;
+    // Properties based off of dayWeatherCardParams
     this._imperialMinTemp = dayWeatherCardParams.imperialMinTemp;
     this._metricMinTemp = dayWeatherCardParams.metricMinTemp;
     this._imperialMaxTemp = dayWeatherCardParams.imperialMaxTemp;
     this._metricMaxTemp = dayWeatherCardParams.metricMaxTemp;
+    this.cardContainer.dataset.index =
+      dayWeatherCardParams.index % dayWeatherCardParams.forecastArr.length;
+
+    // Other properties
+    this._cardType = "day-weather-card";
   }
   // Convert time to day of the week
   formatTimeMeasurement() {
