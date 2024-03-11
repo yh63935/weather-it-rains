@@ -13,7 +13,7 @@ function createEl(el, text, className) {
   return element;
 }
 
-// Append element(s) to a parent
+// Append element(s) to a parent element
 function appendEl(parent, ...elements) {
   elements.forEach((el) => {
     parent.append(el);
