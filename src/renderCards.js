@@ -21,20 +21,20 @@ function getEightHourForecast() {
 // Render current weather card
 function renderCurrentWeatherCard(forecastArr, parsedData) {
   // Create current weather card
-  const currentWeatherCard = createCurrentWeatherCard(
-    parsedData.time,
-    parsedData.currentTemp.far,
-    parsedData.currentTemp.cels,
-    parsedData.condition.icon,
-    parsedData.location,
-    parsedData.condition.text,
-    parsedData.feelsLike.far,
-    parsedData.feelsLike.cels,
-    parsedData.humidity,
-    forecastArr[0].day.daily_chance_of_rain,
-    parsedData.wind.mi,
-    parsedData.wind.km
-  );
+  const currentWeatherCard = createCurrentWeatherCard({
+    timeMeasurement: parsedData.time,
+    imperialTemp: parsedData.currentTemp.far,
+    metricTemp: parsedData.currentTemp.cels,
+    icon: parsedData.condition.icon,
+    location: parsedData.location,
+    conditionText: parsedData.condition.text,
+    imperialFeelsLikeTemp: parsedData.feelsLike.far,
+    metricFeelsLikeTemp: parsedData.feelsLike.cels,
+    humidity: parsedData.humidity,
+    chanceOfRain: forecastArr[0].day.daily_chance_of_rain,
+    imperialWindSpeed: parsedData.wind.mi,
+    metricWindSpeed: parsedData.wind.km,
+  });
   currentWeatherCard.createCard();
   return currentWeatherCard;
 }
@@ -59,12 +59,12 @@ function renderHourlyWeatherCards(dayWeatherCard, forecastArr) {
       }
     }
     console.log("DayWeatherCardIndex", dayWeatherCardIndex);
-    const hourlyWeatherCard = createHourlyWeatherCard(
-      forecastArr[dayWeatherCardIndex].hour[hour].time,
-      forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
-      forecastArr[dayWeatherCardIndex].hour[hour].temp_c,
-      forecastArr[dayWeatherCardIndex].hour[hour].condition.icon
-    );
+    const hourlyWeatherCard = createHourlyWeatherCard({
+      timeMeasurement: forecastArr[dayWeatherCardIndex].hour[hour].time,
+      imperialTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
+      metricTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_c,
+      icon: forecastArr[dayWeatherCardIndex].hour[hour].condition.icon,
+    });
     hourlyWeatherCards.push(hourlyWeatherCard);
     hourlyWeatherCard.createCard();
   }
@@ -73,18 +73,18 @@ function renderHourlyWeatherCards(dayWeatherCard, forecastArr) {
 // Render day weather cards
 function renderDayWeatherCards(forecastArr, parsedData) {
   forecastArr.forEach((forecastDay, index) => {
-    const dayWeatherCard = createDayWeatherCard(
-      forecastDay.date,
-      null,
-      null,
-      parsedData.condition.icon,
-      forecastDay.day.mintemp_f,
-      forecastDay.day.mintemp_c,
-      forecastDay.day.maxtemp_f,
-      forecastDay.day.maxtemp_c,
-      index,
-      forecastArr
-    );
+    const dayWeatherCard = createDayWeatherCard({
+      timeMeasurement: forecastDay.date,
+      imperialTemp: null,
+      metricTemp: null,
+      icon: parsedData.condition.icon,
+      imperialMinTemp: forecastDay.day.mintemp_f,
+      metricMinTemp: forecastDay.day.mintemp_c,
+      imperialMaxTemp: forecastDay.day.maxtemp_f,
+      metricMaxTemp: forecastDay.day.maxtemp_c,
+      index: index,
+      forecastArr: forecastArr,
+    });
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
   });
