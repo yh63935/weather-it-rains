@@ -1,5 +1,5 @@
 import { convertAmPm } from "./utils/timeUtils.js";
-import { addLabel } from "./utils/formatUtils.js";
+import { formattedUnitWithLabel } from "./utils/formatUtils.js";
 
 import { createEl, appendEl } from "./utils/domUtils.js";
 
@@ -26,7 +26,7 @@ class WeatherCard {
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
     const tempEl = this._imperialTemp
-      ? createEl("p", addLabel(this._imperialTemp, this.tempUnit), "temp")
+      ? createEl("p", formattedUnitWithLabel(this._imperialTemp, this.tempUnit), "temp")
       : "";
     const iconEl = createEl("img");
     iconEl.src = this._icon;
@@ -55,7 +55,7 @@ class WeatherCard {
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this.cardContainer.querySelector(className);
     if (el) {
-      el.innerText = addLabel(
+      el.innerText = formattedUnitWithLabel(
         this.isImperial ? imperialValue : metricValue,
         unit
       );
@@ -140,14 +140,14 @@ class CurrentWeatherCard extends WeatherCard {
     this.cardContainer.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl(
       "p",
-      addLabel(this._imperialFeelsLikeTemp, this.tempUnit),
+      formattedUnitWithLabel(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
-    const humidityEl = createEl("p", addLabel(this._humidity, "%"));
-    const chanceRainEl = createEl("p", addLabel(this._chanceRain, "%"));
+    const humidityEl = createEl("p", formattedUnitWithLabel(this._humidity, "%"));
+    const chanceRainEl = createEl("p", formattedUnitWithLabel(this._chanceRain, "%"));
     const windSpeedEl = createEl(
       "p",
-      addLabel(this._imperialWindSpeed, this.speedUnit),
+      formattedUnitWithLabel(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
     appendEl(
@@ -238,12 +238,12 @@ class DayWeatherCard extends WeatherCard {
     );
     const minTempEl = createEl(
       "p",
-      addLabel(this._imperialMinTemp, this.tempUnit),
+      formattedUnitWithLabel(this._imperialMinTemp, this.tempUnit),
       "min-temp"
     );
     const maxTempEl = createEl(
       "p",
-      addLabel(this._imperialMaxTemp, this.tempUnit),
+      formattedUnitWithLabel(this._imperialMaxTemp, this.tempUnit),
       "max-temp"
     );
     appendEl(
