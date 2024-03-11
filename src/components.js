@@ -1,4 +1,7 @@
-import { convertAmPm, addLabel } from "./utils.js";
+import { convertAmPm } from "./utils/timeUtils.js";
+import { addLabel } from "./utils/formatUtils.js";
+
+import { createEl, appendEl } from "./utils/domUtils.js";
 
 // Base class for all weather cards
 class WeatherCard {
@@ -353,29 +356,8 @@ function createHourlyWeatherCard(
   return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
 }
 
-// Create element with specified text and class
-function createEl(el, text, className) {
-  const element = document.createElement(el);
-  element.innerText = text;
-
-  // Only add class if provided
-  if (className) {
-    element.classList.add(className);
-  }
-
-  return element;
-}
-
-// Append element(s) to a parent
-function appendEl(parent, ...elements) {
-  elements.forEach((el) => {
-    parent.append(el);
-  });
-}
-
 export {
   createCurrentWeatherCard,
   createDayWeatherCard,
   createHourlyWeatherCard,
-  appendEl,
 };

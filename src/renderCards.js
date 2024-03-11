@@ -3,7 +3,8 @@ import {
   createDayWeatherCard,
   createHourlyWeatherCard,
 } from "./components.js";
-import { convertTimeToHours, clearContainer } from "./utils.js";
+import { convertTimeToHours } from "./utils/timeUtils.js";
+import { clearContainer } from "./utils/domUtils.js";
 
 const dayWeatherCards = [];
 const hourlyWeatherCards = [];
