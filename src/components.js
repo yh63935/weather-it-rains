@@ -1,16 +1,15 @@
 import { convertAmPm } from "./utils/timeUtils.js";
 import { formattedUnitWithLabel } from "./utils/formatUtils.js";
-
 import { createEl, appendEl } from "./utils/domUtils.js";
 
 // Base class for all weather cards
 class WeatherCard {
-  constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
-    this._timeMeasurement = timeMeasurement;
-    this._imperialTemp = imperialTemp;
-    this._metricTemp = metricTemp;
+  constructor(weatherCardParams) {
+    this._timeMeasurement = weatherCardParams.timeMeasurement;
+    this._imperialTemp = weatherCardParams.imperialTemp;
+    this._metricTemp = weatherCardParams.metricTemp;
     this.tempUnit = "f";
-    this._icon = icon;
+    this._icon = weatherCardParams.icon;
     this.cardContainer = createEl("div", "");
     this.isImperial = true;
   }
@@ -26,7 +25,11 @@ class WeatherCard {
     const formattedTimeMeasurement = this.formatTimeMeasurement();
     const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
     const tempEl = this._imperialTemp
-      ? createEl("p", formattedUnitWithLabel(this._imperialTemp, this.tempUnit), "temp")
+      ? createEl(
+          "p",
+          formattedUnitWithLabel(this._imperialTemp, this.tempUnit),
+          "temp"
+        )
       : "";
     const iconEl = createEl("img");
     iconEl.src = this._icon;
@@ -65,31 +68,19 @@ class WeatherCard {
 
 // Class for the current day weather card (today)
 class CurrentWeatherCard extends WeatherCard {
-  constructor(
-    timeMeasurement,
-    imperialTemp,
-    metricTemp,
-    icon,
-    location,
-    conditionText,
-    imperialFeelsLikeTemp,
-    metricFeelsLikeTemp,
-    humidity,
-    chanceRain,
-    imperialWindSpeed,
-    metricWindSpeed
-  ) {
-    super(timeMeasurement, imperialTemp, metricTemp, icon);
+  constructor(currentWeatherCardParams) {
+    super(currentWeatherCardParams);
     this._cardType = "current-weather-card";
-    this._location = location;
-    this._conditionText = conditionText;
+    this._location = currentWeatherCardParams.location;
+    this._conditionText = currentWeatherCardParams.conditionText;
     this.speedUnit = "mi";
-    this._humidity = humidity;
-    this._chanceRain = chanceRain;
-    this._imperialWindSpeed = imperialWindSpeed;
-    this._metricWindSpeed = metricWindSpeed;
-    this._imperialFeelsLikeTemp = imperialFeelsLikeTemp;
-    this._metricFeelsLikeTemp = metricFeelsLikeTemp;
+    this._humidity = currentWeatherCardParams.humidity;
+    this._chanceOfRain = currentWeatherCardParams.chanceOfRain;
+    this._imperialWindSpeed = currentWeatherCardParams.imperialWindSpeed;
+    this._metricWindSpeed = currentWeatherCardParams.metricWindSpeed;
+    this._imperialFeelsLikeTemp =
+      currentWeatherCardParams.imperialFeelsLikeTemp;
+    this._metricFeelsLikeTemp = currentWeatherCardParams.metricFeelsLikeTemp;
   }
   formatTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
@@ -143,8 +134,14 @@ class CurrentWeatherCard extends WeatherCard {
       formattedUnitWithLabel(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
-    const humidityEl = createEl("p", formattedUnitWithLabel(this._humidity, "%"));
-    const chanceRainEl = createEl("p", formattedUnitWithLabel(this._chanceRain, "%"));
+    const humidityEl = createEl(
+      "p",
+      formattedUnitWithLabel(this._humidity, "%")
+    );
+    const chanceOfRainEl = createEl(
+      "p",
+      formattedUnitWithLabel(this._chanceOfRain, "%")
+    );
     const windSpeedEl = createEl(
       "p",
       formattedUnitWithLabel(this._imperialWindSpeed, this.speedUnit),
@@ -154,7 +151,7 @@ class CurrentWeatherCard extends WeatherCard {
       weatherConditions,
       feelsLikeEl,
       humidityEl,
-      chanceRainEl,
+      chanceOfRainEl,
       windSpeedEl
     );
   }
@@ -192,25 +189,15 @@ class CurrentWeatherCard extends WeatherCard {
 // Class for day weather cards
 class DayWeatherCard extends WeatherCard {
   // Create an index variable to increase every time a new instance of DayWeatherCard is created
-  constructor(
-    timeMeasurement,
-    imperialTemp,
-    metricTemp,
-    icon,
-    imperialMinTemp,
-    metricMinTemp,
-    imperialMaxTemp,
-    metricMaxTemp,
-    index,
-    forecastArr
-  ) {
-    super(timeMeasurement, imperialTemp, metricTemp, icon);
+  constructor(dayWeatherCardParams) {
+    super(dayWeatherCardParams);
     this._cardType = "day-weather-card";
-    this.cardContainer.dataset.index = index % forecastArr.length;
-    this._imperialMinTemp = imperialMinTemp;
-    this._metricMinTemp = metricMinTemp;
-    this._imperialMaxTemp = imperialMaxTemp;
-    this._metricMaxTemp = metricMaxTemp;
+    this.cardContainer.dataset.index =
+      dayWeatherCardParams.index % dayWeatherCardParams.forecastArr.length;
+    this._imperialMinTemp = dayWeatherCardParams.imperialMinTemp;
+    this._metricMinTemp = dayWeatherCardParams.metricMinTemp;
+    this._imperialMaxTemp = dayWeatherCardParams.imperialMaxTemp;
+    this._metricMaxTemp = dayWeatherCardParams.metricMaxTemp;
   }
   // Convert time to day of the week
   formatTimeMeasurement() {
@@ -272,8 +259,8 @@ class DayWeatherCard extends WeatherCard {
 
 // Class for hourly weather cards
 class HourlyWeatherCard extends WeatherCard {
-  constructor(timeMeasurement, imperialTemp, metricTemp, icon) {
-    super(timeMeasurement, imperialTemp, metricTemp, icon);
+  constructor(hourlyWeatherCardParams) {
+    super(hourlyWeatherCardParams);
     this._cardType = "hourly-weather-card";
   }
   formatTimeMeasurement() {
@@ -290,70 +277,17 @@ class HourlyWeatherCard extends WeatherCard {
   }
 }
 // Factory function to create instances of a current day card
-function createCurrentWeatherCard(
-  timeMeasurement,
-  imperialTemp,
-  metricTemp,
-  icon,
-  location,
-  conditionText,
-  imperialFeelsLikeTemp,
-  metricFeelsLikeTemp,
-  humidity,
-  chanceRain,
-  imperialWindSpeed,
-  metricWindSpeed
-) {
-  return new CurrentWeatherCard(
-    timeMeasurement,
-    imperialTemp,
-    metricTemp,
-    icon,
-    location,
-    conditionText,
-    imperialFeelsLikeTemp,
-    metricFeelsLikeTemp,
-    humidity,
-    chanceRain,
-    imperialWindSpeed,
-    metricWindSpeed
-  );
+function createCurrentWeatherCard(currentWeatherCardParams) {
+  return new CurrentWeatherCard(currentWeatherCardParams);
 }
 // Factory function to create instances of a forecast day card
-function createDayWeatherCard(
-  timeMeasurement,
-  imperialTemp,
-  metricTemp,
-  icon,
-  imperialMinTemp,
-  metricMinTemp,
-  imperialMaxTemp,
-  metricMaxTemp,
-  index,
-  forecastArr
-) {
-  return new DayWeatherCard(
-    timeMeasurement,
-    imperialTemp,
-    metricTemp,
-    icon,
-    imperialMinTemp,
-    metricMinTemp,
-    imperialMaxTemp,
-    metricMaxTemp,
-    index,
-    forecastArr
-  );
+function createDayWeatherCard(dayWeatherCardParams) {
+  return new DayWeatherCard(dayWeatherCardParams);
 }
 
 // Factory function to create instances of a hourly card
-function createHourlyWeatherCard(
-  timeMeasurement,
-  imperialTemp,
-  metricTemp,
-  icon
-) {
-  return new HourlyWeatherCard(timeMeasurement, imperialTemp, metricTemp, icon);
+function createHourlyWeatherCard(hourlyWeatherCardParams) {
+  return new HourlyWeatherCard(hourlyWeatherCardParams);
 }
 
 export {
