@@ -1,7 +1,7 @@
 // Utility functions for formatting and presenting data
 
-// Determine appropriate labels for imperial/metric system
-function determineImperialMetricLabel(label) {
+// Return formatted labels for imperial/metric system based on input labels
+function formattedImperialMetricLabel(label) {
   switch (label) {
     case "f":
       return "°F";
@@ -14,10 +14,11 @@ function determineImperialMetricLabel(label) {
   }
 }
 
-// Add appropriate labels to elements displayed
-function addLabel(unit, label) {
-  if (determineImperialMetricLabel(label)) {
-    label = determineImperialMetricLabel(label);
+// Returns formatted unit with appropriate label
+function formattedUnitWithLabel(unit, label) {
+  // If formatted imperial metric label exists, set the label as the formatted imperial metric label
+  if (formattedImperialMetricLabel(label)) {
+    label = formattedImperialMetricLabel(label);
   }
   return `${unit} ${label}`;
 }
@@ -37,4 +38,4 @@ function createForecastViewToggler() {
   };
 }
 
-export { addLabel, createForecastViewToggler };
+export { formattedUnitWithLabel, createForecastViewToggler };
