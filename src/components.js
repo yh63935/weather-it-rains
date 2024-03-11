@@ -90,7 +90,7 @@ class CurrentWeatherCard extends WeatherCard {
   }
   formatTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
-    const day = date.getDay();
+    const day = date.getDate();
     const months = [
       "January",
       "February",
