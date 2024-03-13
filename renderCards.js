@@ -9,13 +9,20 @@ import { clearContainer } from "./utils/domUtils.js";
 const dayWeatherCards = [];
 const hourlyWeatherCards = [];
 
-// Get the 8 hour interval from the current time of selected date
-function getEightHourForecast() {
+// Get 8 hour forecast from the current time or specified offset interval
+function getEightHourForecast(offsetInterval = 0) {
   const selectedDate = new Date();
-  const hour = convertTimeToHours(selectedDate);
-  const start = hour + 1;
-  const end = hour + 8;
-  return { start, end };
+
+  // Current hour in 24-hour time
+  const currentHour = convertTimeToHours(selectedDate);
+
+  const roundedHour = currentHour + 1;
+
+  // Calculate start interval from the rounded hour by adding the offset
+  const startHour = roundedHour + offsetInterval * 8;
+  let endHour = startHour + 7; // End the interveral 8 hours from the start (including start hour)
+
+  return { startHour, endHour };
 }
 
 // Render current weather card
@@ -40,11 +47,11 @@ function renderCurrentWeatherCard(forecastArr, parsedData) {
 }
 
 // Render the hourly cards for selected date in a 8 hour interval (starting from the next hour from today)
-function renderHourlyWeatherCards(dayWeatherCard, forecastArr) {
-  const hours = getEightHourForecast();
+function renderHourlyWeatherCards(dayWeatherCard, forecastArr, interval) {
+  const hours = getEightHourForecast(interval);
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
   let dayWeatherCardIndexUpdated = false;
-  for (let i = hours.start; i <= hours.end; i++) {
+  for (let i = hours.startHour; i <= hours.endHour; i++) {
     let hour = i;
     // If hour is more than 24, dayWeatherIndex will increase by 1 and hours will become hour % 24(for the next day)
     if (i >= 24) {
@@ -114,7 +121,8 @@ function renderForecastDisplay(
   renderFunc,
   forecastViewToggler,
   param1,
-  param2
+  param2,
+  param3
 ) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
@@ -123,7 +131,7 @@ function renderForecastDisplay(
   forecastViewToggler.toggleView();
   let currentView = forecastViewToggler.getView();
   renderDisplayDayForecastBtn(currentView);
-  renderFunc(param1, param2);
+  renderFunc(param1, param2, param3);
 }
 
 export {
