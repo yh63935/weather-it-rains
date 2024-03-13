@@ -63,12 +63,43 @@ async function initialize(userLocationWeatherData) {
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
     if (selectedBtn && selectedCard) {
+      let interval = 0;
       renderForecastDisplay(
         renderHourlyWeatherCards,
         forecastViewToggler,
         selectedCard,
-        forecastArr
+        forecastArr,
+        interval
       );
+      const prevHrIntervalBtn = document.querySelector(".prev-interval");
+      const nxtHrIntervalBtn = document.querySelector(".nxt-interval");
+      prevHrIntervalBtn.addEventListener("click", () => {
+        // Ensure that the new interval value stays within indexes of 0 to 2 (0 - 24 hours)
+        // preventing it from exceeding the bounds of a single day's hourly forecast.
+        interval = interval <= 0 ? 0 : interval - 1;
+
+        renderForecastDisplay(
+          renderHourlyWeatherCards,
+          forecastViewToggler,
+          selectedCard,
+          forecastArr,
+          interval
+        );
+      });
+
+      nxtHrIntervalBtn.addEventListener("click", () => {
+        // Ensure that the new interval value stays within indexes of 0 to 2 (0 - 24 hours)
+        // preventing it from exceeding the bounds of a single day's hourly forecast.
+        interval = interval >= 2 ? 2 : interval + 1;
+
+        renderForecastDisplay(
+          renderHourlyWeatherCards,
+          forecastViewToggler,
+          selectedCard,
+          forecastArr,
+          interval
+        );
+      });
     }
   });
 
