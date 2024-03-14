@@ -231,7 +231,8 @@ class DayWeatherCard extends WeatherCard {
     appendEl(forecastCardsContainer, this.cardContainer);
     const displayHourlyForecastBtn = createEl(
       "button",
-      "Display hourly forecast"
+      "Display hourly forecast",
+      "display-hourly-forecast"
     );
     const minTempEl = createEl(
       "p",
