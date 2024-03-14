@@ -52,6 +52,8 @@ function initializeWeatherAppWithLocation(userLocation) {
     });
 }
 
+// Should this function be somewhere else that isn't index.js
+
 // Toggle error message visibility depending on whether user location is valid
 function toggleErrorMsgVisibility(errorEl, isValidUserLocation) {
   errorEl.style.display = isValidUserLocation ? "none" : "block";
@@ -78,23 +80,28 @@ async function initialize(userLocationWeatherData) {
       renderForecastDisplay(
         renderHourlyWeatherCards,
         forecastViewToggler,
-        selectedCard,
-        forecastArr,
-        interval
+        {
+          selectedCard,
+          forecastArr,
+          interval,
+        },
+        selectedBtn
       );
       const prevHrIntervalBtn = document.querySelector(".prev-interval");
       const nxtHrIntervalBtn = document.querySelector(".nxt-interval");
-      prevHrIntervalBtn.addEventListener("click", () => {
+      prevHrIntervalBtn.addEventListener("click", (e) => {
         // Ensure that the new interval value stays within indexes of 0 to 2 (0 - 24 hours)
         // preventing it from exceeding the bounds of a single day's hourly forecast.
         interval = interval <= 0 ? 0 : interval - 1;
-
         renderForecastDisplay(
           renderHourlyWeatherCards,
           forecastViewToggler,
-          selectedCard,
-          forecastArr,
-          interval
+          {
+            selectedCard,
+            forecastArr,
+            interval,
+          },
+          prevHrIntervalBtn
         );
       });
 
@@ -106,9 +113,13 @@ async function initialize(userLocationWeatherData) {
         renderForecastDisplay(
           renderHourlyWeatherCards,
           forecastViewToggler,
-          selectedCard,
-          forecastArr,
-          interval
+          {
+            selectedCard,
+            forecastArr,
+            interval,
+          },
+
+          nxtHrIntervalBtn
         );
       });
     }
@@ -120,8 +131,11 @@ async function initialize(userLocationWeatherData) {
     renderForecastDisplay(
       renderDayWeatherCards,
       forecastViewToggler,
-      forecastArr,
-      parsedData
+      {
+        forecastArr,
+        parsedData,
+      },
+      displayDayForecastBtn
     );
   });
 

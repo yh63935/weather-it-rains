@@ -120,18 +120,23 @@ function renderDisplayDayForecastBtn(currentView) {
 function renderForecastDisplay(
   renderFunc,
   forecastViewToggler,
-  param1,
-  param2,
-  param3
+  renderFuncParams,
+  clickedEl
 ) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
   clearContainer(forecastCardsContainer);
-  forecastViewToggler.toggleView();
+  // Only toggle the view if it is the display day forecast or display hourly forecast button
+  if (
+    clickedEl.classList.contains("display-day-forecast") ||
+    clickedEl.classList.contains("display-hourly-forecast")
+  )
+    forecastViewToggler.toggleView();
   let currentView = forecastViewToggler.getView();
   renderDisplayDayForecastBtn(currentView);
-  renderFunc(param1, param2, param3);
+  // Render function with varying number of parameters
+  renderFunc(...Object.values(renderFuncParams));
 }
 
 export {
