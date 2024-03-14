@@ -52,7 +52,7 @@ function initializeWeatherAppWithLocation(userLocation) {
     });
 }
 
-// Toggle error message visibility depending on whether user location
+// Toggle error message visibility depending on whether user location is valid
 function toggleErrorMsgVisibility(errorEl, isValidUserLocation) {
   errorEl.style.display = isValidUserLocation ? "none" : "block";
 }
