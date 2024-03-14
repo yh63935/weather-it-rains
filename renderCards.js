@@ -120,9 +120,7 @@ function renderDisplayDayForecastBtn(currentView) {
 function renderForecastDisplay(
   renderFunc,
   forecastViewToggler,
-  param1,
-  param2,
-  param3
+  renderFuncParams,
 ) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
@@ -131,7 +129,8 @@ function renderForecastDisplay(
   forecastViewToggler.toggleView();
   let currentView = forecastViewToggler.getView();
   renderDisplayDayForecastBtn(currentView);
-  renderFunc(param1, param2, param3);
+  // Render function with varying number of parameters
+  renderFunc(...Object.values(renderFuncParams));
 }
 
 export {
