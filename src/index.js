@@ -78,9 +78,11 @@ async function initialize(userLocationWeatherData) {
       renderForecastDisplay(
         renderHourlyWeatherCards,
         forecastViewToggler,
+        {
         selectedCard,
         forecastArr,
-        interval
+          interval,
+        },
       );
       const prevHrIntervalBtn = document.querySelector(".prev-interval");
       const nxtHrIntervalBtn = document.querySelector(".nxt-interval");
@@ -92,9 +94,11 @@ async function initialize(userLocationWeatherData) {
         renderForecastDisplay(
           renderHourlyWeatherCards,
           forecastViewToggler,
+          {
           selectedCard,
           forecastArr,
-          interval
+            interval,
+          },
         );
       });
 
@@ -106,9 +110,11 @@ async function initialize(userLocationWeatherData) {
         renderForecastDisplay(
           renderHourlyWeatherCards,
           forecastViewToggler,
+          {
           selectedCard,
           forecastArr,
-          interval
+            interval,
+          },
         );
       });
     }
@@ -120,8 +126,10 @@ async function initialize(userLocationWeatherData) {
     renderForecastDisplay(
       renderDayWeatherCards,
       forecastViewToggler,
+      {
       forecastArr,
-      parsedData
+        parsedData,
+      },
     );
   });
 
