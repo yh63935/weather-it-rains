@@ -1,3 +1,4 @@
-.display-day-forecast {
+.display-day-forecast,
+.error-msg {
   display: none;
 }
