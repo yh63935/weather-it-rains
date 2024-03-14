@@ -17,17 +17,9 @@ initializeWeatherAppWithLocation("San Jose");
 let userLocationInput = document.querySelector("#location");
 
 userLocationInput.addEventListener("keyup", (e) => {
-  const currentWeatherContainer = document.querySelector(
-    ".current-weather-container"
-  );
-  const forecastCardsContainer = document.querySelector(
-    ".forecast-cards-container"
-  );
-
   if (e.key === "Enter") {
     let userLocation = userLocationInput.value;
-    clearContainer(currentWeatherContainer);
-    clearContainer(forecastCardsContainer);
+
     initializeWeatherAppWithLocation(userLocation);
 
     // Clear user input after pressing enter
@@ -37,8 +29,17 @@ userLocationInput.addEventListener("keyup", (e) => {
 
 // Initialize weather app with location
 function initializeWeatherAppWithLocation(userLocation) {
+  const currentWeatherContainer = document.querySelector(
+    ".current-weather-container"
+  );
+  const forecastCardsContainer = document.querySelector(
+    ".forecast-cards-container"
+  );
   getUserLocationWeatherData(userLocation)
     .then((userLocationWeatherData) => {
+      // Only clear containers and initialize app if API request for user location is valid
+      clearContainer(currentWeatherContainer);
+      clearContainer(forecastCardsContainer);
       initialize(userLocationWeatherData);
     })
     .catch((err) => {
