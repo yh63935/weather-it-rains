@@ -35,16 +35,26 @@ function initializeWeatherAppWithLocation(userLocation) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
+  const errorMsgEl = document.querySelector(".error-msg");
+  let isValidUserLocation = false;
   getUserLocationWeatherData(userLocation)
     .then((userLocationWeatherData) => {
       // Only clear containers and initialize app if API request for user location is valid
+      isValidUserLocation = true;
+      toggleErrorMsgVisibility(errorMsgEl, isValidUserLocation);
       clearContainer(currentWeatherContainer);
       clearContainer(forecastCardsContainer);
       initialize(userLocationWeatherData);
     })
     .catch((err) => {
       console.log(`Error in initializing weather app: ${err.message}`);
+      toggleErrorMsgVisibility(errorMsgEl, isValidUserLocation);
     });
+}
+
+// Toggle error message visibility depending on whether user location
+function toggleErrorMsgVisibility(errorEl, isValidUserLocation) {
+  errorEl.style.display = isValidUserLocation ? "none" : "block";
 }
 
 // Initialize app
