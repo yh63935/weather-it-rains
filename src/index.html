@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <label for="location"></label>
-    <input type="text" id="location" />
-    <button><i class="fas fa-search"></i></button>
+    <div class="search-container">
+      <label for="location"></label>
+      <input type="text" id="location" />
+      <button><i class="fas fa-search"></i></button>
+      <p class="error-msg">Please enter a valid location</p>
+    </div>
     <div class="current-weather-container"></div>
     <div class="forecast-container">
       <button class="display-day-forecast">Display day forecast</button>
