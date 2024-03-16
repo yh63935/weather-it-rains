@@ -13,6 +13,11 @@ body {
   height: 100%;
 }
 
+body {
+  background-image: url("./assets/foggy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .display-day-forecast,
 .error-msg {
