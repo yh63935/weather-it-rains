@@ -119,12 +119,34 @@ class CurrentWeatherCard extends WeatherCard {
     );
     appendEl(currentWeatherContainer, this.cardContainer);
     const body = document.querySelector("body");
-    const mainInfo = createEl("div", "", "main-info");
-    appendEl(body, mainInfo);
-    const weatherConditions = createEl("div", "", "weather-conditions");
-    appendEl(this.cardContainer, mainInfo, weatherConditions);
+    const mainInfoEl = createEl("div", "", "main-info");
+
+    /* Create two extra div containers to hold information inside the current weather container for styling purposes
+     <div class="current-weather-container">
+       <div class="main-info">
+         Base class card details here (timeMeasurementEl, tempEl, iconEl)
+       </div>
+       <div class="weather-conditions"></div>
+     </div>
+   */
+    const createStylingContainers = () => {
+      // Remove this.cardContainer's elements to mainInfo container instead for styling purposes
+      while (this.cardContainer.firstChild) {
+        mainInfoEl.appendChild(this.cardContainer.firstChild);
+      }
+      // Append mainInfoEl to this.cardContainer
+      appendEl(this.cardContainer, mainInfoEl);
+
+      const weatherConditions = createEl("div", "", "weather-conditions");
+      appendEl(this.cardContainer, mainInfoEl, weatherConditions);
+    };
+
+    createStylingContainers();
+
+    // Add location element to mainInfo container
     const locationEl = createEl("p", this._location);
-    appendEl(mainInfo, locationEl);
+    appendEl(mainInfoEl, locationEl);
+
     const convertImperialMetricBtn = createEl(
       "button",
       `Display °C`,
@@ -132,9 +154,9 @@ class CurrentWeatherCard extends WeatherCard {
     );
     const tempEl = this.cardContainer.querySelector(".temp");
     const iconEl = this.cardContainer.querySelector("img");
-    this.cardContainer.insertBefore(convertImperialMetricBtn, iconEl);
+    mainInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
     const conditionEl = createEl("p", this._conditionText);
-    this.cardContainer.insertBefore(conditionEl, tempEl);
+    mainInfoEl.insertBefore(conditionEl, tempEl);
     const feelsLikeEl = createEl(
       "p",
       formattedUnitWithLabel(this._imperialFeelsLikeTemp, this.tempUnit),
