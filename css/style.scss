@@ -26,4 +26,13 @@ body {
 
 .forecast-cards-container {
   display: flex;
+  justify-content: space-around;
+  background: rgba(199, 208, 213, 0.5);
+  color: #112a46;
+  padding: 3rem;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
