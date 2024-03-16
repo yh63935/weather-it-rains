@@ -1,6 +1,6 @@
 # weather-app
 # This is a weather app that will display the current day weather, along with forecast day and hourly weather.
-
+https://imgur.com/a/szRXwIE
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
