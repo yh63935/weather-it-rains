@@ -2,3 +2,7 @@
 .error-msg {
   display: none;
 }
+
+.forecast-cards-container {
+  display: flex;
+}
