@@ -2,6 +2,8 @@
 # This is a weather app that will display the current day weather, along with forecast day and hourly weather.
 https://imgur.com/a/szRXwIE
 https://wallpapercave.com/snow-winter-anime-wallpapers
+https://search.krea.ai/prompt/01fd5428-4bd2-46b3-aea8-512b436c1b06
+https://rare-gallery.com/981429-light-fairytail-artwork-sky-lightning-clouds-nature-.html
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
