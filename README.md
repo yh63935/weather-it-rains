@@ -5,6 +5,13 @@ https://wallpapercave.com/snow-winter-anime-wallpapers
 https://search.krea.ai/prompt/01fd5428-4bd2-46b3-aea8-512b436c1b06
 https://rare-gallery.com/981429-light-fairytail-artwork-sky-lightning-clouds-nature-.html
 https://www.peakpx.com/en/hd-wallpaper-desktop-amync
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
