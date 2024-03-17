@@ -14,7 +14,7 @@ import {
 initializeWeatherAppWithLocation("San Jose");
 
 // Initializes app with user location weather data when user presses Enter
-let userLocationInput = document.querySelector("#location");
+let userLocationInput = document.querySelector("#search-location");
 
 userLocationInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
