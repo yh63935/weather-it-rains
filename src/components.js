@@ -155,7 +155,7 @@ class CurrentWeatherCard extends WeatherCard {
     const tempEl = this.cardContainer.querySelector(".temp");
     const iconEl = this.cardContainer.querySelector("img");
     mainInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
-    const conditionEl = createEl("p", this._conditionText);
+    const conditionEl = createEl("p", this._conditionText, "conditions");
     mainInfoEl.insertBefore(conditionEl, tempEl);
 
     return mainInfoEl;
