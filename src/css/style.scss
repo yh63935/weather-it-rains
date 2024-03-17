@@ -1,38 +1,111 @@
 @import "./base/normalize.scss";
 @import "./base/reset.scss";
 
+// Variables
+$search-padding: 0.5rem;
+
+html {
+  font-size: 18px;
+  line-height: 1.5rem;
+}
+
 * {
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px;
-}
 html,
 body {
   height: 100%;
+  font-family: "Lora", "Domine", "Times New Roman", serif;
+  font-weight: 400;
 }
 
 body {
-  background-image: url("./assets/foggy.jpg");
+  background-image: url("./assets/sunny.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+p {
+  margin: 0.5rem;
+}
+.current-weather-card p.temp {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.conditions {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+button {
+  padding: 0.5rem;
+  background: none;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#search-location {
+  padding: $search-padding;
+  width: 40%;
+  border-right: none;
+}
+
+.main-info {
+  position: relative;
+  p {
+    margin: 1.5rem 0;
+  }
+  img {
+    position: absolute;
+    left: 100%;
+    width: 100%;
+    top: 0;
+  }
+}
+
+.day-weather-card:hover {
+  background: lightgreen;
+}
 .display-day-forecast,
 .error-msg {
   display: none;
 }
 
+.current-weather-card {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  flex-direction: column;
+  margin: auto;
+}
+
 .forecast-cards-container {
   display: flex;
   justify-content: space-around;
-  background: rgba(199, 208, 213, 0.5);
+  background: rgba(237, 225, 225, 0.82);
   color: #112a46;
   padding: 3rem;
   div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border: solid 1px white;
+    padding: 1.5rem 1rem;
+  }
+}
+
+.hourly-weather-card,
+.day-weather-card {
+  p:first-child {
+    font-size: 1.5rem;
+    font-weight: 500;
   }
 }
