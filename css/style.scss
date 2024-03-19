@@ -5,12 +5,13 @@
 $search-padding: 0.5rem;
 
 html {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.5rem;
 }
 
 * {
   box-sizing: border-box;
+  color: white;
 }
 
 html,
@@ -21,7 +22,7 @@ body {
 }
 
 body {
-  background-image: url("./assets/sunny.jpg");
+  background-image: url("./assets/fog.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -29,10 +30,6 @@ body {
 
 p {
   margin: 0.5rem;
-}
-.current-weather-card p.temp {
-  font-weight: 700;
-  font-size: 3rem;
 }
 
 .conditions {
@@ -83,22 +80,46 @@ button {
   display: flex;
   align-items: center;
   width: 80%;
-  flex-direction: column;
-  margin: auto;
+  margin: 2rem auto 0;
+  background: rgba(0, 0, 0, 0.2);
+
+  p.temp {
+    font-weight: 700;
+    font-size: 3rem;
+  }
 }
 
-.forecast-cards-container {
-  display: flex;
-  justify-content: space-around;
-  background: rgba(237, 225, 225, 0.82);
-  color: #112a46;
-  padding: 3rem;
-  div {
+.forecast-container {
+  position: relative;
+  .forecast-cards-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: solid 1px white;
-    padding: 1.5rem 1rem;
+    justify-content: space-around;
+    // background: rgba(237, 225, 225, 0.82);
+    color: #112a46;
+    padding: 3rem;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: solid 1px white;
+      padding: 1.5rem 1rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .prev-interval,
+  .nxt-interval {
+    position: absolute;
+    top: 50%;
+  }
+
+  .prev-interval {
+    left: 1.5%;
+  }
+
+  .nxt-interval {
+    right: 1.5%;
   }
 }
 
