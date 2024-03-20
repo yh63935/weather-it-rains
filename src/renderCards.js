@@ -108,12 +108,11 @@ function getHourlyWeatherCards() {
   return hourlyWeatherCards;
 }
 
-// Render display day forecast button if forecast is in hourlyu view
-function renderDisplayDayForecastBtn(currentView) {
-  const displayDayForecastBtn = document.querySelector(".display-day-forecast");
-  console.log("forecast button", displayDayForecastBtn);
-  displayDayForecastBtn.style.display =
-    currentView === "hourly" ? "block" : "none";
+// Render all buttons that are visible in hourly view
+function renderHourlyViewBtns(hourlyViewBtns, currentView) {
+  hourlyViewBtns.forEach((btn) => {
+    btn.style.display = currentView === "hourly" ? "block" : "none";
+  });
 }
 
 // Render forecast display based on function passed in
@@ -121,7 +120,8 @@ function renderForecastDisplay(
   renderFunc,
   forecastViewToggler,
   renderFuncParams,
-  clickedEl
+  clickedEl,
+  hourlyViewBtns = []
 ) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
@@ -134,7 +134,7 @@ function renderForecastDisplay(
   )
     forecastViewToggler.toggleView();
   let currentView = forecastViewToggler.getView();
-  renderDisplayDayForecastBtn(currentView);
+  renderHourlyViewBtns(hourlyViewBtns, currentView);
   // Render function with varying number of parameters
   renderFunc(...Object.values(renderFuncParams));
 }
@@ -145,6 +145,6 @@ export {
   renderHourlyWeatherCards,
   getDayWeatherCards,
   getHourlyWeatherCards,
-  renderDisplayDayForecastBtn,
+  renderHourlyViewBtns,
   renderForecastDisplay,
 };
