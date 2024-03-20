@@ -71,10 +71,20 @@ async function initialize(userLocationWeatherData) {
   let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
   renderDayWeatherCards(forecastArr, parsedData);
 
+  const displayDayForecastBtn = document.querySelector(".display-day-forecast");
+  const prevHrIntervalBtn = document.querySelector(".prev-interval");
+  const nxtHrIntervalBtn = document.querySelector(".nxt-interval");
+  const hourlyViewBtns = [
+    displayDayForecastBtn,
+    prevHrIntervalBtn,
+    nxtHrIntervalBtn,
+  ];
+
   // Display associated hourly forecast for the selected button of the day card when clicked
   forecastCardsContainer.addEventListener("click", (e) => {
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
+
     if (selectedBtn && selectedCard) {
       let interval = 0;
       renderForecastDisplay(
@@ -85,10 +95,10 @@ async function initialize(userLocationWeatherData) {
           forecastArr,
           interval,
         },
-        selectedBtn
+        selectedBtn,
+        hourlyViewBtns
       );
-      const prevHrIntervalBtn = document.querySelector(".prev-interval");
-      const nxtHrIntervalBtn = document.querySelector(".nxt-interval");
+
       prevHrIntervalBtn.addEventListener("click", (e) => {
         // Ensure that the new interval value stays within indexes of 0 to 2 (0 - 24 hours)
         // preventing it from exceeding the bounds of a single day's hourly forecast.
@@ -101,7 +111,8 @@ async function initialize(userLocationWeatherData) {
             forecastArr,
             interval,
           },
-          prevHrIntervalBtn
+          prevHrIntervalBtn,
+          hourlyViewBtns
         );
       });
 
@@ -119,14 +130,14 @@ async function initialize(userLocationWeatherData) {
             interval,
           },
 
-          nxtHrIntervalBtn
+          nxtHrIntervalBtn,
+          hourlyViewBtns
         );
       });
     }
   });
 
   // Display day forecast when displayDayForecastBtn is clicked
-  const displayDayForecastBtn = document.querySelector(".display-day-forecast");
   displayDayForecastBtn.addEventListener("click", () => {
     renderForecastDisplay(
       renderDayWeatherCards,
@@ -135,7 +146,8 @@ async function initialize(userLocationWeatherData) {
         forecastArr,
         parsedData,
       },
-      displayDayForecastBtn
+      displayDayForecastBtn,
+      hourlyViewBtns
     );
   });
 
