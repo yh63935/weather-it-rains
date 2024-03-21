@@ -41,22 +41,17 @@ function initializeWeatherAppWithLocation(userLocation) {
     .then((userLocationWeatherData) => {
       // Only clear containers and initialize app if API request for user location is valid
       isValidUserLocation = true;
-      toggleErrorMsgVisibility(errorMsgEl, isValidUserLocation);
       clearContainer(currentWeatherContainer);
       clearContainer(forecastCardsContainer);
       initialize(userLocationWeatherData);
     })
     .catch((err) => {
       console.log(`Error in initializing weather app: ${err.message}`);
-      toggleErrorMsgVisibility(errorMsgEl, isValidUserLocation);
+    })
+    .finally(() => {
+      // Toggle the error message vsibility based on if user location is valid
+      errorMsgEl.style.display = isValidUserLocation ? "none" : "block";
     });
-}
-
-// Should this function be somewhere else that isn't index.js
-
-// Toggle error message visibility depending on whether user location is valid
-function toggleErrorMsgVisibility(errorEl, isValidUserLocation) {
-  errorEl.style.display = isValidUserLocation ? "none" : "block";
 }
 
 // Initialize app
