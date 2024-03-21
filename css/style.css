@@ -550,6 +550,7 @@ button {
 .forecast-container .nxt-interval {
   position: absolute;
   top: 50%;
+  display: none;
 }
 .forecast-container .prev-interval {
   left: 1.5%;
