@@ -17,12 +17,15 @@ class WeatherCard {
     // Property to determine if it is imperial system or not (if not, it is metric system)
     this.isImperial = true; // Default is imperial system
   }
+
   get formattedTimeMeasurement() {
     return this._timeMeasurement;
   }
+
   addCardType() {
     this._card.classList.add(this._cardType);
   }
+
   createCard() {
     this.addCardType();
     const body = document.querySelector("body");
@@ -51,7 +54,7 @@ class WeatherCard {
     }
   }
 
-  // Toggle between imperial and metric units for the weather card
+  // Toggle between imperial and metric system for the weather card
   toggleImperialMetric() {
     this.isImperial = !this.isImperial;
     this.updateImperialMetricUnits();
@@ -85,6 +88,7 @@ class WeatherCard {
 class CurrentWeatherCard extends WeatherCard {
   constructor(currentWeatherCardParams) {
     super(currentWeatherCardParams);
+
     // Properties based off of currentWeatherCardParams
     this._location = currentWeatherCardParams.location;
     this._conditionText = currentWeatherCardParams.conditionText;
@@ -100,6 +104,9 @@ class CurrentWeatherCard extends WeatherCard {
     this._cardType = "current-weather-card";
     this.speedUnit = "mi";
   }
+
+  // Returns time measurement formatted in format of Month day-of-month, year time(12-hour clock format)
+  // Ex: March 22, 2024 11:52 PM
   get formattedTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
     const day = date.getDate();
@@ -124,13 +131,13 @@ class CurrentWeatherCard extends WeatherCard {
     const formattedDate = `${month} ${day}, ${year} ${formattedHourMin}`;
     return formattedDate;
   }
+
   createCard() {
     super.createCard();
     const currentWeatherContainer = document.querySelector(
       ".current-weather-container"
     );
     appendEl(currentWeatherContainer, this._card);
-    // const body = document.querySelector("body");
 
     this.createStylingContainers();
   }
@@ -204,11 +211,14 @@ class CurrentWeatherCard extends WeatherCard {
 
     return weatherConditionsEl;
   }
+
+  // Toggle between imperial and metric system for the card to update convertImperialMetricBtn
   toggleImperialMetric() {
     super.toggleImperialMetric();
     this.toggleConvertImperialMetricBtn();
   }
-  // Updates convert imperial metric button with new temp unit when toggled
+
+  // Update convertImperialMetricBtn's text based on imperial/metric system
   toggleConvertImperialMetricBtn() {
     const convertImperialMetricBtn = document.querySelector(
       ".convert-imperial-metric"
@@ -216,16 +226,21 @@ class CurrentWeatherCard extends WeatherCard {
     const altTempUnit = this.tempUnit === "c" ? "f" : "c";
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
+
+  // Updates imperial metric units for additional elements of feelsLikeEl, windSpeedEl
   updateImperialMetricUnits() {
     super.updateImperialMetricUnits();
     this.speedUnit = this.isImperial ? "mi" : "km";
 
+    // Update feelsLikeEl with respective imperial metric values and units
     this.updateImperialMetricUnit(
       ".feels-like",
       this._imperialFeelsLikeTemp,
       this._metricFeelsLikeTemp,
       this.tempUnit
     );
+
+    // Update windSpeel with respective imperial metric values and units
     this.updateImperialMetricUnit(
       ".wind-speed",
       this._imperialWindSpeed,
