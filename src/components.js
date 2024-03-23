@@ -1,5 +1,5 @@
 import { convertAmPm } from "./utils/timeUtils.js";
-import { formattedUnitWithLabel } from "./utils/formatUtils.js";
+import { formattedValueWithUnit } from "./utils/formatUtils.js";
 import { createEl, appendEl } from "./utils/domUtils.js";
 
 // Base class for all weather cards
@@ -14,7 +14,8 @@ class WeatherCard {
     // Other properties
     this.tempUnit = "f";
     this._card = createEl("div", "");
-    this.isImperial = true;
+    // Property to determine if it is imperial system or not (if not, it is metric system)
+    this.isImperial = true; // Default is imperial system
   }
   get formattedTimeMeasurement() {
     return this._timeMeasurement;
@@ -26,41 +27,53 @@ class WeatherCard {
     this.addCardType();
     const body = document.querySelector("body");
     const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
+
+    // Create tempEl element to contain general temperature information
     const tempEl = this._imperialTemp
       ? createEl(
           "p",
-          formattedUnitWithLabel(this._imperialTemp, this.tempUnit),
+          formattedValueWithUnit(this._imperialTemp, this.tempUnit),
           "temp"
         )
       : "";
+
+    // Create iconEl element to contain icon image
     const iconEl = createEl("img");
     iconEl.src = this._icon;
+
     appendEl(body, this._card);
+
+    // If tempEl exists, append it to the card
     if (tempEl) {
       appendEl(this._card, timeMeasurementEl, tempEl, iconEl);
     } else {
       appendEl(this._card, timeMeasurementEl, iconEl);
     }
   }
+
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
     this.isImperial = !this.isImperial;
-    this.updateImperialMetricLabels();
+    this.updateImperialMetricUnits();
   }
-  // Update imperial and metric labels
-  updateImperialMetricLabels() {
+
+  // Update multiple imperial/metric values and units based on imperial/metric system selected
+  // Base class only updates the tempEl element, but subclasses can override it to update additional elements
+  updateImperialMetricUnits() {
     this.tempUnit = this.isImperial ? "f" : "c";
-    this.updateImperialMetricLabel(
+    this.updateImperialMetricUnit(
       ".temp",
       this._imperialTemp,
       this._metricTemp,
       this.tempUnit
     );
   }
-  updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
+
+  // Update imperial/metric values and units of an element
+  updateImperialMetricUnit(className, imperialValue, metricValue, unit) {
     const el = this._card.querySelector(className);
     if (el) {
-      el.innerText = formattedUnitWithLabel(
+      el.innerText = formattedValueWithUnit(
         this.isImperial ? imperialValue : metricValue,
         unit
       );
@@ -164,20 +177,20 @@ class CurrentWeatherCard extends WeatherCard {
 
     const feelsLikeEl = createEl(
       "p",
-      formattedUnitWithLabel(this._imperialFeelsLikeTemp, this.tempUnit),
+      formattedValueWithUnit(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
     const humidityEl = createEl(
       "p",
-      formattedUnitWithLabel(this._humidity, "%")
+      formattedValueWithUnit(this._humidity, "%")
     );
     const chanceOfRainEl = createEl(
       "p",
-      formattedUnitWithLabel(this._chanceOfRain, "%")
+      formattedValueWithUnit(this._chanceOfRain, "%")
     );
     const windSpeedEl = createEl(
       "p",
-      formattedUnitWithLabel(this._imperialWindSpeed, this.speedUnit),
+      formattedValueWithUnit(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
 
@@ -203,17 +216,17 @@ class CurrentWeatherCard extends WeatherCard {
     const altTempUnit = this.tempUnit === "c" ? "f" : "c";
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
-  updateImperialMetricLabels() {
-    super.updateImperialMetricLabels();
+  updateImperialMetricUnits() {
+    super.updateImperialMetricUnits();
     this.speedUnit = this.isImperial ? "mi" : "km";
 
-    this.updateImperialMetricLabel(
+    this.updateImperialMetricUnit(
       ".feels-like",
       this._imperialFeelsLikeTemp,
       this._metricFeelsLikeTemp,
       this.tempUnit
     );
-    this.updateImperialMetricLabel(
+    this.updateImperialMetricUnit(
       ".wind-speed",
       this._imperialWindSpeed,
       this._metricWindSpeed,
@@ -265,25 +278,25 @@ class DayWeatherCard extends WeatherCard {
     );
     const minTempEl = createEl(
       "p",
-      formattedUnitWithLabel(this._imperialMinTemp, this.tempUnit),
+      formattedValueWithUnit(this._imperialMinTemp, this.tempUnit),
       "min-temp"
     );
     const maxTempEl = createEl(
       "p",
-      formattedUnitWithLabel(this._imperialMaxTemp, this.tempUnit),
+      formattedValueWithUnit(this._imperialMaxTemp, this.tempUnit),
       "max-temp"
     );
     appendEl(this._card, displayHourlyForecastBtn, minTempEl, maxTempEl);
   }
-  updateImperialMetricLabels() {
-    super.updateImperialMetricLabels();
-    this.updateImperialMetricLabel(
+  updateImperialMetricUnits() {
+    super.updateImperialMetricUnits();
+    this.updateImperialMetricUnit(
       ".min-temp",
       this._imperialMinTemp,
       this._metricMinTemp,
       this.tempUnit
     );
-    this.updateImperialMetricLabel(
+    this.updateImperialMetricUnit(
       ".max-temp",
       this._imperialMaxTemp,
       this._metricMaxTemp,
