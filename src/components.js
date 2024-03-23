@@ -14,7 +14,8 @@ class WeatherCard {
     // Other properties
     this.tempUnit = "f";
     this._card = createEl("div", "");
-    this.isImperial = true;
+    // Property to determine if it is imperial system or not (if not, it is metric system)
+    this.isImperial = true; // Default is imperial system
   }
   get formattedTimeMeasurement() {
     return this._timeMeasurement;
@@ -26,6 +27,8 @@ class WeatherCard {
     this.addCardType();
     const body = document.querySelector("body");
     const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
+
+    // Create tempEl element to contain general temperature information
     const tempEl = this._imperialTemp
       ? createEl(
           "p",
@@ -33,21 +36,29 @@ class WeatherCard {
           "temp"
         )
       : "";
+
+    // Create iconEl element to contain icon image
     const iconEl = createEl("img");
     iconEl.src = this._icon;
+
     appendEl(body, this._card);
+
+    // If tempEl exists, append it to the card
     if (tempEl) {
       appendEl(this._card, timeMeasurementEl, tempEl, iconEl);
     } else {
       appendEl(this._card, timeMeasurementEl, iconEl);
     }
   }
+
   // Toggle between imperial and metric units for the weather card
   toggleImperialMetric() {
     this.isImperial = !this.isImperial;
     this.updateImperialMetricLabels();
   }
-  // Update imperial and metric labels
+
+  // Update multiple imperial/metric values and units based on imperial/metric system selected
+  // Base class only updates the tempEl element, but subclasses can override it to update additional elements
   updateImperialMetricLabels() {
     this.tempUnit = this.isImperial ? "f" : "c";
     this.updateImperialMetricLabel(
@@ -57,6 +68,8 @@ class WeatherCard {
       this.tempUnit
     );
   }
+
+  // Update imperial/metric values and units of an element
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this._card.querySelector(className);
     if (el) {
