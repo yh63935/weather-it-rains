@@ -1,5 +1,5 @@
 import { convertAmPm } from "./utils/timeUtils.js";
-import { formattedUnitWithLabel } from "./utils/formatUtils.js";
+import { formattedValueWithUnit } from "./utils/formatUtils.js";
 import { createEl, appendEl } from "./utils/domUtils.js";
 
 // Base class for all weather cards
@@ -32,7 +32,7 @@ class WeatherCard {
     const tempEl = this._imperialTemp
       ? createEl(
           "p",
-          formattedUnitWithLabel(this._imperialTemp, this.tempUnit),
+          formattedValueWithUnit(this._imperialTemp, this.tempUnit),
           "temp"
         )
       : "";
@@ -73,7 +73,7 @@ class WeatherCard {
   updateImperialMetricLabel(className, imperialValue, metricValue, unit) {
     const el = this._card.querySelector(className);
     if (el) {
-      el.innerText = formattedUnitWithLabel(
+      el.innerText = formattedValueWithUnit(
         this.isImperial ? imperialValue : metricValue,
         unit
       );
