@@ -16,7 +16,7 @@ class WeatherCard {
     this.cardContainer = createEl("div", "");
     this.isImperial = true;
   }
-  formatTimeMeasurement() {
+  get formattedTimeMeasurement() {
     return this._timeMeasurement;
   }
   addCardType() {
@@ -25,8 +25,7 @@ class WeatherCard {
   createCard() {
     this.addCardType();
     const body = document.querySelector("body");
-    const formattedTimeMeasurement = this.formatTimeMeasurement();
-    const timeMeasurementEl = createEl("p", formattedTimeMeasurement);
+    const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
     const tempEl = this._imperialTemp
       ? createEl(
           "p",
@@ -88,7 +87,7 @@ class CurrentWeatherCard extends WeatherCard {
     this._cardType = "current-weather-card";
     this.speedUnit = "mi";
   }
-  formatTimeMeasurement() {
+  get formattedTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
     const day = date.getDate();
     const months = [
@@ -240,7 +239,7 @@ class DayWeatherCard extends WeatherCard {
     this._cardType = "day-weather-card";
   }
   // Convert time to day of the week
-  formatTimeMeasurement() {
+  get FormattedTimeMeasurement() {
     const days = [
       "Sunday",
       "Monday",
@@ -304,7 +303,7 @@ class HourlyWeatherCard extends WeatherCard {
     super(hourlyWeatherCardParams);
     this._cardType = "hourly-weather-card";
   }
-  formatTimeMeasurement() {
+  get formattedTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
     const formattedHour = convertAmPm(date);
     return formattedHour;
