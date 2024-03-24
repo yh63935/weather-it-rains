@@ -96,9 +96,9 @@ function renderDayWeatherCards(forecastArr, parsedData, cardContainer) {
       metricMinTemp: forecastDay.day.mintemp_c,
       imperialMaxTemp: forecastDay.day.maxtemp_f,
       metricMaxTemp: forecastDay.day.maxtemp_c,
-      index: index,
-      forecastArr: forecastArr,
-      cardContainer: cardContainer,
+      index,
+      forecastArr,
+      cardContainer,
     });
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
