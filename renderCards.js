@@ -26,13 +26,14 @@ function getEightHourForecast(offsetInterval = 0) {
 }
 
 // Render current weather card
-function renderCurrentWeatherCard(forecastArr, parsedData) {
+function renderCurrentWeatherCard(forecastArr, parsedData, cardContainer) {
   // Create current weather card
   const currentWeatherCard = createCurrentWeatherCard({
     timeMeasurement: parsedData.time,
     imperialTemp: parsedData.currentTemp.far,
     metricTemp: parsedData.currentTemp.cels,
     icon: parsedData.condition.icon,
+    cardContainer,
     location: parsedData.location,
     conditionText: parsedData.condition.text,
     imperialFeelsLikeTemp: parsedData.feelsLike.far,
@@ -47,7 +48,12 @@ function renderCurrentWeatherCard(forecastArr, parsedData) {
 }
 
 // Render the hourly cards for selected date in a 8 hour interval (starting from the next hour from today)
-function renderHourlyWeatherCards(dayWeatherCard, forecastArr, interval) {
+function renderHourlyWeatherCards(
+  dayWeatherCard,
+  forecastArr,
+  cardContainer,
+  interval
+) {
   const hours = getEightHourForecast(interval);
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
   let dayWeatherCardIndexUpdated = false;
@@ -71,6 +77,7 @@ function renderHourlyWeatherCards(dayWeatherCard, forecastArr, interval) {
       imperialTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
       metricTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_c,
       icon: forecastArr[dayWeatherCardIndex].hour[hour].condition.icon,
+      cardContainer,
     });
     hourlyWeatherCards.push(hourlyWeatherCard);
     hourlyWeatherCard.createCard();
