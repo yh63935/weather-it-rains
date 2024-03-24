@@ -106,7 +106,7 @@ class CurrentWeatherCard extends WeatherCard {
     this.speedUnit = "mi";
   }
 
-  // Returns time measurement formatted in format of Month day-of-month, year time(12-hour clock format)
+  // Returns time measurement formatted in format of Month day-of-month, year time (12-hour clock format)
   // Ex: March 22, 2024 11:52 PM
   get formattedTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
@@ -268,7 +268,7 @@ class DayWeatherCard extends WeatherCard {
     // Other properties
     this._cardType = "day-weather-card";
   }
-  // Convert time to day of the week
+  // Returns time measurement formatted as the day of the week
   get FormattedTimeMeasurement() {
     const days = [
       "Sunday",
@@ -282,27 +282,35 @@ class DayWeatherCard extends WeatherCard {
     const index = new Date(this._timeMeasurement + " 00:00").getDay();
     return days[index];
   }
+
   createCard() {
     super.createCard();
     const forecastCardsContainer = document.querySelector(
       ".forecast-cards-container"
     );
     appendEl(forecastCardsContainer, this._card);
+
+    // Create button to display hourly forecast data
     const displayHourlyForecastBtn = createEl(
       "button",
       "Display hourly forecast",
       "display-hourly-forecast"
     );
+
+    // Create this.minTempEl to contain minimum temperature information
     this.minTempEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialMinTemp, this.tempUnit),
       "min-temp"
     );
+
+    // Create this.maxTempEl to contain maximum temperature information
     this.maxTempEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialMaxTemp, this.tempUnit),
       "max-temp"
     );
+
     appendEl(
       this._card,
       displayHourlyForecastBtn,
@@ -310,14 +318,18 @@ class DayWeatherCard extends WeatherCard {
       this.maxTempEl
     );
   }
+
+  // Updates imperial metric units for additional elements of this.minTempEl, this.maxTempEl
   updateImperialMetricUnits() {
     super.updateImperialMetricUnits();
+
     this.updateImperialMetricUnit(
       this.minTempEl,
       this._imperialMinTemp,
       this._metricMinTemp,
       this.tempUnit
     );
+
     this.updateImperialMetricUnit(
       this.maxTempEl,
       this._imperialMaxTemp,
