@@ -73,8 +73,7 @@ class WeatherCard {
   }
 
   // Update imperial/metric values and units of an element
-  updateImperialMetricUnit(className, imperialValue, metricValue, unit) {
-    const el = this._card.querySelector(className);
+  updateImperialMetricUnit(el, imperialValue, metricValue, unit) {
     if (el) {
       el.innerText = formattedValueWithUnit(
         this.isImperial ? imperialValue : metricValue,
