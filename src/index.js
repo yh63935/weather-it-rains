@@ -58,12 +58,17 @@ function initializeWeatherAppWithLocation(userLocation) {
 async function initialize(userLocationWeatherData) {
   const parsedData = parseWeatherData(userLocationWeatherData);
   const forecastArr = userLocationWeatherData.forecast.forecastday;
+  const body = document.querySelector("body");
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
   const userLocationInput = document.querySelector("#location");
   let forecastViewToggler = createForecastViewToggler();
-  let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
+  let currentWeatherCard = renderCurrentWeatherCard(
+    forecastArr,
+    parsedData,
+    body
+  );
   renderDayWeatherCards(forecastArr, parsedData, forecastCardsContainer);
 
   const displayDayForecastBtn = document.querySelector(".display-day-forecast");
@@ -88,6 +93,7 @@ async function initialize(userLocationWeatherData) {
         {
           selectedCard,
           forecastArr,
+          forecastCardsContainer,
           interval,
         },
         selectedBtn,
@@ -104,6 +110,7 @@ async function initialize(userLocationWeatherData) {
           {
             selectedCard,
             forecastArr,
+            forecastCardsContainer,
             interval,
           },
           prevHrIntervalBtn,
@@ -122,6 +129,7 @@ async function initialize(userLocationWeatherData) {
           {
             selectedCard,
             forecastArr,
+            forecastCardsContainer,
             interval,
           },
 
