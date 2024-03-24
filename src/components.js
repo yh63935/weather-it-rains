@@ -281,9 +281,7 @@ class DayWeatherCard extends WeatherCard {
       "Friday",
       "Saturday",
     ];
-    console.log(this._timeMeasurement);
     const index = new Date(this._timeMeasurement + " 00:00").getDay();
-    console.log("index", index);
     return days[index];
   }
 
