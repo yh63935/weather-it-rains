@@ -269,7 +269,7 @@ class DayWeatherCard extends WeatherCard {
     this._cardType = "day-weather-card";
   }
   // Returns time measurement formatted as the day of the week
-  get FormattedTimeMeasurement() {
+  get formattedTimeMeasurement() {
     const days = [
       "Sunday",
       "Monday",
@@ -279,7 +279,9 @@ class DayWeatherCard extends WeatherCard {
       "Friday",
       "Saturday",
     ];
+    console.log(this._timeMeasurement);
     const index = new Date(this._timeMeasurement + " 00:00").getDay();
+    console.log("index", index);
     return days[index];
   }
 
