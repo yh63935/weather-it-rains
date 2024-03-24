@@ -42,7 +42,7 @@ class WeatherCard {
         )
       : "";
 
-    // Create iconEl element containing icon image
+    // Create iconEl element to contain icon image
     const iconEl = createEl("img");
     iconEl.src = this._icon;
 
@@ -215,11 +215,12 @@ class CurrentWeatherCard extends WeatherCard {
   // Toggle between imperial and metric system for the card to update convertImperialMetricBtn
   toggleImperialMetric() {
     super.toggleImperialMetric();
-    this.toggleConvertImperialMetricBtn();
+    // This may need to be refactored further since toggleImperialMetric should just do one thing toggle --> Single responsibility
+    this.updateConvertImperialMetricBtnText();
   }
 
   // Update convertImperialMetricBtn's text based on imperial/metric system
-  toggleConvertImperialMetricBtn() {
+  updateConvertImperialMetricBtnText() {
     const convertImperialMetricBtn = document.querySelector(
       ".convert-imperial-metric"
     );
