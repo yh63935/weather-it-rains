@@ -333,11 +333,15 @@ class HourlyWeatherCard extends WeatherCard {
     super(hourlyWeatherCardParams);
     this._cardType = "hourly-weather-card";
   }
+
+  // Return formatted hour in 12-hour clock format with AM/PM
+  // Ex: 11 PM
   get formattedTimeMeasurement() {
     const date = new Date(this._timeMeasurement);
     const formattedHour = convertAmPm(date);
     return formattedHour;
   }
+
   createCard() {
     super.createCard();
     const forecastCardsContainer = document.querySelector(
