@@ -31,8 +31,10 @@ class WeatherCard {
     const body = document.querySelector("body");
     const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
 
-    // Create tempEl element to contain general temperature information
-    const tempEl = this._imperialTemp
+    // Create this.tempEl as property containing general temperature information
+    // If this._imperialTemp exists, creates an element with the general temp information
+    // Otherwise, assign an empty string
+    this.tempEl = this._imperialTemp
       ? createEl(
           "p",
           formattedValueWithUnit(this._imperialTemp, this.tempUnit),
@@ -40,15 +42,15 @@ class WeatherCard {
         )
       : "";
 
-    // Create iconEl element to contain icon image
+    // Create iconEl element containing icon image
     const iconEl = createEl("img");
     iconEl.src = this._icon;
 
     appendEl(body, this._card);
 
-    // If tempEl exists, append it to the card
-    if (tempEl) {
-      appendEl(this._card, timeMeasurementEl, tempEl, iconEl);
+    // If this.tempEl exists, append it to the card
+    if (this.tempEl) {
+      appendEl(this._card, timeMeasurementEl, this.tempEl, iconEl);
     } else {
       appendEl(this._card, timeMeasurementEl, iconEl);
     }
@@ -60,12 +62,12 @@ class WeatherCard {
     this.updateImperialMetricUnits();
   }
 
-  // Update multiple imperial/metric values and units based on imperial/metric system selected
-  // Base class only updates the tempEl element, but subclasses can override it to update additional elements
+  // Update imperial/metric values and units of multiple elements based on imperial/metric system selected
+  // Base class only updates this.tempEl, but subclasses can override it to update additional elements
   updateImperialMetricUnits() {
     this.tempUnit = this.isImperial ? "f" : "c";
     this.updateImperialMetricUnit(
-      ".temp",
+      this.tempEl,
       this._imperialTemp,
       this._metricTemp,
       this.tempUnit
@@ -143,7 +145,7 @@ class CurrentWeatherCard extends WeatherCard {
   /* Create two extra div containers to hold information inside the current weather container for styling purposes
      <div class="current-weather-container">
        <div class="main-info">
-         Base class card details here (timeMeasurementEl, tempEl, iconEl)
+         Base class card details here (timeMeasurementEl, this.tempEl, iconEl)
        </div>
        <div class="weather-conditions"></div>
      </div>
@@ -170,23 +172,22 @@ class CurrentWeatherCard extends WeatherCard {
       `Display °C`,
       "convert-imperial-metric"
     );
-    const tempEl = this._card.querySelector(".temp");
     const iconEl = this._card.querySelector("img");
     mainInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
     const conditionEl = createEl("p", this._conditionText, "conditions");
-    mainInfoEl.insertBefore(conditionEl, tempEl);
+    mainInfoEl.insertBefore(conditionEl, this.tempEl);
 
     return mainInfoEl;
   }
   createWeatherConditionsEl() {
     const weatherConditionsEl = createEl("div", "", "weather-conditions");
 
-    const feelsLikeEl = createEl(
+    this.feelsLikeEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
-    const humidityEl = createEl(
+    this.humidityEl = createEl(
       "p",
       formattedValueWithUnit(this._humidity, "%")
     );
@@ -194,7 +195,7 @@ class CurrentWeatherCard extends WeatherCard {
       "p",
       formattedValueWithUnit(this._chanceOfRain, "%")
     );
-    const windSpeedEl = createEl(
+    this.windSpeedEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
@@ -202,10 +203,10 @@ class CurrentWeatherCard extends WeatherCard {
 
     appendEl(
       weatherConditionsEl,
-      feelsLikeEl,
-      humidityEl,
+      this.feelsLikeEl,
+      this.humidityEl,
       chanceOfRainEl,
-      windSpeedEl
+      this.windSpeedEl
     );
 
     return weatherConditionsEl;
@@ -226,14 +227,14 @@ class CurrentWeatherCard extends WeatherCard {
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
 
-  // Updates imperial metric units for additional elements of feelsLikeEl, windSpeedEl
+  // Updates imperial metric units for additional elements of this.feelsLikeEl, this.windSpeedEl
   updateImperialMetricUnits() {
     super.updateImperialMetricUnits();
     this.speedUnit = this.isImperial ? "mi" : "km";
 
     // Update feelsLikeEl with respective imperial metric values and units
     this.updateImperialMetricUnit(
-      ".feels-like",
+      this.feelsLikeEl,
       this._imperialFeelsLikeTemp,
       this._metricFeelsLikeTemp,
       this.tempUnit
@@ -241,7 +242,7 @@ class CurrentWeatherCard extends WeatherCard {
 
     // Update windSpeel with respective imperial metric values and units
     this.updateImperialMetricUnit(
-      ".wind-speed",
+      this.windSpeedEl,
       this._imperialWindSpeed,
       this._metricWindSpeed,
       this.speedUnit
@@ -290,28 +291,33 @@ class DayWeatherCard extends WeatherCard {
       "Display hourly forecast",
       "display-hourly-forecast"
     );
-    const minTempEl = createEl(
+    this.minTempEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialMinTemp, this.tempUnit),
       "min-temp"
     );
-    const maxTempEl = createEl(
+    this.maxTempEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialMaxTemp, this.tempUnit),
       "max-temp"
     );
-    appendEl(this._card, displayHourlyForecastBtn, minTempEl, maxTempEl);
+    appendEl(
+      this._card,
+      displayHourlyForecastBtn,
+      this.minTempEl,
+      this.maxTempEl
+    );
   }
   updateImperialMetricUnits() {
     super.updateImperialMetricUnits();
     this.updateImperialMetricUnit(
-      ".min-temp",
+      this.minTempEl,
       this._imperialMinTemp,
       this._metricMinTemp,
       this.tempUnit
     );
     this.updateImperialMetricUnit(
-      ".max-temp",
+      this.maxTempEl,
       this._imperialMaxTemp,
       this._metricMaxTemp,
       this.tempUnit
