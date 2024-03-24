@@ -1,8 +1,8 @@
 // Utility functions for formatting and presenting data
 
-// Return formatted labels for imperial/metric system based on input labels
-function formattedImperialMetricLabel(label) {
-  switch (label) {
+// Return formatted units for imperial/metric system based on input units
+function formattedImperialMetricUnit(unit) {
+  switch (unit) {
     case "f":
       return "°F";
     case "c":
@@ -14,13 +14,13 @@ function formattedImperialMetricLabel(label) {
   }
 }
 
-// Returns formatted unit with appropriate label
-function formattedUnitWithLabel(unit, label) {
-  // If formatted imperial metric label exists, set the label as the formatted imperial metric label
-  if (formattedImperialMetricLabel(label)) {
-    label = formattedImperialMetricLabel(label);
+// Returns formatted value with appropriate unit
+function formattedValueWithUnit(value, unit) {
+  // If formatted imperial metric unit exists, set the unit as the formatted imperial metric unit
+  if (formattedImperialMetricUnit(unit)) {
+    unit = formattedImperialMetricUnit(unit);
   }
-  return `${unit} ${label}`;
+  return `${value} ${unit}`;
 }
 
 // Create a forecast view toggler to toggle forecast view and return the current view
@@ -38,4 +38,4 @@ function createForecastViewToggler() {
   };
 }
 
-export { formattedUnitWithLabel, createForecastViewToggler };
+export { formattedValueWithUnit, createForecastViewToggler };
