@@ -10,6 +10,7 @@ class WeatherCard {
     this._imperialTemp = weatherCardParams.imperialTemp;
     this._metricTemp = weatherCardParams.metricTemp;
     this._icon = weatherCardParams.icon;
+    this._cardContainer = weatherCardParams.cardContainer;
 
     // Other properties
     this.tempUnit = "f";
@@ -28,7 +29,7 @@ class WeatherCard {
 
   createCard() {
     this.addCardType();
-    const body = document.querySelector("body");
+    // const body = document.querySelector("body");
     const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
 
     // Create this.tempEl as property containing general temperature information
@@ -46,7 +47,8 @@ class WeatherCard {
     const iconEl = createEl("img");
     iconEl.src = this._icon;
 
-    appendEl(body, this._card);
+    // Append card to the card container element
+    appendEl(this._cardContainer, this._card);
 
     // If this.tempEl exists, append it to the card
     if (this.tempEl) {
@@ -264,7 +266,7 @@ class DayWeatherCard extends WeatherCard {
     this._metricMaxTemp = dayWeatherCardParams.metricMaxTemp;
     this._card.dataset.index =
       dayWeatherCardParams.index % dayWeatherCardParams.forecastArr.length;
-    this._cardContainer = dayWeatherCardParams.cardContainer;
+    // this._cardContainer = dayWeatherCardParams.cardContainer;
 
     // Other properties
     this._cardType = "day-weather-card";
@@ -287,7 +289,6 @@ class DayWeatherCard extends WeatherCard {
 
   createCard() {
     super.createCard();
-    appendEl(this._cardContainer, this._card);
 
     // Create button to display hourly forecast data
     const displayHourlyForecastBtn = createEl(
@@ -351,14 +352,6 @@ class HourlyWeatherCard extends WeatherCard {
     const date = new Date(this._timeMeasurement);
     const formattedHour = convertAmPm(date);
     return formattedHour;
-  }
-
-  createCard() {
-    super.createCard();
-    const forecastCardsContainer = document.querySelector(
-      ".forecast-cards-container"
-    );
-    appendEl(forecastCardsContainer, this._card);
   }
 }
 
