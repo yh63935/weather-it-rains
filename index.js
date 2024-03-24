@@ -64,7 +64,7 @@ async function initialize(userLocationWeatherData) {
   const userLocationInput = document.querySelector("#location");
   let forecastViewToggler = createForecastViewToggler();
   let currentWeatherCard = renderCurrentWeatherCard(forecastArr, parsedData);
-  renderDayWeatherCards(forecastArr, parsedData);
+  renderDayWeatherCards(forecastArr, parsedData, forecastCardsContainer);
 
   const displayDayForecastBtn = document.querySelector(".display-day-forecast");
   const prevHrIntervalBtn = document.querySelector(".prev-interval");
@@ -140,6 +140,7 @@ async function initialize(userLocationWeatherData) {
       {
         forecastArr,
         parsedData,
+        forecastCardsContainer,
       },
       displayDayForecastBtn,
       hourlyViewBtns
