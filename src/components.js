@@ -264,10 +264,12 @@ class DayWeatherCard extends WeatherCard {
     this._metricMaxTemp = dayWeatherCardParams.metricMaxTemp;
     this._card.dataset.index =
       dayWeatherCardParams.index % dayWeatherCardParams.forecastArr.length;
+    this._cardContainer = dayWeatherCardParams.cardContainer;
 
     // Other properties
     this._cardType = "day-weather-card";
   }
+
   // Returns time measurement formatted as the day of the week
   get formattedTimeMeasurement() {
     const days = [
@@ -279,18 +281,13 @@ class DayWeatherCard extends WeatherCard {
       "Friday",
       "Saturday",
     ];
-    console.log(this._timeMeasurement);
     const index = new Date(this._timeMeasurement + " 00:00").getDay();
-    console.log("index", index);
     return days[index];
   }
 
   createCard() {
     super.createCard();
-    const forecastCardsContainer = document.querySelector(
-      ".forecast-cards-container"
-    );
-    appendEl(forecastCardsContainer, this._card);
+    appendEl(this._cardContainer, this._card);
 
     // Create button to display hourly forecast data
     const displayHourlyForecastBtn = createEl(

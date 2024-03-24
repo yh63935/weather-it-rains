@@ -78,7 +78,7 @@ function renderHourlyWeatherCards(dayWeatherCard, forecastArr, interval) {
 }
 
 // Render day weather cards
-function renderDayWeatherCards(forecastArr, parsedData) {
+function renderDayWeatherCards(forecastArr, parsedData, cardContainer) {
   forecastArr.forEach((forecastDay, index) => {
     const dayWeatherCard = createDayWeatherCard({
       timeMeasurement: forecastDay.date,
@@ -91,6 +91,7 @@ function renderDayWeatherCards(forecastArr, parsedData) {
       metricMaxTemp: forecastDay.day.maxtemp_c,
       index: index,
       forecastArr: forecastArr,
+      cardContainer: cardContainer,
     });
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
