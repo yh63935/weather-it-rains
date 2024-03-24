@@ -215,7 +215,7 @@ class CurrentWeatherCard extends WeatherCard {
   // Toggle between imperial and metric system for the card to update convertImperialMetricBtn
   toggleImperialMetric() {
     super.toggleImperialMetric();
-    // This may need to be refactored further since toggleImperialMetric should just do one thing toggle --> Single responsibility
+    // Change? This may need to be refactored further since toggleImperialMetric should just do one thing toggle --> Single responsibility
     this.updateConvertImperialMetricBtnText();
   }
 
@@ -224,6 +224,7 @@ class CurrentWeatherCard extends WeatherCard {
     const convertImperialMetricBtn = document.querySelector(
       ".convert-imperial-metric"
     );
+    // Change? Maybe change this display to something else since it also change km and mi? maybe display imperial/metric r
     const altTempUnit = this.tempUnit === "c" ? "f" : "c";
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
