@@ -350,10 +350,12 @@ class HourlyWeatherCard extends WeatherCard {
     appendEl(forecastCardsContainer, this._card);
   }
 }
+
 // Factory function to create instances of a current day card
 function createCurrentWeatherCard(currentWeatherCardParams) {
   return new CurrentWeatherCard(currentWeatherCardParams);
 }
+
 // Factory function to create instances of a forecast day card
 function createDayWeatherCard(dayWeatherCardParams) {
   return new DayWeatherCard(dayWeatherCardParams);
