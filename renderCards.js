@@ -92,13 +92,13 @@ function renderDayWeatherCards(forecastArr, parsedData, cardContainer) {
       imperialTemp: null,
       metricTemp: null,
       icon: parsedData.condition.icon,
+      cardContainer,
       imperialMinTemp: forecastDay.day.mintemp_f,
       metricMinTemp: forecastDay.day.mintemp_c,
       imperialMaxTemp: forecastDay.day.maxtemp_f,
       metricMaxTemp: forecastDay.day.maxtemp_c,
       index,
       forecastArr,
-      cardContainer,
     });
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
