@@ -58,7 +58,9 @@ function initializeWeatherAppWithLocation(userLocation) {
 async function initialize(userLocationWeatherData) {
   const parsedData = parseWeatherData(userLocationWeatherData);
   const forecastArr = userLocationWeatherData.forecast.forecastday;
-  const body = document.querySelector("body");
+  const currentWeatherContainer = document.querySelector(
+    ".current-weather-container"
+  );
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
@@ -67,7 +69,7 @@ async function initialize(userLocationWeatherData) {
   let currentWeatherCard = renderCurrentWeatherCard(
     forecastArr,
     parsedData,
-    body
+    currentWeatherContainer
   );
   renderDayWeatherCards(forecastArr, parsedData, forecastCardsContainer);
 
