@@ -149,36 +149,42 @@ class CurrentWeatherCard extends WeatherCard {
      </div>
    */
   createStylingContainers() {
-    const mainInfoEl = this.createMainInfoEl();
-    const weatherConditionsEl = this.createWeatherConditionsEl();
+    // Element that holds main information: date, temperature, condition, icon, and toggle imperial/metric button
+    const MainWeatherInfoEl = this.createMainWeatherInfoEl();
 
-    appendEl(this._card, mainInfoEl, weatherConditionsEl);
+    // Element that holds weather condition information:
+    const additionalWeatherInfoEl = this.createAdditionalWeatherInfoEl();
+
+    appendEl(this._card, MainWeatherInfoEl, weatherConditionsEl);
   }
 
-  createMainInfoEl() {
-    const mainInfoEl = createEl("div", "", "main-info");
+  createMainWeatherInfoEl() {
+    const mainWeatherInfoEl = createEl("div", "", "main-info");
 
-    // Move this._card's elements to mainInfo container instead for styling purposes
+    // Move this._card's children elements to MainWeatherInfoEl container instead for styling purposes
     while (this._card.firstChild) {
-      mainInfoEl.appendChild(this._card.firstChild);
+      mainWeatherInfoEl.appendChild(this._card.firstChild);
     }
-    // Add location element to mainInfo container
+
+    // Add location element to mainWeatherInfoEl container
     const locationEl = createEl("p", this._location);
-    appendEl(mainInfoEl, locationEl);
+    appendEl(mainWeatherInfoEl, locationEl);
+
     const convertImperialMetricBtn = createEl(
       "button",
       `Display °C`,
       "convert-imperial-metric"
     );
     const iconEl = this._card.querySelector("img");
-    mainInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
-    const conditionEl = createEl("p", this._conditionText, "conditions");
-    mainInfoEl.insertBefore(conditionEl, this.tempEl);
 
-    return mainInfoEl;
+    mainWeatherInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
+    const conditionEl = createEl("p", this._conditionText, "conditions");
+    mainWeatherInfoEl.insertBefore(conditionEl, this.tempEl);
+
+    return mainWeatherInfoEl;
   }
-  createWeatherConditionsEl() {
-    const weatherConditionsEl = createEl("div", "", "weather-conditions");
+  createAdditionalWeatherInfoEl() {
+    const additionalWeatherInfoEl = createEl("div", "", "additional-info");
 
     this.feelsLikeEl = createEl(
       "p",
@@ -200,14 +206,14 @@ class CurrentWeatherCard extends WeatherCard {
     );
 
     appendEl(
-      weatherConditionsEl,
+      additionalWeatherInfoEl,
       this.feelsLikeEl,
       this.humidityEl,
       chanceOfRainEl,
       this.windSpeedEl
     );
 
-    return weatherConditionsEl;
+    return additionalWeatherInfoEl;
   }
 
   // Toggle between imperial and metric system for the card to update convertImperialMetricBtn
