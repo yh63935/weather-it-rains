@@ -27,6 +27,8 @@ class WeatherCard {
     this._card.classList.add(this._cardType);
   }
 
+  // Creates and sets up the card
+  // Adds card type, this.tempEl, iconEl, and appends appropriate elements to their respective containers
   createCard() {
     this.addCardType();
     // const body = document.querySelector("body");
@@ -135,15 +137,22 @@ class CurrentWeatherCard extends WeatherCard {
     return formattedDate;
   }
 
+  // Creates currentWeatherCard with styling containers
   createCard() {
     super.createCard();
 
     this.createStylingContainers();
   }
+
   /* Create two extra div containers to hold information inside the current weather container for styling purposes
      <div class="current-weather-container">
        <div class="main-info">
-         Base class card details here (timeMeasurementEl, this.tempEl, iconEl)
+         Base class card details here:
+         <timeMeasurementEl>
+         <conditionEl>
+         <this.tempEl>
+         <iconEl>
+         <convertImperialMetricBtn>
        </div>
        <div class="weather-conditions"></div>
      </div>
@@ -177,12 +186,24 @@ class CurrentWeatherCard extends WeatherCard {
     );
     const iconEl = this._card.querySelector("img");
 
+    // Move convertImperialMetricBtn before iconEl
     mainWeatherInfoEl.insertBefore(convertImperialMetricBtn, iconEl);
+
+    // Move this.tempEl before conditionEl
     const conditionEl = createEl("p", this._conditionText, "conditions");
     mainWeatherInfoEl.insertBefore(conditionEl, this.tempEl);
 
     return mainWeatherInfoEl;
   }
+
+  /* Create additionalWeatherInfoEl element to hold additional weather information: feelsLike temperature, humidity, chance of rain, and windspeed
+    <div class="weather-conditions">
+      <this.feelsLikeEl>
+      <this.humidityEl>
+      <this.chanceOfRainEl>
+      <this.windSpeelEl>
+    </div>
+  */
   createAdditionalWeatherInfoEl() {
     const additionalWeatherInfoEl = createEl("div", "", "additional-info");
 
@@ -191,14 +212,17 @@ class CurrentWeatherCard extends WeatherCard {
       formattedValueWithUnit(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
+
     this.humidityEl = createEl(
       "p",
       formattedValueWithUnit(this._humidity, "%")
     );
+
     const chanceOfRainEl = createEl(
       "p",
       formattedValueWithUnit(this._chanceOfRain, "%")
     );
+
     this.windSpeedEl = createEl(
       "p",
       formattedValueWithUnit(this._imperialWindSpeed, this.speedUnit),
@@ -289,6 +313,7 @@ class DayWeatherCard extends WeatherCard {
     return days[index];
   }
 
+  // Creates dayWeatherCard that has additional elements of displayHourlyForecastBtn, this.minTempEl, this.maxTempEl
   createCard() {
     super.createCard();
 
