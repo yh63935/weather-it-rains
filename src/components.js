@@ -159,12 +159,12 @@ class CurrentWeatherCard extends WeatherCard {
    */
   createStylingContainers() {
     // Element that holds main information: date, temperature, condition, icon, and toggle imperial/metric button
-    const MainWeatherInfoEl = this.createMainWeatherInfoEl();
+    const mainWeatherInfoEl = this.createMainWeatherInfoEl();
 
     // Element that holds weather condition information:
     const additionalWeatherInfoEl = this.createAdditionalWeatherInfoEl();
 
-    appendEl(this._card, MainWeatherInfoEl, weatherConditionsEl);
+    appendEl(this._card, mainWeatherInfoEl, additionalWeatherInfoEl);
   }
 
   createMainWeatherInfoEl() {

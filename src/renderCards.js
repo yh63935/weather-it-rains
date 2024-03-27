@@ -125,24 +125,26 @@ function renderHourlyViewBtns(hourlyViewBtns, currentView) {
 
 // Render forecast display based on function passed in
 function renderForecastDisplay(
+  containerToClear,
   renderFunc,
   forecastViewToggler,
   renderFuncParams,
   clickedEl,
   hourlyViewBtns = []
 ) {
-  const forecastCardsContainer = document.querySelector(
-    ".forecast-cards-container"
-  );
-  clearContainer(forecastCardsContainer);
-  // Only toggle the view if it is the display day forecast or display hourly forecast button
+  // Clear container with cards before rendering cards
+  clearContainer(containerToClear);
+
+  // Toggle the view if it is the display day forecast or display hourly forecast button
   if (
     clickedEl.classList.contains("display-day-forecast") ||
     clickedEl.classList.contains("display-hourly-forecast")
   )
     forecastViewToggler.toggleView();
+
   let currentView = forecastViewToggler.getView();
   renderHourlyViewBtns(hourlyViewBtns, currentView);
+
   // Render function with varying number of parameters
   renderFunc(...Object.values(renderFuncParams));
 }
