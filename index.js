@@ -90,6 +90,7 @@ async function initialize(userLocationWeatherData) {
     if (selectedBtn && selectedCard) {
       let interval = 0;
       renderForecastDisplay(
+        forecastCardsContainer,
         renderHourlyWeatherCards,
         forecastViewToggler,
         {
@@ -107,6 +108,7 @@ async function initialize(userLocationWeatherData) {
         // preventing it from exceeding the bounds of a single day's hourly forecast.
         interval = interval <= 0 ? 0 : interval - 1;
         renderForecastDisplay(
+          forecastCardsContainer,
           renderHourlyWeatherCards,
           forecastViewToggler,
           {
@@ -126,6 +128,7 @@ async function initialize(userLocationWeatherData) {
         interval = interval >= 2 ? 2 : interval + 1;
 
         renderForecastDisplay(
+          forecastCardsContainer,
           renderHourlyWeatherCards,
           forecastViewToggler,
           {
@@ -145,6 +148,7 @@ async function initialize(userLocationWeatherData) {
   // Display day forecast when displayDayForecastBtn is clicked
   displayDayForecastBtn.addEventListener("click", () => {
     renderForecastDisplay(
+      forecastCardsContainer,
       renderDayWeatherCards,
       forecastViewToggler,
       {
