@@ -57,11 +57,14 @@ function renderHourlyWeatherCards(
   const hours = getEightHourForecast(interval);
   let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
   let dayWeatherCardIndexUpdated = false;
+
   for (let i = hours.startHour; i <= hours.endHour; i++) {
     let hour = i;
+
     // If hour is more than 24, dayWeatherIndex will increase by 1 and hours will become hour % 24(for the next day)
     if (i >= 24) {
       hour = hour % 24;
+
       // Check if dayWeatherCardIndex was updated and if the data for the next day for that index exists in forecastARr
       if (
         !dayWeatherCardIndexUpdated &&
@@ -71,7 +74,9 @@ function renderHourlyWeatherCards(
         dayWeatherCardIndex++;
       }
     }
+
     console.log("DayWeatherCardIndex", dayWeatherCardIndex);
+
     const hourlyWeatherCard = createHourlyWeatherCard({
       timeMeasurement: forecastArr[dayWeatherCardIndex].hour[hour].time,
       imperialTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
@@ -79,6 +84,7 @@ function renderHourlyWeatherCards(
       icon: forecastArr[dayWeatherCardIndex].hour[hour].condition.icon,
       cardContainer,
     });
+
     hourlyWeatherCards.push(hourlyWeatherCard);
     hourlyWeatherCard.createCard();
   }
@@ -100,9 +106,11 @@ function renderDayWeatherCards(forecastArr, parsedData, cardContainer) {
       index,
       forecastArr,
     });
+
     dayWeatherCard.createCard();
     dayWeatherCards.push(dayWeatherCard);
   });
+
   return dayWeatherCards;
 }
 
