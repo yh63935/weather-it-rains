@@ -40,6 +40,7 @@ const backgroundWeatherImages = {
   drizzle: "rain.jpg",
   rain: "rain.jpg",
   sleet: "rain.jpg",
+  cloudy: "cloudy.jpg",
   sunny: "sunny.jpg",
 };
 
