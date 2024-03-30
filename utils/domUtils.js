@@ -62,3 +62,10 @@ function setBackgroundImage(backgroundImageContainer, backgroundWeatherImage) {
   backgroundImageContainer.style.backgroundImage = `url(../css/assets/${backgroundWeatherImage})`;
 }
 
+export {
+  createEl,
+  appendEl,
+  clearContainer,
+  backgroundWeatherImage,
+  setBackgroundImage,
+};
