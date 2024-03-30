@@ -25,4 +25,47 @@ function clearContainer(container) {
   container.innerHTML = "";
 }
 
-export { createEl, appendEl, clearContainer };
+// If it has thunder, shunder should take priority
+// If it has snow, it should take priority
+
+// Object that maps key of weather condition to background image file
+const backgroundWeatherImages = {
+  thunder: "thunder.jpg",
+  fog: "fog.jpg",
+  overcast: "fog.jpg",
+  mist: "fog.jpg",
+  snow: "snow.jpg",
+  blizzard: "snow.jpg",
+  ice: "snow.jpg",
+  drizzle: "rain.jpg",
+  rain: "rain.jpg",
+  sleet: "rain.jpg",
+  sunny: "sunny.jpg",
+};
+
+// Return background weather image based on weather condition text
+function backgroundWeatherImage(conditionText) {
+  // Format conditionText to be all lowercase
+  const conditionTextLower = conditionText.toLowerCase();
+
+  for (const [weatherCondition, backgroundWeatherImage] of Object.entries(
+    backgroundWeatherImages
+  )) {
+    if (conditionTextLower.includes(weatherCondition)) {
+      return backgroundWeatherImage;
+    }
+  }
+}
+
+// Set background image of backgroundImageContainer based on backgroundWeatherImage
+function setBackgroundImage(backgroundImageContainer, backgroundWeatherImage) {
+  backgroundImageContainer.style.backgroundImage = `url(../css/assets/${backgroundWeatherImage})`;
+}
+
+export {
+  createEl,
+  appendEl,
+  clearContainer,
+  backgroundWeatherImage,
+  setBackgroundImage,
+};
