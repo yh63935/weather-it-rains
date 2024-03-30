@@ -40,11 +40,12 @@ const backgroundWeatherImages = {
   drizzle: "rain.jpg",
   rain: "rain.jpg",
   sleet: "rain.jpg",
+  cloudy: "cloudy.jpg",
   sunny: "sunny.jpg",
 };
 
 // Return background weather image based on weather condition text
-function backgroundWeatherImage(conditionText) {
+function chosenBackgroundWeatherImage(conditionText) {
   // Format conditionText to be all lowercase
   const conditionTextLower = conditionText.toLowerCase();
 
@@ -66,6 +67,6 @@ export {
   createEl,
   appendEl,
   clearContainer,
-  backgroundWeatherImage,
+  chosenBackgroundWeatherImage,
   setBackgroundImage,
 };
