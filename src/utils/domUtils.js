@@ -43,3 +43,16 @@ const backgroundWeatherImages = {
   sunny: "sunny.jpg",
 };
 
+// Return background weather image based on weather condition text
+function backgroundWeatherImage(conditionText) {
+  // Format conditionText to be all lowercase
+  const conditionTextLower = conditionText.toLowerCase();
+
+  for (const [weatherCondition, backgroundWeatherImage] of Object.entries(
+    backgroundWeatherImages
+  )) {
+    if (conditionTextLower.includes(weatherCondition)) {
+      return backgroundWeatherImage;
+    }
+  }
+}
