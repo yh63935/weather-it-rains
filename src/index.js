@@ -1,6 +1,10 @@
 import { parseWeatherData, getUserLocationWeatherData } from "./api.js";
 import { createCurrentWeatherCard } from "./components.js";
 import {
+  clearContainer,
+  chosenBackgroundWeatherImage,
+  setBackgroundImage,
+} from "./utils/domUtils.js";
 import { createForecastViewToggler } from "./utils/formatUtils.js";
 import {
   renderCurrentWeatherCard,
@@ -64,6 +68,13 @@ async function initialize(userLocationWeatherData) {
   const forecastCardsContainer = document.querySelector(
     ".forecast-cards-container"
   );
+  const backgroundImageContainer = document.querySelector("body");
+  const backgroundWeatherImage = chosenBackgroundWeatherImage(
+    parsedData.condition.text
+  );
+  console.log("background weather image", backgroundWeatherImage);
+  setBackgroundImage(backgroundImageContainer, backgroundWeatherImage);
+
   const userLocationInput = document.querySelector("#location");
   let forecastViewToggler = createForecastViewToggler();
   let currentWeatherCard = renderCurrentWeatherCard(
