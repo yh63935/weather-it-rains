@@ -3,6 +3,7 @@
 
 // Variables
 $search-padding: 0.5rem;
+$color-error: #f40000;
 
 html {
   font-size: 20px;
@@ -73,6 +74,11 @@ button {
 .display-day-forecast,
 .error-msg {
   display: none;
+}
+
+.error-msg {
+  padding: 0.5rem;
+  color: $color-error;
 }
 
 .current-weather-card {
