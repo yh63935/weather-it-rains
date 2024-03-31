@@ -3,6 +3,7 @@
 
 // Variables
 $search-padding: 0.5rem;
+$color-navy-blue: #112a46;
 $color-error: #f40000;
 
 html {
@@ -101,7 +102,7 @@ button {
     display: flex;
     justify-content: space-around;
     // background: rgba(237, 225, 225, 0.82);
-    color: #112a46;
+    color: $color-navy-blue;
     padding: 3rem;
 
     div {
