@@ -3,6 +3,8 @@
 
 // Variables
 $search-padding: 0.5rem;
+$color-navy-blue: #112a46;
+$color-error: #f40000;
 
 html {
   font-size: 20px;
@@ -28,6 +30,9 @@ body {
   background-attachment: fixed;
 }
 
+input {
+  color: $color-navy-blue;
+}
 p {
   margin: 0.5rem;
 }
@@ -75,6 +80,11 @@ button {
   display: none;
 }
 
+.error-msg {
+  padding: 0.5rem;
+  color: $color-error;
+}
+
 .current-weather-card {
   justify-content: center;
   display: flex;
@@ -95,7 +105,7 @@ button {
     display: flex;
     justify-content: space-around;
     // background: rgba(237, 225, 225, 0.82);
-    color: #112a46;
+    color: $color-navy-blue;
     padding: 3rem;
 
     div {
