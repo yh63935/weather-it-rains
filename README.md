@@ -6,7 +6,7 @@ https://search.krea.ai/prompt/01fd5428-4bd2-46b3-aea8-512b436c1b06
 https://rare-gallery.com/981429-light-fairytail-artwork-sky-lightning-clouds-nature-.html
 
 https://www.peakpx.com/en/hd-wallpaper-desktop-amync
-
+* Cloudy image([https://wallpapers.com/wallpapers/light-blue-laptop-70mtcno1nv1yilu4.html)
 
 
 
