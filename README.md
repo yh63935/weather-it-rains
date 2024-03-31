@@ -1,6 +1,6 @@
 # weather-app
 # This is a weather app that will display the current day weather, along with forecast day and hourly weather.
-
+* Snow - https://wall.alphacoders.com/big.php?i=1083131
 * Rain - https://imgur.com/a/szRXwIE
 * Thunder - https://rare-gallery.com/981429-light-fairytail-artwork-sky-lightning-clouds-nature-.html
 * Cloudy - https://wallpapers.com/wallpapers/light-blue-laptop-70mtcno1nv1yilu4.html
