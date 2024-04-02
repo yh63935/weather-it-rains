@@ -88,6 +88,11 @@ button {
   display: none;
 }
 
+.display-day-forecast {
+  transform: translate(50%, 0);
+  background: $color-background-overlay;
+}
+
 .error-msg {
   padding: 0.5rem;
   color: $color-error;
