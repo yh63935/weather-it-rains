@@ -468,6 +468,10 @@ body {
   background-attachment: fixed;
 }
 
+input {
+  color: #112a46;
+}
+
 p {
   margin: 0.5rem;
 }
@@ -480,6 +484,12 @@ p {
 button {
   padding: 0.5rem;
   background: none;
+  border: solid 1px white;
+  margin-bottom: 0.5rem;
+  box-shadow: 5px 5px 5px 2px black;
+}
+button:hover {
+  background: #112a46;
 }
 
 .search-container {
@@ -498,7 +508,7 @@ button {
   position: relative;
 }
 .main-info p {
-  margin: 1.5rem 0;
+  margin-bottom: 1.5rem;
 }
 .main-info img {
   position: absolute;
@@ -507,22 +517,35 @@ button {
   top: 0;
 }
 
-.day-weather-card:hover {
-  background: lightgreen;
-}
-
 .display-day-forecast,
 .error-msg {
   display: none;
 }
 
+.display-day-forecast {
+  transform: translate(50%, 0);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.error-msg {
+  padding: 0.5rem;
+  color: #f40000;
+}
+
 .current-weather-card {
   justify-content: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 80%;
   margin: 2rem auto 0;
+  padding: 2rem 0;
   background: rgba(0, 0, 0, 0.2);
+}
+@media screen and (min-width: 576px) {
+  .current-weather-card {
+    flex-direction: row;
+  }
 }
 .current-weather-card p.temp {
   font-weight: 700;
@@ -531,20 +554,42 @@ button {
 
 .forecast-container {
   position: relative;
+  margin-top: 2rem;
+  padding: 0 1.5rem;
 }
 .forecast-container .forecast-cards-container {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 15px;
+  column-gap: 10px;
   color: #112a46;
-  padding: 3rem;
+  padding: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .forecast-container .forecast-cards-container {
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 1082px) {
+  .forecast-container .forecast-cards-container {
+    flex-wrap: nowrap;
+  }
 }
 .forecast-container .forecast-cards-container div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border: solid 1px white;
+  justify-content: space-evenly;
   padding: 1.5rem 1rem;
   background: rgba(0, 0, 0, 0.2);
+}
+.forecast-container .forecast-cards-container .day-weather-card {
+  flex-basis: calc(33.3333333333% - 10px);
+}
+.forecast-container .forecast-cards-container .hourly-weather-card {
+  flex-basis: calc(25% - 10px);
 }
 .forecast-container .prev-interval,
 .forecast-container .nxt-interval {
