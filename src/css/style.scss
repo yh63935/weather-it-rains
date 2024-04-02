@@ -62,7 +62,7 @@ button {
 .main-info {
   position: relative;
   p {
-    margin: 1.5rem 0;
+    margin-bottom: 1.5rem;
   }
   img {
     position: absolute;
@@ -91,6 +91,7 @@ button {
   align-items: center;
   width: 80%;
   margin: 2rem auto 0;
+  padding: 2rem 0;
   background: rgba(0, 0, 0, 0.2);
 
   p.temp {
