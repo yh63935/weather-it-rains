@@ -42,6 +42,7 @@ const backgroundWeatherImages = {
   sleet: "rain.jpg",
   cloudy: "cloudy.jpg",
   sunny: "sunny.jpg",
+  clear: "sunny.jpg",
 };
 
 // Return background weather image based on weather condition text
