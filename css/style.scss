@@ -115,18 +115,19 @@ button {
 
 .forecast-container {
   position: relative;
+  margin-top: 2rem;
   .forecast-cards-container {
     display: flex;
     justify-content: space-around;
-    // background: rgba(237, 225, 225, 0.82);
     color: $color-navy-blue;
-    padding: 3rem;
+    padding: 2rem;
 
     div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       border: solid 1px white;
+      justify-content: space-evenly;
       padding: 1.5rem 1rem;
       background: $color-background-overlay;
     }
