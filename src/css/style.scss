@@ -5,6 +5,8 @@
 $search-padding: 0.5rem;
 $color-navy-blue: #112a46;
 $color-error: #f40000;
+$button-box-shadow: 5px 5px 5px 2px black;
+$color-background-overlay: rgba(0, 0, 0, 0.2);
 
 html {
   font-size: 20px;
@@ -45,6 +47,12 @@ p {
 button {
   padding: 0.5rem;
   background: none;
+  border: solid 1px white;
+  margin-bottom: 0.5rem;
+  box-shadow: $button-box-shadow;
+  &:hover {
+    background: $color-navy-blue;
+  }
 }
 
 .search-container {
@@ -80,6 +88,11 @@ button {
   display: none;
 }
 
+.display-day-forecast {
+  transform: translate(50%, 0);
+  background: $color-background-overlay;
+}
+
 .error-msg {
   padding: 0.5rem;
   color: $color-error;
@@ -92,7 +105,8 @@ button {
   width: 80%;
   margin: 2rem auto 0;
   padding: 2rem 0;
-  background: rgba(0, 0, 0, 0.2);
+
+  background: $color-background-overlay;
 
   p.temp {
     font-weight: 700;
@@ -102,20 +116,21 @@ button {
 
 .forecast-container {
   position: relative;
+  margin-top: 2rem;
   .forecast-cards-container {
     display: flex;
     justify-content: space-around;
-    // background: rgba(237, 225, 225, 0.82);
     color: $color-navy-blue;
-    padding: 3rem;
+    padding: 2rem;
 
     div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       border: solid 1px white;
+      justify-content: space-evenly;
       padding: 1.5rem 1rem;
-      background: rgba(0, 0, 0, 0.2);
+      background: $color-background-overlay;
     }
   }
 
