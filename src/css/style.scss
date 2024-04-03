@@ -7,6 +7,7 @@ $color-navy-blue: #112a46;
 $color-error: #f40000;
 $button-box-shadow: 5px 5px 5px 2px black;
 $color-background-overlay: rgba(0, 0, 0, 0.2);
+$border-solid-white: solid 1px white;
 $card-col-gap-width: 10px;
 $card-row-gap-width: 15px;
 
@@ -49,7 +50,7 @@ p {
 button {
   padding: 0.5rem;
   background: none;
-  border: solid 1px white;
+  border: $border-solid-white;
   margin-bottom: 0.5rem;
   box-shadow: $button-box-shadow;
   &:hover {
