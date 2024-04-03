@@ -82,10 +82,9 @@ button {
     margin-bottom: 1.5rem;
   }
   img {
-    position: absolute;
-    left: 100%;
-    width: 100%;
     top: 0;
+    width: 200px;
+    margin: -4rem -2rem -3rem;
   }
 }
 
@@ -159,6 +158,10 @@ button {
 
     .day-weather-card {
       flex-basis: calc(calc(100% / 3) - $card-col-gap-width);
+      img {
+        width: 100px;
+        margin: -0.5rem;
+      }
     }
 
     .hourly-weather-card {
