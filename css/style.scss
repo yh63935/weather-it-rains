@@ -77,12 +77,28 @@ button {
 }
 
 .main-info {
+  position: relative;
+  @media screen and (min-width: 992px) {
+    padding: 0 1rem;
+    margin-left: calc(2rem + 100px);
+  }
   p {
     margin-bottom: 1.5rem;
   }
   img {
     top: 0;
     width: 200px;
+    margin: -1rem -1rem -2rem;
+    @media screen and (min-width: 992px) {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
 .additional-info {
   @media screen and (min-width: 992px) {
     margin-left: 1.5rem;
