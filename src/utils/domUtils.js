@@ -61,7 +61,7 @@ function chosenBackgroundWeatherImage(conditionText) {
 
 // Set background image of backgroundImageContainer based on backgroundWeatherImage
 function setBackgroundImage(backgroundImageContainer, backgroundWeatherImage) {
-  backgroundImageContainer.style.backgroundImage = `url(../css/assets/${backgroundWeatherImage})`;
+  backgroundImageContainer.style.backgroundImage = `url(./css/assets/${backgroundWeatherImage})`;
 }
 
 export {
