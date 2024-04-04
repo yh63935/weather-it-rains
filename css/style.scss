@@ -121,7 +121,7 @@ button {
 
 .error-msg {
   padding: 0.5rem;
-  color: $color-error;
+  background: $color-error;
 }
 
 .current-weather-card {
@@ -136,7 +136,7 @@ button {
 
   @media screen and (min-width: 576px) {
     flex-direction: row;
-    width: 75%;
+    width: calc(75% + 3vw);
   }
 
   p.temp {
@@ -187,6 +187,10 @@ button {
         width: 100px;
         margin: -0.5rem;
       }
+
+      .display-hourly-forecast {
+        margin-top: 1.25rem;
+      }
     }
 
     .hourly-weather-card {
@@ -215,5 +219,6 @@ button {
   p:first-child {
     font-size: 1.5rem;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
 }
