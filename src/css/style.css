@@ -574,7 +574,7 @@ button:hover {
 @media screen and (min-width: 576px) {
   .current-weather-card {
     flex-direction: row;
-    width: 75%;
+    width: calc(75% + 3vw);
   }
 }
 .current-weather-card p.temp {

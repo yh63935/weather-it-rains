@@ -136,7 +136,7 @@ button {
 
   @media screen and (min-width: 576px) {
     flex-direction: row;
-    width: 75%;
+    width: calc(75% + 3vw);
   }
 
   p.temp {
