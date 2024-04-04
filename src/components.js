@@ -196,45 +196,48 @@ class CurrentWeatherCard extends WeatherCard {
     return mainWeatherInfoEl;
   }
 
-  /* Create additionalWeatherInfoEl element to hold additional weather information: feelsLike temperature, humidity, chance of rain, and windspeed
-    <div class="weather-conditions">
-      <this.feelsLikeEl>
-      <this.humidityEl>
-      <this.chanceOfRainEl>
-      <this.windSpeelEl>
-    </div>
-  */
+  /* Create additionalWeatherInfoEl element to hold additional weather information stored in respective containers: feelsLike temperature, humidity, chance of rain, and windspeed
+   <div class="additional-info">
+     <feelsLikeContainer>
+     <humidityContainer>
+     <chanceOfRainContainer>
+     <windSpeedContainer>
+   </div>
+ */
+
   createAdditionalWeatherInfoEl() {
     const additionalWeatherInfoEl = createEl("div", "", "additional-info");
 
-    this.feelsLikeEl = createEl(
-      "p",
+    const feelsLikeContainer = this.createIndividualWeatherInfoContainer(
+      "Feels Like",
       formattedValueWithUnit(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
 
-    this.humidityEl = createEl(
-      "p",
-      formattedValueWithUnit(this._humidity, "%")
+    const humidityContainer = this.createIndividualWeatherInfoContainer(
+      "Humidity",
+      formattedValueWithUnit(this._humidity, "%", "humidity"),
+      "humidity"
     );
 
-    const chanceOfRainEl = createEl(
-      "p",
-      formattedValueWithUnit(this._chanceOfRain, "%")
+    const chanceOfRainContainer = this.createIndividualWeatherInfoContainer(
+      "Chance of Rain",
+      formattedValueWithUnit(this._chanceOfRain, "%"),
+      "chance-of-rain"
     );
 
-    this.windSpeedEl = createEl(
-      "p",
+    const windSpeedContainer = this.createIndividualWeatherInfoContainer(
+      "Wind Speed",
       formattedValueWithUnit(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
 
     appendEl(
       additionalWeatherInfoEl,
-      this.feelsLikeEl,
-      this.humidityEl,
-      chanceOfRainEl,
-      this.windSpeedEl
+      feelsLikeContainer,
+      humidityContainer,
+      chanceOfRainContainer,
+      windSpeedContainer
     );
 
     return additionalWeatherInfoEl;
@@ -293,14 +296,18 @@ class CurrentWeatherCard extends WeatherCard {
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
 
-  // Updates imperial metric units for additional elements of this.feelsLikeEl, this.windSpeedEl
+  // Updates imperial metric units for additional elements of feelsLikeValueEl, windSpeedValueEl
   updateImperialMetricUnits() {
     super.updateImperialMetricUnits();
     this.speedUnit = this.isImperial ? "mi" : "km";
 
-    // Update feelsLikeEl with respective imperial metric values and units
+    // Get additional elements to update from card
+    const feelsLikeValueEl = this._card.querySelector(".feels-like-value");
+    const windSpeedValueEl = this._card.querySelector(".wind-speed-value");
+
+    // Update feelsLikeValueEl with respective imperial metric values and units
     this.updateImperialMetricUnit(
-      this.feelsLikeEl,
+      feelsLikeValueEl,
       this._imperialFeelsLikeTemp,
       this._metricFeelsLikeTemp,
       this.tempUnit
@@ -308,7 +315,7 @@ class CurrentWeatherCard extends WeatherCard {
 
     // Update windSpeel with respective imperial metric values and units
     this.updateImperialMetricUnit(
-      this.windSpeedEl,
+      windSpeedValueEl,
       this._imperialWindSpeed,
       this._metricWindSpeed,
       this.speedUnit
