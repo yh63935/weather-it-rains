@@ -558,7 +558,7 @@ button:hover {
 
 .error-msg {
   padding: 0.5rem;
-  color: #f40000;
+  background: #f40000;
 }
 
 .current-weather-card {
@@ -625,6 +625,9 @@ button:hover {
   width: 100px;
   margin: -0.5rem;
 }
+.forecast-container .forecast-cards-container .day-weather-card .display-hourly-forecast {
+  margin-top: 1.25rem;
+}
 .forecast-container .forecast-cards-container .hourly-weather-card {
   flex-basis: calc(25% - 10px);
 }
@@ -645,6 +648,7 @@ button:hover {
 .day-weather-card p:first-child {
   font-size: 1.5rem;
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
