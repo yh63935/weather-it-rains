@@ -240,6 +240,42 @@ class CurrentWeatherCard extends WeatherCard {
     return additionalWeatherInfoEl;
   }
 
+  /* Creates containers for individual weather information such as feelsLike information, humidity information
+      Containers will have the structure below: 
+
+      <div class="feels-like-container">
+        <p class="feels-like-label">Feels Like</p>
+        <p class="feels-like-value">60.8 °F</p>
+      </div>
+  */
+  createIndividualWeatherInfoContainer(label, value, weatherInfoType) {
+    const individualWeatherInfoContainer = createEl(
+      "div",
+      "",
+      `${weatherInfoType}-container`
+    );
+
+    const individualWeatherLabel = createEl(
+      "p",
+      label,
+      `${weatherInfoType}-label`
+    );
+
+    const individualWeatherValue = createEl(
+      "p",
+      value,
+      `${weatherInfoType}-value`
+    );
+
+    appendEl(
+      individualWeatherInfoContainer,
+      individualWeatherLabel,
+      individualWeatherValue
+    );
+
+    return individualWeatherInfoContainer;
+  }
+
   // Toggle between imperial and metric system for the card to update convertImperialMetricBtn
   toggleImperialMetric() {
     super.toggleImperialMetric();
