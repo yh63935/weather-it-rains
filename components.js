@@ -196,45 +196,48 @@ class CurrentWeatherCard extends WeatherCard {
     return mainWeatherInfoEl;
   }
 
-  /* Create additionalWeatherInfoEl element to hold additional weather information: feelsLike temperature, humidity, chance of rain, and windspeed
-    <div class="weather-conditions">
-      <this.feelsLikeEl>
-      <this.humidityEl>
-      <this.chanceOfRainEl>
-      <this.windSpeelEl>
+  /* Create additionalWeatherInfoEl element to hold additional weather information stored in respective containers: feelsLike temperature, humidity, chance of rain, and windspeed
+   <div class="additional-info">
+     <feelsLikeContainer>
+     <humidityContainer>
+     <chanceOfRainContainer>
+     <windSpeedContainer>
     </div>
   */
+
   createAdditionalWeatherInfoEl() {
     const additionalWeatherInfoEl = createEl("div", "", "additional-info");
 
-    this.feelsLikeEl = createEl(
-      "p",
+    const feelsLikeContainer = this.createIndividualWeatherInfoContainer(
+      "Feels Like",
       formattedValueWithUnit(this._imperialFeelsLikeTemp, this.tempUnit),
       "feels-like"
     );
 
-    this.humidityEl = createEl(
-      "p",
-      formattedValueWithUnit(this._humidity, "%")
+    const humidityContainer = this.createIndividualWeatherInfoContainer(
+      "Humidity",
+      formattedValueWithUnit(this._humidity, "%", "humidity"),
+      "humidity"
     );
 
-    const chanceOfRainEl = createEl(
-      "p",
-      formattedValueWithUnit(this._chanceOfRain, "%")
+    const chanceOfRainContainer = this.createIndividualWeatherInfoContainer(
+      "Chance of Rain",
+      formattedValueWithUnit(this._chanceOfRain, "%"),
+      "chance-of-rain"
     );
 
-    this.windSpeedEl = createEl(
-      "p",
+    const windSpeedContainer = this.createIndividualWeatherInfoContainer(
+      "Wind Speed",
       formattedValueWithUnit(this._imperialWindSpeed, this.speedUnit),
       "wind-speed"
     );
 
     appendEl(
       additionalWeatherInfoEl,
-      this.feelsLikeEl,
-      this.humidityEl,
-      chanceOfRainEl,
-      this.windSpeedEl
+      feelsLikeContainer,
+      humidityContainer,
+      chanceOfRainContainer,
+      windSpeedContainer
     );
 
     return additionalWeatherInfoEl;
