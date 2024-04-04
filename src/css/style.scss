@@ -83,7 +83,13 @@ button {
   img {
     top: 0;
     width: 200px;
-    margin: -4rem -2rem -3rem;
+.additional-info {
+  @media screen and (min-width: 992px) {
+    margin-left: 1.5rem;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
