@@ -187,6 +187,10 @@ button {
         width: 100px;
         margin: -0.5rem;
       }
+
+      .display-hourly-forecast {
+        margin-top: 1.25rem;
+      }
     }
 
     .hourly-weather-card {
@@ -215,5 +219,6 @@ button {
   p:first-child {
     font-size: 1.5rem;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
 }
