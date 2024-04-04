@@ -77,13 +77,35 @@ button {
 }
 
 .main-info {
+  position: relative;
+  @media screen and (min-width: 992px) {
+    padding: 0 1rem;
+    margin-left: calc(2rem + 100px);
+  }
   p {
     margin-bottom: 1.5rem;
   }
   img {
     top: 0;
     width: 200px;
-    margin: -4rem -2rem -3rem;
+    margin: -1rem -1rem -2rem;
+    @media screen and (min-width: 992px) {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.additional-info {
+  @media screen and (min-width: 992px) {
+    margin-left: 1.5rem;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -107,13 +129,14 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   margin: 2rem auto 0;
   padding: 2rem 0;
   background: $color-background-overlay;
 
   @media screen and (min-width: 576px) {
     flex-direction: row;
+    width: 75%;
   }
 
   p.temp {
@@ -131,14 +154,14 @@ button {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    // justify-content: space-around;
     row-gap: $card-row-gap-width;
     column-gap: $card-col-gap-width;
     color: $color-navy-blue;
-    padding: 2rem;
+    padding-top: 1rem;
 
     @media screen and (min-width: 768px) {
       flex-direction: row;
+      padding: 2rem 3rem;
     }
 
     @media screen and (min-width: 1082px) {
@@ -153,10 +176,13 @@ button {
       justify-content: space-evenly;
       padding: 1.5rem 1rem;
       background: $color-background-overlay;
+      width: 75%;
+      margin: auto;
     }
 
     .day-weather-card {
       flex-basis: calc(calc(100% / 3) - $card-col-gap-width);
+
       img {
         width: 100px;
         margin: -0.5rem;
