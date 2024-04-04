@@ -497,24 +497,53 @@ button:hover {
   justify-content: center;
   margin-top: 2rem;
 }
+.search-container .search-button {
+  box-shadow: none;
+  margin-bottom: 0;
+}
 
 #search-location {
   padding: 0.5rem;
   width: 40%;
   border-right: none;
+  border: solid 1px white;
 }
 
 .main-info {
   position: relative;
 }
+@media screen and (min-width: 992px) {
+  .main-info {
+    padding: 0 1rem;
+    margin-left: calc(2rem + 100px);
+  }
+}
 .main-info p {
   margin-bottom: 1.5rem;
 }
 .main-info img {
-  position: absolute;
-  left: 100%;
-  width: 100%;
   top: 0;
+  width: 200px;
+  margin: -1rem -1rem -2rem;
+}
+@media screen and (min-width: 992px) {
+  .main-info img {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translate(0, -50%);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .additional-info {
+    margin-left: 1.5rem;
+  }
+}
+.additional-info div {
+  display: flex;
+  justify-content: space-between;
 }
 
 .display-day-forecast,
@@ -529,7 +558,7 @@ button:hover {
 
 .error-msg {
   padding: 0.5rem;
-  color: #f40000;
+  background: #f40000;
 }
 
 .current-weather-card {
@@ -537,7 +566,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   margin: 2rem auto 0;
   padding: 2rem 0;
   background: rgba(0, 0, 0, 0.2);
@@ -545,6 +574,7 @@ button:hover {
 @media screen and (min-width: 576px) {
   .current-weather-card {
     flex-direction: row;
+    width: calc(75% + 3vw);
   }
 }
 .current-weather-card p.temp {
@@ -564,11 +594,12 @@ button:hover {
   row-gap: 15px;
   column-gap: 10px;
   color: #112a46;
-  padding: 2rem;
+  padding-top: 1rem;
 }
 @media screen and (min-width: 768px) {
   .forecast-container .forecast-cards-container {
     flex-direction: row;
+    padding: 2rem 3rem;
   }
 }
 @media screen and (min-width: 1082px) {
@@ -584,9 +615,18 @@ button:hover {
   justify-content: space-evenly;
   padding: 1.5rem 1rem;
   background: rgba(0, 0, 0, 0.2);
+  width: 75%;
+  margin: auto;
 }
 .forecast-container .forecast-cards-container .day-weather-card {
   flex-basis: calc(33.3333333333% - 10px);
+}
+.forecast-container .forecast-cards-container .day-weather-card img {
+  width: 100px;
+  margin: -0.5rem;
+}
+.forecast-container .forecast-cards-container .day-weather-card .display-hourly-forecast {
+  margin-top: 1.25rem;
 }
 .forecast-container .forecast-cards-container .hourly-weather-card {
   flex-basis: calc(25% - 10px);
@@ -608,6 +648,7 @@ button:hover {
 .day-weather-card p:first-child {
   font-size: 1.5rem;
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
