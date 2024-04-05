@@ -57,6 +57,9 @@ function chosenBackgroundWeatherImage(conditionText) {
       return backgroundWeatherImage;
     }
   }
+
+  // Default to sunny image from backgroundWeatherImages if there is no valid image
+  return backgroundWeatherImages.sunny;
 }
 
 // Set background image of backgroundImageContainer based on backgroundWeatherImage
