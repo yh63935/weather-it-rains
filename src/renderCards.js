@@ -75,8 +75,6 @@ function renderHourlyWeatherCards(
       }
     }
 
-    console.log("DayWeatherCardIndex", dayWeatherCardIndex);
-
     const hourlyWeatherCard = createHourlyWeatherCard({
       timeMeasurement: forecastArr[dayWeatherCardIndex].hour[hour].time,
       imperialTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
