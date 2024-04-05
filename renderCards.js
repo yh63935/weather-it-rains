@@ -75,8 +75,6 @@ function renderHourlyWeatherCards(
       }
     }
 
-    console.log("DayWeatherCardIndex", dayWeatherCardIndex);
-
     const hourlyWeatherCard = createHourlyWeatherCard({
       timeMeasurement: forecastArr[dayWeatherCardIndex].hour[hour].time,
       imperialTemp: forecastArr[dayWeatherCardIndex].hour[hour].temp_f,
@@ -143,13 +141,10 @@ function renderForecastDisplay(
   // Clear container with cards before rendering cards
   clearContainer(containerToClear);
 
-  // Toggle the view if it is the display day forecast or display hourly forecast button
-  if (
-    clickedEl.classList.contains("display-day-forecast") ||
-    clickedEl.classList.contains("display-hourly-forecast")
-  )
-    forecastViewToggler.toggleView();
+  // Toggle the view based on the clicked element
+  forecastViewToggler.toggleViewBasedOnClickedEl(clickedEl);
 
+  // Render hourly view buttons based on the view
   let currentView = forecastViewToggler.getView();
   renderHourlyViewBtns(hourlyViewBtns, currentView);
 

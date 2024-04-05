@@ -25,15 +25,29 @@ function formattedValueWithUnit(value, unit) {
 
 // Create a forecast view toggler to toggle forecast view and return the current view
 function createForecastViewToggler() {
+  // Default view is day
   let view = "day";
+
   const toggleView = () => {
     view = view === "day" ? "hourly" : "day";
   };
 
+  // Toggle view based on clicked element
+  const toggleViewBasedOnClickedEl = (clickedEl) => {
+    // Toggle the view if it is the display day forecast or display hourly forecast button
+    if (
+      clickedEl.classList.contains("display-day-forecast") ||
+      clickedEl.classList.contains("display-hourly-forecast")
+    ) {
+      toggleView();
+    }
+  };
+
+  // Return current view
   const getView = () => view;
 
   return {
-    toggleView,
+    toggleViewBasedOnClickedEl,
     getView,
   };
 }
