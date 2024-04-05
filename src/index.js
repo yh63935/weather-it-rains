@@ -17,18 +17,18 @@ import {
 
 initializeWeatherAppWithLocation("San Jose");
 
-// Initializes app with user location weather data when user presses Enter
-let userLocationInput = document.querySelector("#search-location");
+// Initializes app with user location weather data when user presses Enter or the search button
+const userLocationInput = document.querySelector("#search-location");
+const searchButton = document.querySelector(".search-button");
 
 userLocationInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    let userLocation = userLocationInput.value;
-
-    initializeWeatherAppWithLocation(userLocation);
-
-    // Clear user input after pressing enter
-    userLocationInput.value = "";
+    handleUserInputAndInitializeApp();
   }
+});
+
+searchButton.addEventListener("click", (e) => {
+  handleUserInputAndInitializeApp();
 });
 
 // Initialize weather app with location
@@ -187,4 +187,14 @@ async function initialize(userLocationWeatherData) {
       hourlyWeatherCard.toggleImperialMetric();
     });
   });
+}
+
+// Takes user input and uses it to initialize the weather app
+function handleUserInputAndInitializeApp() {
+  let userLocation = userLocationInput.value;
+
+  initializeWeatherAppWithLocation(userLocation);
+
+  // Clear user input after pressing enter
+  userLocationInput.value = "";
 }
