@@ -25,10 +25,10 @@ function clearContainer(container) {
   container.innerHTML = "";
 }
 
-// If it has thunder, shunder should take priority
-// If it has snow, it should take priority
-
-// Object that maps key of weather condition to background image file
+/* Object that maps key of weather condition to background image file
+// backgroundWeatherImages properties are ordered in terms of priority, ie if a conditionText contains both thunder and rain words, 
+it will return the backgroundWeatherImage of thunder
+*/
 const backgroundWeatherImages = {
   thunder: "thunder.jpg",
   fog: "fog.jpg",
