@@ -1,8 +1,7 @@
 import { parseWeatherData, getUserLocationWeatherData } from "./api.js";
-import { createCurrentWeatherCard } from "./components.js";
 import {
   clearContainer,
-  chosenBackgroundWeatherImage,
+  getWeatherImageFromConditionText,
   setBackgroundImage,
 } from "./utils/domUtils.js";
 import { createForecastViewToggler } from "./utils/formatUtils.js";
@@ -41,6 +40,7 @@ function initializeWeatherAppWithLocation(userLocation) {
   );
   const errorMsgEl = document.querySelector(".error-msg");
   let isValidUserLocation = false;
+
   getUserLocationWeatherData(userLocation)
     .then((userLocationWeatherData) => {
       // Only clear containers and initialize app if API request for user location is valid
@@ -69,7 +69,7 @@ async function initialize(userLocationWeatherData) {
     ".forecast-cards-container"
   );
   const backgroundImageContainer = document.querySelector("body");
-  const backgroundWeatherImage = chosenBackgroundWeatherImage(
+  const backgroundWeatherImage = getWeatherImageFromConditionText(
     parsedData.condition.text
   );
   console.log("background weather image", backgroundWeatherImage);
@@ -176,6 +176,7 @@ async function initialize(userLocationWeatherData) {
   const convertImperialMetricBtn = document.querySelector(
     ".convert-imperial-metric"
   );
+
   convertImperialMetricBtn.addEventListener("click", () => {
     currentWeatherCard.toggleImperialMetric();
     const dayWeatherCards = getDayWeatherCards();
