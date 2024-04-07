@@ -25,10 +25,10 @@ function clearContainer(container) {
   container.innerHTML = "";
 }
 
-// If it has thunder, shunder should take priority
-// If it has snow, it should take priority
-
-// Object that maps key of weather condition to background image file
+/* Object that maps key of weather condition to background image file
+// backgroundWeatherImages properties are ordered in terms of priority, ie if a conditionText contains both thunder and rain words, 
+it will return the backgroundWeatherImage of thunder
+*/
 const backgroundWeatherImages = {
   thunder: "thunder.jpg",
   fog: "fog.jpg",
@@ -46,7 +46,7 @@ const backgroundWeatherImages = {
 };
 
 // Return background weather image based on weather condition text
-function chosenBackgroundWeatherImage(conditionText) {
+function getWeatherImageFromConditionText(conditionText) {
   // Format conditionText to be all lowercase
   const conditionTextLower = conditionText.toLowerCase();
 
@@ -57,6 +57,9 @@ function chosenBackgroundWeatherImage(conditionText) {
       return backgroundWeatherImage;
     }
   }
+
+  // Default to sunny image from backgroundWeatherImages if there is no valid image
+  return backgroundWeatherImages.sunny;
 }
 
 // Set background image of backgroundImageContainer based on backgroundWeatherImage
@@ -68,6 +71,6 @@ export {
   createEl,
   appendEl,
   clearContainer,
-  chosenBackgroundWeatherImage,
+  getWeatherImageFromConditionText,
   setBackgroundImage,
 };
