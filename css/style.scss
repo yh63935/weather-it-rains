@@ -177,7 +177,7 @@ button {
       padding: 1.5rem 1rem;
       background: $color-background-overlay;
       width: 75%;
-      margin: auto;
+      margin: 0 auto;
     }
 
     .day-weather-card {
@@ -201,16 +201,25 @@ button {
   .prev-interval,
   .nxt-interval {
     position: absolute;
-    top: 50%;
     display: none;
+    top: 0;
+    @media screen and (min-width: 768px) {
+      top: 50%;
+    }
   }
 
   .prev-interval {
-    left: 1.5%;
+    left: 5%;
+    @media screen and (min-width: 768px) {
+      left: 1.5%;
+    }
   }
 
   .nxt-interval {
-    right: 1.5%;
+    right: 5%;
+    @media screen and (min-width: 768px) {
+      right: 1.5%;
+    }
   }
 }
 

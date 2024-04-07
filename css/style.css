@@ -616,7 +616,7 @@ button:hover {
   padding: 1.5rem 1rem;
   background: rgba(0, 0, 0, 0.2);
   width: 75%;
-  margin: auto;
+  margin: 0 auto;
 }
 .forecast-container .forecast-cards-container .day-weather-card {
   flex-basis: calc(33.3333333333% - 10px);
@@ -634,14 +634,30 @@ button:hover {
 .forecast-container .prev-interval,
 .forecast-container .nxt-interval {
   position: absolute;
-  top: 50%;
   display: none;
+  top: 0;
+}
+@media screen and (min-width: 768px) {
+  .forecast-container .prev-interval,
+  .forecast-container .nxt-interval {
+    top: 50%;
+  }
 }
 .forecast-container .prev-interval {
-  left: 1.5%;
+  left: 5%;
+}
+@media screen and (min-width: 768px) {
+  .forecast-container .prev-interval {
+    left: 1.5%;
+  }
 }
 .forecast-container .nxt-interval {
-  right: 1.5%;
+  right: 5%;
+}
+@media screen and (min-width: 768px) {
+  .forecast-container .nxt-interval {
+    right: 1.5%;
+  }
 }
 
 .hourly-weather-card p:first-child,

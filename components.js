@@ -31,7 +31,6 @@ class WeatherCard {
   // Adds card type, this.tempEl, iconEl, and appends appropriate elements to their respective containers
   createCard() {
     this.addCardType();
-    // const body = document.querySelector("body");
     const timeMeasurementEl = createEl("p", this.formattedTimeMeasurement);
 
     // Create this.tempEl as property containing general temperature information
@@ -288,10 +287,9 @@ class CurrentWeatherCard extends WeatherCard {
 
   // Update convertImperialMetricBtn's text based on imperial/metric system
   updateConvertImperialMetricBtnText() {
-    const convertImperialMetricBtn = document.querySelector(
+    const convertImperialMetricBtn = this._card.querySelector(
       ".convert-imperial-metric"
     );
-    // Change? Maybe change this display to something else since it also change km and mi? maybe display imperial/metric r
     const altTempUnit = this.tempUnit === "c" ? "f" : "c";
     convertImperialMetricBtn.innerText = `Display °${altTempUnit.toUpperCase()}`;
   }
