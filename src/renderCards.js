@@ -9,20 +9,37 @@ import { clearContainer } from "./utils/domUtils.js";
 const dayWeatherCards = [];
 const hourlyWeatherCards = [];
 
-// Get 8 hour forecast from the current time or specified offset interval
-function getEightHourForecast(offsetInterval = 0) {
+// Get all the hour intervals for a specific day
+// Current day intervals start from roundedHr, then 8 hr intervals, until 11PM max
+// Other day intervals will start from 12AM, then 8 hr intervals until 11 PM max
+function getDayHourIntervals(dayIndex) {
   const selectedDate = new Date();
 
+  // Start hour intervals at 12AM
+  let startHour = 0;
+  let endHour;
+  let dayHourIntervals = [];
+
+  // If it is current day, the interval should start on the next hour after current hour
+  // Ex: if it is 7:25 AM right now, it should start at 8AM
+  if (dayIndex === 0) {
   // Current hour in 24-hour time
   const currentHour = convertTimeToHours(selectedDate);
-
   const roundedHour = currentHour + 1;
+    startHour = roundedHour;
+  }
 
-  // Calculate start interval from the rounded hour by adding the offset
-  const startHour = roundedHour + offsetInterval * 8;
-  let endHour = startHour + 7; // End the interveral 8 hours from the start (including start hour)
+  // Grab all hour intervals for a day, endHour should never be greater than 11 PM (12AM would be the next day)
+  while (startHour <= 23) {
+    // Ensure forecasted endHour (startHour + 7) is never greater than 23 (11PM)
+    endHour = startHour + 7 > 23 ? 23 : startHour + 7;
+    dayHourIntervals.push({ startHour, endHour });
 
-  return { startHour, endHour };
+    // Increase startHour by 8 to get the start of the next interval of the day
+    startHour += 8;
+  }
+
+  return dayHourIntervals;
 }
 
 // Render current weather card
