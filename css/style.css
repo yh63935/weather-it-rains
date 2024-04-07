@@ -617,6 +617,7 @@ button:hover {
   background: rgba(0, 0, 0, 0.2);
   width: 75%;
   margin: 0 auto;
+  flex: 1;
 }
 .forecast-container .forecast-cards-container .day-weather-card {
   flex-basis: calc(33.3333333333% - 10px);
