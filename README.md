@@ -5,7 +5,8 @@
 * Thunder - https://rare-gallery.com/981429-light-fairytail-artwork-sky-lightning-clouds-nature-.html
 * Cloudy - https://wallpapers.com/wallpapers/light-blue-laptop-70mtcno1nv1yilu4.html
 * Foggy - https://openart.ai/discovery/sd-1007496795762470962
-* Sunny - https://steamcommunity.com/sharedfiles/filedetails/?id=3113243295
+* Sunny - https://www.pixground.com/peaceful-field-landscape-ai-generated-4k-wallpaper/
+
 
 
 
