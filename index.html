@@ -17,18 +17,24 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="search-container">
-      <label for="search-location"></label>
-      <input type="text" id="search-location" />
-      <button class="search-button"><i class="fas fa-search"></i></button>
-      <p class="error-msg">Please enter a valid location</p>
-    </div>
-    <div class="current-weather-container"></div>
-    <div class="forecast-container">
-      <button class="display-day-forecast">Display day forecast</button>
-      <div class="forecast-cards-container"></div>
-      <button class="prev-interval"><i class="fas fa-chevron-left"></i></button>
-      <button class="nxt-interval"><i class="fas fa-chevron-right"></i></button>
+    <div class="weather-app">
+      <div class="search-container">
+        <label for="search-location"></label>
+        <input type="text" id="search-location" />
+        <button class="search-button"><i class="fas fa-search"></i></button>
+        <p class="error-msg">Please enter a valid location</p>
+      </div>
+      <div class="current-weather-container"></div>
+      <div class="forecast-container">
+        <button class="display-day-forecast">Display day forecast</button>
+        <div class="forecast-cards-container"></div>
+        <button class="prev-interval">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nxt-interval">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
     <script type="module" src="index.js"></script>
   </body>

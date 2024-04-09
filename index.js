@@ -76,7 +76,7 @@ async function initialize(userLocationWeatherData) {
   );
 
   // Set background image based on weather condition
-  const backgroundImageContainer = document.querySelector("body");
+  const backgroundImageContainer = document.querySelector(".weather-app");
   const backgroundWeatherImage = getWeatherImageFromConditionText(
     parsedData.condition.text
   );
