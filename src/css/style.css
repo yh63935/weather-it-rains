@@ -462,7 +462,6 @@ body {
 }
 
 body {
-  background-image: url("./assets/fog.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -495,7 +494,7 @@ button:hover {
 .search-container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 .search-container .search-button {
   box-shadow: none;
