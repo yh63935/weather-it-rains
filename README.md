@@ -25,7 +25,7 @@
 ## About The Project
 
 ### Description
-I'm a huge fan of Ghibli Studio and if you haven't gathered from my blog-page project, food! This website is for a cafe that serves the food featured in Ghibli Studio movies. It's also responsive, so feel free to resize the screen if you'd like :) 
+This is a weather app that shows the next 3 day forecast of the location you search, and the hourly forecast for each day (for the current day it shows the next hour to 11PM). It also changes background image depending on what the weather conditions (ie sunny) are. It's also responsive, so feel free to view the site on your other mobile devices/tablets.
 
 [See live website hosted on Github Pages](https://yh63935.github.io/weather-app/) 
 
