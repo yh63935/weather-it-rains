@@ -1,5 +1,5 @@
 # weather-app
-# This is a weather app that will display the current day weather, along with forecast day and hourly weather.
+## This is a weather app that displays the current day weather, along with the next 3 days and hourly weather of a location (also changes background images depending on weather conditions).
 
 
 <!-- TABLE OF CONTENTS -->
