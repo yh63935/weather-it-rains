@@ -50,6 +50,8 @@ Another part of this project I had never considered deeply iswhat the HTML struc
 #### API Encryption
 As you must have noticed by now, my API key in the code in my repository is not encrypted. 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Built With
 
 * HTML
