@@ -55,8 +55,9 @@ Another part of this project I had never considered deeply iswhat the HTML struc
 Yet again, I was doubly hit with the importance of descriptive comments and variables. In the process of writing my code, there were often times where I was testing code out with variable or function names that had once reflected something else. This quickly got confusing to the point where I couldn't even explain to myself what my code was doing. I learned some ways to name variables and functions descriptively to represent what they returned or what they checked for. For example, instead of a variable imperialMetric for determining whether the imperial or metric system was selected, naming it instead to isImperial for clarity. File and folder names were also important as I separated utilities into different files for types of utilities when they were originally just clumped together into one file.
 
 
-#### API Encryption
-As you must have noticed by now, my API key in the code in my repository is not encrypted. 
+#### API Key
+As you must have noticed by now, my API key in the code in my repository is not encrypted. For security reasons, I am aware that I shouldn't "trust the client"S. but since this API key is public, I am exposing it for now, since I have not yet learned on the back-end how to securely deal with this issue. 
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -88,14 +89,14 @@ Quick start:
 
 5. Open up index.html on your local to view your own copy
 
-6. Alternatively go to [https://yh63935.github.io/cafe-page-webpack/](https://yh63935.github.io/cafe-page-webpack/) to see a live demo hosted on Github Pages.
+6. Alternatively go to [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/) to see a live demo hosted on Github Pages.
 
 <!-- CONTACT -->
 ## Contact
 
 Amelia Ho - [Amelia Ho Linkedin](https://www.linkedin.com/in/ameliahoyp/)
 
-Project Link: [https://github.com/yh63935/cafe-page-webpack](https://github.com/yh63935/cafe-page-webpack))
+Project Link: [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
