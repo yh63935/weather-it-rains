@@ -25,7 +25,7 @@
 ## About The Project
 
 ### Description
-This is a weather app that shows the next 3 day forecast of the location you search, and the hourly forecast for each day (for the current day it shows the next hour to 11PM). It also changes background image depending on what the weather conditions (ie sunny) are. It's also responsive, so feel free to view the site on your other mobile devices/tablets.
+This is a weather app that shows the next 3 day forecast of the location you search, and the hourly forecast for each day (for the current day it shows the next hour to 11PM). It also changes background image depending on what the weather conditions (ie sunny) are. The default location is San Jose, California, but enter a location to see other weather data! It's also responsive, so feel free to view the site on your other mobile devices/tablets.
 
 [See live website hosted on Github Pages](https://yh63935.github.io/weather-app/) 
 
@@ -38,7 +38,7 @@ Although I know creating a weather app is fairly typical of coders to make, what
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Reflection
-Wow, there were so many difficult parts about building this project. It's definitely been the longest and most difficult project that I have made so far with around 400 commits. And I ran into bugs every few seconds it seems, but ...I persevered.
+Wow, there were so many difficult parts about building this project. It's definitely been the longest and most difficult project that I have made so far with around 400 commits. And I ran into bugs every few seconds it seems, but ...I persevered. This was also the first time I used a development server (node.js live server) because trying to open index.html directly in the browser as a file caused a CORS error where the cross-origin request was blocked.
 
 #### User Interface
 Before beginning to code, I had to think about what information that I felt was important and relevant enough to display on the user-interface. I ended up designing the weather app to show the current day weather (because that is what most people will want to see first and is most relevant), a 3 day forecast (only 3 days, because after the free trial, you can only see a 3 day forecast), and hourly forecasts. At first, I thought that I would just display hourly forecast of the current day as that is what most weather apps do, but decided that it would be helpful to show hourly forecasts of every day in the 3 day forecast. Additionally, I added the functionality of being able to toggle from day and hourly forecasts using buttons. The hourly forecasts were in 8 hour intervals which made sense to me as a time frame that would be perfect length (also a workday). I also had to consider which hours to show in the hourly forecast, specifically for the current day. For example, the current day starts from the next hour from the current hour and not 12AM. This is because for the user, since the past hours have already passed and they are already living the current hour, they most likely wouldn't need to know the past/current hour temperatures. I also ended the hour intervals at 11PM for each day forecast, because even though the hours rolling over to the next day (ie today's forecast displaying up to 11PM, then 12AM etc of the next day) may be convenient, it is also a little confusing and misleading if pressing the hourly forecast button on the current day card included part of the next day's forecast. 
@@ -50,6 +50,7 @@ I did consider using factory functions or constructor functions instead of class
 When creating the classes and derived classes, I thought about SOLID OOP, specifically single responsibility, interface segregation, and open/closed principle. For the base class, I debated about putting different methods that wouldn't be used by all classes (but would certainly make my life easier haha), but I wanted to try my best to have each class only use the methods that it had instead of having unneccessary methods they wouldn't use. For different method functionality, I extended the class for the different weather cards from the base class.
 
 #### API Data Organization
+Another piece of the project that was deciding how to organize the data that the API would pull in. Instead of listing the properties manually like I have in the project, I thought about going through the data recursively to get properties because they have similar structures. However, since the dataset is so big and even the individual levels had quite a lot of properties, that didn’t seem like a good idea in terms of both space and time complexity. I realized the best solution was not to store all the data, but just the ones that I needed and to simplify the paths that I would need to access them in a function (parseWeatherData). To do this, I made a new object containing the paths in the weather data API with simplified properties to access those paths.
 
 
 #### Maintainability, Reusability, and Readability 
@@ -65,9 +66,13 @@ Yet again, I was doubly hit with the importance of descriptive comments and vari
 #### API Key
 As you must have noticed by now, my API key in the code in my repository is not encrypted. For security reasons, I am aware that I shouldn't "trust the client", but since this API key is public, I am exposing it for now, since I have not yet learned on the back-end how to securely deal with this issue. 
 
-#### Other Learning
 
 #### Future Improvements/Possible Features
+* Currently doesn't check country/coordinates for exact location
+  * ie san jose could be San Jose, CA or San Jose, Costa Rica
+* Adding different icons that reflect the moon phase of the day would be cute
+* Adding a character with an outfit depending on the temperature/weather conditions
+  * I think this would be really cool for the future, ie if you click on display outfit, it will display a cartoon character with different articles of clothing depending on weather conditions. Then it might say "Remember to bring your umbrella today, it's raining!"
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
