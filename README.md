@@ -43,7 +43,10 @@ Wow, there were so many difficult parts about building this project. It's defini
 #### User Interface
 Before beginning to code, I had to think about what information that I felt was important and relevant enough to display on the user-interface. I ended up designing the weather app to show the current day weather (because that is what most people will want to see first and is most relevant), a 3 day forecast (only 3 days, because after the free trial, you can only see a 3 day forecast), and hourly forecasts. At first, I thought that I would just display hourly forecast of the current day as that is what most weather apps do, but decided that it would be helpful to show hourly forecasts of every day in the 3 day forecast. Additionally, I added the functionality of being able to toggle from day and hourly forecasts using buttons. The hourly forecasts were in 8 hour intervals which made sense to me as a time frame that would be perfect length (also a workday). I also had to consider which hours to show in the hourly forecast, specifically for the current day. For example, the current day starts from the next hour from the current hour and not 12AM. This is because for the user, since the past hours have already passed and they are already living the current hour, they most likely wouldn't need to know the past/current hour temperatures. I also ended the hour intervals at 11PM for each day forecast, because even though the hours rolling over to the next day (ie today's forecast displaying up to 11PM, then 12AM etc of the next day) may be convenient, it is also a little confusing and misleading if pressing the hourly forecast button on the current day card included part of the next day's forecast. 
 
-#### OOP and Classes
+#### OOP and Classes VS Factory Functions
+I did consider using factory functions or constructor functions instead of classes for this project. I know using composition in factory functions could have been easier, and perhaps more flexible/maintainable,  but since I had already used factory functions in my Tic-Tac-Toe project (https://github.com/yh63935/tic-tac-toe), I wanted to practice using classes especially since other languages such as Java do have classes.
+
+When creating the classes and derived classes, I thought about SOLID OOP, specifically single responsibility, interface segregation, and open/closed principle. For the base class, I debated about putting different methods that wouldn't be used by all classes (but would certainly make my life easier haha), but I wanted to try my best to have each class only use the methods that it had instead of having unneccessary methods they wouldn't use. For different method functionality, I extended the class for the different weather cards from the base class.
 
 #### Maintainability, Reusability, and Readability 
 
@@ -56,7 +59,7 @@ Yet again, I was doubly hit with the importance of descriptive comments and vari
 
 
 #### API Key
-As you must have noticed by now, my API key in the code in my repository is not encrypted. For security reasons, I am aware that I shouldn't "trust the client"S. but since this API key is public, I am exposing it for now, since I have not yet learned on the back-end how to securely deal with this issue. 
+As you must have noticed by now, my API key in the code in my repository is not encrypted. For security reasons, I am aware that I shouldn't "trust the client", but since this API key is public, I am exposing it for now, since I have not yet learned on the back-end how to securely deal with this issue. 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
