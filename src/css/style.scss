@@ -34,6 +34,12 @@ html,
   background-attachment: fixed;
 }
 
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
 input {
   color: $color-navy-blue;
 }
@@ -60,7 +66,6 @@ button {
 .search-container {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
 
   .search-button {
     box-shadow: none;

@@ -455,16 +455,22 @@ html {
 }
 
 html,
-body {
+.weather-app {
   height: 100%;
   font-family: "Lora", "Domine", "Times New Roman", serif;
   font-weight: 400;
 }
 
-body {
+.weather-app {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 1.5rem 0;
 }
 
 input {
@@ -494,7 +500,6 @@ button:hover {
 .search-container {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
 }
 .search-container .search-button {
   box-shadow: none;
