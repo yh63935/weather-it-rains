@@ -98,13 +98,11 @@ Quick start:
 
    ```$ npm install```
 
-4. Build dist/ files on your local machine
+4. To view the site, you will also need a development server because of the API restrictions. I used Node.js live-server, but you can use any other development server you are comfortable with. See how to install and use Node.js live-server here (https://gist.github.com/donmccurdy/20fb112949324c92c5e8). Then open up the app using the live-server and view the app!
 
-   ```$ npm start```
+ ![image](https://github.com/yh63935/weather-app/assets/120755144/82f09d91-49ea-4c57-867c-2b1c2724a717)
 
-5. Open up index.html on your local to view your own copy
-
-6. Alternatively go to [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/) to see a live demo hosted on Github Pages.
+5. Alternatively go to [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/) to see a live demo hosted on Github Pages.
 
 <!-- CONTACT -->
 ## Contact
