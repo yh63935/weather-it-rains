@@ -1,3 +1,5 @@
+import { getDayHourIntervals } from "../renderCards.js";
+
 // Utility functions for DOM manipulation
 
 // Create element with specified text and class
@@ -67,10 +69,27 @@ function setBackgroundImage(backgroundImageContainer, backgroundWeatherImage) {
   backgroundImageContainer.style.backgroundImage = `url(./css/assets/${backgroundWeatherImage})`;
 }
 
+// Set nxt hour interval button to disabled or enabled depending on if the interval's end hour is 23
+function setNxtHrIntervalButtonDisabledState(
+  dayWeatherCardIndex,
+  button,
+  interval
+) {
+  // Get the specific day's intervals
+  const dayHourIntervals = getDayHourIntervals(dayWeatherCardIndex);
+
+  if (dayHourIntervals[interval].endHour == 23) {
+    button.disabled = true;
+  } else {
+    button.disabled = false;
+  }
+}
+
 export {
   createEl,
   appendEl,
   clearContainer,
   getWeatherImageFromConditionText,
   setBackgroundImage,
+  setNxtHrIntervalButtonDisabledState,
 };
