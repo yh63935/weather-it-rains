@@ -119,7 +119,7 @@ async function initialize(userLocationWeatherData) {
         renderHourlyWeatherCards,
         forecastViewToggler,
         {
-          selectedCard,
+          selectedCardIndex,
           forecastArr,
           forecastCardsContainer,
           interval,
@@ -144,7 +144,7 @@ async function initialize(userLocationWeatherData) {
           renderHourlyWeatherCards,
           forecastViewToggler,
           {
-            selectedCard,
+            selectedCardIndex,
             forecastArr,
             forecastCardsContainer,
             interval,
@@ -165,7 +165,7 @@ async function initialize(userLocationWeatherData) {
           renderHourlyWeatherCards,
           forecastViewToggler,
           {
-            selectedCard,
+            selectedCardIndex,
             forecastArr,
             forecastCardsContainer,
             interval,
