@@ -3,6 +3,7 @@ import {
   clearContainer,
   getWeatherImageFromConditionText,
   setBackgroundImage,
+  setNxtHrIntervalButtonDisabledState,
 } from "./utils/domUtils.js";
 import { createForecastViewToggler } from "./utils/formatUtils.js";
 import {
@@ -107,6 +108,7 @@ async function initialize(userLocationWeatherData) {
   forecastCardsContainer.addEventListener("click", (e) => {
     const selectedCard = e.target.closest(".day-weather-card");
     const selectedBtn = e.target.closest(".day-weather-card button");
+    const selectedCardIndex = parseInt(selectedCard.dataset.index);
 
     // Render forecast display only if the button selected is a button that is a child of .day-weather-card
     // This means it would be a "display hourly button"
@@ -124,6 +126,12 @@ async function initialize(userLocationWeatherData) {
         },
         selectedBtn,
         hourlyViewBtns
+      );
+
+      setNxtHrIntervalButtonDisabledState(
+        selectedCardIndex,
+        nxtHrIntervalBtn,
+        interval
       );
 
       // Navigate to and render the previous hourly forecast interval (if it exists)
