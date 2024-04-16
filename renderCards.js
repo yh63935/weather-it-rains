@@ -168,4 +168,5 @@ export {
   getHourlyWeatherCards,
   renderHourlyViewBtns,
   renderForecastDisplay,
+  getDayHourIntervals,
 };
