@@ -66,13 +66,11 @@ function renderCurrentWeatherCard(forecastArr, parsedData, cardContainer) {
 
 // Render the hourly cards for selected date in 8 hour intervals (current card will start from the next hour from current time)
 function renderHourlyWeatherCards(
-  dayWeatherCard,
+  dayWeatherCardIndex,
   forecastArr,
   cardContainer,
   interval
 ) {
-  let dayWeatherCardIndex = parseInt(dayWeatherCard.dataset.index);
-
   // Get the specific day's intervals
   const dayHourIntervals = getDayHourIntervals(dayWeatherCardIndex);
 
