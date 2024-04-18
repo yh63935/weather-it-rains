@@ -139,6 +139,12 @@ async function initialize(userLocationWeatherData) {
         // Ensure that the new interval value stays within indexes of 0 to 2 (0 - 24 hours)
         // preventing it from exceeding the bounds of a single day's hourly forecast.
         interval = interval <= 0 ? 0 : interval - 1;
+
+        setNxtHrIntervalButtonDisabledState(
+          selectedCardIndex,
+          nxtHrIntervalBtn,
+          interval
+        );
         renderForecastDisplay(
           forecastCardsContainer,
           renderHourlyWeatherCards,
@@ -160,6 +166,11 @@ async function initialize(userLocationWeatherData) {
         // preventing it from exceeding the bounds of a single day's hourly forecast.
         interval = interval >= 2 ? 2 : interval + 1;
 
+        setNxtHrIntervalButtonDisabledState(
+          selectedCardIndex,
+          nxtHrIntervalBtn,
+          interval
+        );
         renderForecastDisplay(
           forecastCardsContainer,
           renderHourlyWeatherCards,
