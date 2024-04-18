@@ -27,7 +27,7 @@ WeatherItRains is a weather app that displays the current day weather, along wit
 ### Description
 This is a weather app that shows the next 3 day forecast of the location you search, and the hourly forecast for each day (for the current day it shows the next hour to 11PM). It also changes background image depending on what the weather conditions (ie sunny) are. The default location is San Jose, California, but enter a location to see other weather data! It's also responsive, so feel free to view the site on your other mobile devices/tablets.
 
-[See live website hosted on Github Pages](https://yh63935.github.io/weather-app/) 
+[See live website hosted on Github Pages](https://yh63935.github.io/weather-it-rains/)
 
 ### Motivation
 As a next step in my coding journey, I learned about APIs, promises, async, and await. As someone who frequently checks the weather before going out or making plans, it seemed like a natural step to create this app. One of my favorite aspects of the app's functionality is being able to display hourly weather forecast for future days, and not just the current day. I often want to see the hourly forecast for upcoming days, not just today, so having hourly forecasts for the different forecasted days would let me know if I should pack a warmer jacket if I am staying out late the next day or later in the week when I have plans. 
@@ -102,14 +102,14 @@ Quick start:
 
  ![image](https://github.com/yh63935/weather-app/assets/120755144/82f09d91-49ea-4c57-867c-2b1c2724a717)
 
-5. Alternatively go to [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/) to see a live demo hosted on Github Pages.
+5. Alternatively go to [https://yh63935.github.io/weather-it-rains/](https://yh63935.github.io/weather-it-rains/) to see a live demo hosted on Github Pages.
 
 <!-- CONTACT -->
 ## Contact
 
 Amelia Ho - [Amelia Ho Linkedin](https://www.linkedin.com/in/ameliahoyp/)
 
-Project Link: [https://yh63935.github.io/weather-app/](https://yh63935.github.io/weather-app/)
+Project Link: [https://github.com/yh63935/weather-it-rains](https://github.com/yh63935/weather-it-rains)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
