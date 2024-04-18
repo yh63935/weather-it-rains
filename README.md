@@ -1,4 +1,4 @@
-# weather-app
+# WeatherItRains
 WeatherItRains is a weather app that displays the current day weather, along with the next 3 days and hourly weather of a location (also changes background images depending on weather conditions). I named it WeatherItRains because with this app, you will be prepared for the weather... whether it rains or not (I love puns if you couldn't tell).
 
 
