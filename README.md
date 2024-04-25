@@ -104,6 +104,8 @@ Quick start:
 
 5. Alternatively go to [https://yh63935.github.io/weather-it-rains/](https://yh63935.github.io/weather-it-rains/) to see a live demo hosted on Github Pages.
 
+6. To use, simply enter the city location in the search bar and press "enter" or the search icon to search. You can also press display hourly on the day forecast to display the hourly forecast for that specific day. To go back to the display day view, simply press the "display day forecast" button. The UI is designed to be fairly self-explanatory! :D
+   
 <!-- CONTACT -->
 ## Contact
 
