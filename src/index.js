@@ -30,6 +30,13 @@ userLocationInput.addEventListener("keyup", (e) => {
 });
 
 searchButton.addEventListener("click", (e) => {
+  const userLocation = userLocationInput.value;
+
+  if (!userLocation) {
+    alert("Please enter a valid location");
+    return;
+  }
+
   handleUserInputAndInitializeApp();
 });
 
