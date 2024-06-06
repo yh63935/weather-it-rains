@@ -30,13 +30,6 @@ userLocationInput.addEventListener("keyup", (e) => {
 });
 
 searchButton.addEventListener("click", (e) => {
-  const userLocation = userLocationInput.value;
-
-  if (!userLocation) {
-    alert("Please enter a valid location");
-    return;
-  }
-
   handleUserInputAndInitializeApp();
 });
 
@@ -234,6 +227,10 @@ async function initialize(userLocationWeatherData) {
 function handleUserInputAndInitializeApp() {
   let userLocation = userLocationInput.value;
 
+  if (!userLocation) {
+    alert("Please enter a valid location");
+    return;
+  }
   initializeWeatherAppWithLocation(userLocation);
 
   // Clear user input after pressing enter
